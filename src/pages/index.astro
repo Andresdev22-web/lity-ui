@@ -1,12 +1,13 @@
 ---
-// importar los estilos de tailwindcss
-import "../styles/global.css"; 
-// importar la libreria de iconos de astro
-import { Icon } from 'astro-icon/components';
-// importar componente de astro
-import HelloWorld from "../components/helloWorld.astro";
+// Importar el layout en el cual se colocaran todos los componentes
+import Layout from "../layouts/Layout.astro";
+// importar el componente q permite cambiar el them de los componentes
+import ThemeToggle from "../components/v1/Themes/ThemeToggle.astro";
+
+import FeatureCards from "../components/v1/seccions/FeatureCards.astro"; 
 ---
 
-<div class="bg-red-600 p-10">
-	<HelloWorld title="Hola mundo"></HelloWorld>
-</div>
+<Layout>
+	<ThemeToggle></ThemeToggle>
+	<FeatureCards></FeatureCards>
+</Layout>

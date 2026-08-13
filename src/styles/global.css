@@ -1,1 +1,54 @@
+/* src/styles/global.css */
 @import "tailwindcss";
+
+/* --- 🎨 CONFIGURACIÓN DE TEMAS --- */
+
+/* 1. Tema por defecto (Dark/Oscuro) */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #090d16;
+  --bg-secondary: #131b2e;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent: #3b82f6;
+  --border-color: #1e293b;
+}
+
+/* 2. Tema Claro (Light) */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #2563eb;
+  --border-color: #e2e8f0;
+}
+
+/* 3. Tema Rosa (Pink) */
+[data-theme="pink"] {
+  --bg-primary: #180914;
+  --bg-secondary: #2a0e24;
+  --text-primary: #fdf2f8;
+  --text-secondary: #f472b6;
+  --accent: #ec4899;
+  --border-color: #3b1132;
+}
+
+/* 4. Tema Azul/Cyan (Blue) */
+[data-theme="blue"] {
+  --bg-primary: #031326;
+  --bg-secondary: #072242;
+  --text-primary: #f0f9ff;
+  --text-secondary: #38bdf8;
+  --accent: #06b6d4;
+  --border-color: #0c3866;
+}
+
+/* --- 🛠️ ESTILOS BASE --- */
+@layer base {
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}

@@ -1,23 +1,25 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+// importar los estilos globales del proyecto
+import "../styles/global.css"
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+// estructurar los props que resivira el componente
+interface Props {
+	titlePage?: string
+}
+// resivir los porps y asignarle un resultado por defecto en caso de q no se envie nada al componente
+const {
+	titlePage = "Sin titulo"
+} = Astro.props
+
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{titlePage}</title>
+</head>
+<body>
+	<slot></slot>
+</body>
+</html>

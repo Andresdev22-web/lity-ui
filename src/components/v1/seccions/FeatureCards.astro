@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon/components';
+
+// Datos de prueba para las tarjetas
+const features = [
+  {
+    icon: 'lucide:zap',
+    title: 'Rendimiento Extremo',
+    description: 'Componentes construidos sobre la arquitectura Isla de Astro para garantizar cero JS innecesario enviando al navegador.'
+  },
+  {
+    icon: 'lucide:palette',
+    title: 'Temas Dinámicos',
+    description: 'Soporte nativo para múltiples temas de color configurables mediante CSS custom properties y Tailwind CSS v4.'
+  },
+  {
+    icon: 'lucide:code-xml',
+    title: 'TypeScript Nativo',
+    description: 'Tipado estático completo para todas las props e interfaces de tus componentes, garantizando una excelente DX.'
+  },
+  {
+    icon: 'lucide:blocks',
+    title: 'Bloques Reutilizables',
+    description: 'Un catálogo creciente de componentes listos para copiar, pegar y adaptar a las necesidades de tu proyecto.'
+  },
+  {
+    icon: 'lucide:shield-check',
+    title: 'Seguro y Escalable',
+    description: 'Estructura modular diseñada para mantener la coherencia visual a medida que tu sitio web crece.'
+  },
+  {
+    icon: 'lucide:sparkles',
+    title: 'Experiencia Fluida',
+    description: 'Animaciones suaves y microinteracciones de UI listas para cautivar a tus usuarios en cualquier dispositivo.'
+  }
+];
+---
+
+<section class="py-16 px-4 max-w-7xl mx-auto">
+  <!-- Encabezado de la Sección -->
+  <div class="text-center max-w-3xl mx-auto mb-12">
+    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[var(--text-primary)] mb-4">
+      Todo lo que necesitas para tu siguiente proyecto
+    </h2>
+    <p class="text-base sm:text-lg text-[var(--text-secondary)]">
+      Explora las características integradas usando nuestro sistema dinámico de temas de color e íconos vectoriales.
+    </p>
+  </div>
+
+  <!-- Grid de Tarjetas -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      features.map((item) => (
+        <article class="p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[var(--accent)] transition-all duration-300 hover:-translate-y-1 shadow-md">
+          <!-- Ícono con contenedor de acento -->
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--accent)] mb-5 shadow-inner">
+            <Icon name={item.icon} class="w-6 h-6" />
+          </div>
+
+          <!-- Título de la Card -->
+          <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">
+            {item.title}
+          </h3>
+
+          <!-- Descripción -->
+          <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+            {item.description}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>
