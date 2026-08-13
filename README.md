@@ -7,24 +7,26 @@ npm install github:Andresdev22-web/lity-ui
 
 ```
 
+*(Si usas **pnpm**, ejecuta `pnpm add github:Andresdev22-web/lity-ui`)*.
+
 ---
 
-## ⚙️ Requisitos y Configuración de Tailwind CSS
+## ⚙️ Requisitos y Configuración Inicial
 
-Para que las clases de Tailwind CSS de los componentes se procesen e interpreten correctamente en tu aplicación, el proyecto de destino debe tener instalado **Tailwind CSS v4** utilizando la integración oficial de Vite para Astro.
+Para que las clases de Tailwind CSS v4 y los íconos de la librería funcionen correctamente en tu aplicación, debes instalar y configurar las dependencias en el proyecto de destino.
 
-### 1. Instalar Tailwind CSS y el plugin de Vite
+### 1. Instalar Tailwind CSS v4 y Astro Icon
 
-Si aún no tienes instalado Tailwind CSS en tu proyecto, ejecuta:
+Instala Tailwind CSS v4, su plugin para Vite, y las librerías de íconos necesarias:
 
 ```bash
-npm install tailwindcss @tailwindcss/vite
+npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide
 
 ```
 
 ### 2. Configurar `astro.config.mjs`
 
-Añade el plugin de `@tailwindcss/vite` a la configuración de tu proyecto Astro:
+Añade los plugins de **Tailwind CSS** y **Astro Icon** a la configuración de tu proyecto Astro:
 
 ```javascript
 // astro.config.mjs
@@ -34,7 +36,7 @@ import icon from 'astro-icon';
 
 export default defineConfig({
   integrations: [
-    icon() // Habilita el soporte para componentes <Icon/>
+    icon() // Habilita el soporte para los íconos de la librería
   ],
   vite: {
     plugins: [tailwindcss()],
@@ -111,4 +113,3 @@ import { HelloWorld } from 'lity-ui';
 * **[TypeScript](https://www.typescriptlang.org/):** Tipado estático para garantizar la consistencia en los componentes.
 * **[Astro Icon](https://github.com/natemoo-re/astro-icon):** Sistema de íconos optimizado para componentes Astro.
 
----
