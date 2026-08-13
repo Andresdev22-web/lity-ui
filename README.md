@@ -1,3 +1,9 @@
+# 🚀 Lity UI
+
+**Lity UI** es una librería de componentes reusables construida con **Astro**, **Tailwind CSS v4** y **TypeScript**. Está diseñada para acelerar el desarrollo de páginas web modernas, escalables y con un rendimiento excepcional mediante bloques UI listos para usar.
+
+---
+
 ## 📦 Instalación
 
 Puedes instalar la librería directamente desde el repositorio de GitHub en cualquier proyecto de Astro:
@@ -24,6 +30,8 @@ npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide
 
 ```
 
+*(Si usas **pnpm**, ejecuta `pnpm add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide`)*.
+
 ### 2. Configurar `astro.config.mjs`
 
 Añade los plugins de **Tailwind CSS** y **Astro Icon** a la configuración de tu proyecto Astro:
@@ -47,62 +55,86 @@ export default defineConfig({
 
 ### 3. Configurar tu CSS Global e incluir la fuente de la librería
 
-En tu archivo de estilos globales (por ejemplo, `src/styles/global.css`), importa Tailwind e indícale que escanee las clases contenidas en los componentes de `lity-ui`:
+En tu archivo de estilos globales (por ejemplo, `src/styles/global.css`), importa Tailwind, los estilos globales de Lity UI y la regla `@source` para que Tailwind escanee las clases contenidas en los componentes de la librería:
 
 ```css
 /* src/styles/global.css */
 @import "tailwindcss";
 
-/* Permite a Tailwind procesar las clases de los componentes dentro de node_modules */
+/* 1. Carga los estilos globales propios de Lity UI */
+@import "lity-ui/global.css";
+
+/* 2. Permite a Tailwind procesar las clases dentro de los componentes en node_modules */
 @source "../../node_modules/lity-ui";
 
 ```
 
 ---
 
-## 🧩 Uso de Componentes
+## 🧩 Importación y Uso de Componentes y Estilos
 
-Una vez completada la configuración, puedes importar los estilos y componentes directamente en tus páginas o archivos `.astro`:
+### Paso 1: Importar el CSS Global en tu Layout Principal
 
-### En tu Layout Principal (`src/layouts/Layout.astro`):
+En tu archivo de plantilla principal (por ejemplo, `src/layouts/Layout.astro`), importa únicamente tu archivo `global.css`. Al importar este archivo, se cargarán automáticamente tanto Tailwind CSS como los estilos base de **Lity UI**:
 
 ```astro
 ---
-// Importa tu CSS global (el que incluye la regla @source de lity-ui)
+// src/layouts/Layout.astro
+
+// Carga de estilos globales (incluye Tailwind y Lity UI)
 import '../styles/global.css';
 
-// (Opcional) Importa el tema o variables personalizadas de Lity UI
-import 'lity-ui/theme.css';
+interface Props {
+  title?: string;
+}
+
+const { title = "Mi Web con Lity UI" } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Mi Proyecto con Lity UI</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-slate-950 text-white">
     <slot />
   </body>
 </html>
 
 ```
 
-### En tus Páginas (`src/pages/index.astro`):
+---
+
+### Paso 2: Importar Componentes en tus Páginas
+
+Para usar los componentes de la librería en tus páginas (`src/pages/*.astro`) o componentes locales, simplemente impórtalos por su nombre directamente desde `'lity-ui'`:
 
 ```astro
 ---
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+
+// Importación de componentes reutilizables desde Lity UI
 import { HelloWorld } from 'lity-ui';
 ---
 
-<Layout>
+<Layout title="Página Principal - Lity UI">
   <main class="min-h-screen flex items-center justify-center">
     <HelloWorld title="¡Bienvenido a mi web creada con Lity UI!"/>
   </main>
 </Layout>
 
 ```
+
+> **Nota sobre las importaciones:** No necesitas buscar archivos individuales dentro de carpetas internas (ej. `lity-ui/src/components/...`). Puedes importar múltiples componentes en una sola línea gracias al punto de entrada centralizado:
+> ```astro
+> import { HelloWorld, Button, Card } from 'lity-ui';
+> 
+> ```
+> 
+> 
 
 ---
 
@@ -113,3 +145,4 @@ import { HelloWorld } from 'lity-ui';
 * **[TypeScript](https://www.typescriptlang.org/):** Tipado estático para garantizar la consistencia en los componentes.
 * **[Astro Icon](https://github.com/natemoo-re/astro-icon):** Sistema de íconos optimizado para componentes Astro.
 
+---
