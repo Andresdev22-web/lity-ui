@@ -30,8 +30,12 @@ Añade el plugin de `@tailwindcss/vite` a la configuración de tu proyecto Astro
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
 
 export default defineConfig({
+  integrations: [
+    icon() // Habilita el soporte para componentes <Icon/>
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
