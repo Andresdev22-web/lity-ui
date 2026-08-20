@@ -3,11 +3,24 @@
 import Layout from "../layouts/Layout.astro";
 // importar el componente q permite cambiar el them de los componentes
 import ThemeToggle from "../components/v1/Themes/ThemeToggle.astro";
-
+// header para la pagina
+import Header from "../components/v1/headers/header1.astro";
+//test
 import FeatureCards from "../components/v1/seccions/FeatureCards.astro"; 
+
 ---
 
 <Layout>
-	<ThemeToggle></ThemeToggle>
+	<Header 
+  sticky={true} 
+  floating={true} 
+  optionsLinks={[
+    { label: 'Inicio', href: '/' },
+    { label: 'Documentación', href: '/docs', icon: 'lucide:book-open' },
+    { label: 'Ajustes', href: '/settings', icon: 'lucide:settings' }
+  ]} 
+/>
+	
 	<FeatureCards></FeatureCards>
+	
 </Layout>

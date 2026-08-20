@@ -1,0 +1,68 @@
+---
+import { Icon } from 'astro-icon/components';
+import DropdownMenu from '../Dropdown/DropdownMenuForHeader.astro';
+import ThemeSelector from '../Themes/ThemeForHeader.astro';
+
+interface OptionLink {
+  label: string;
+  href: string;
+  icon?: string;
+}
+
+interface Props {
+  title?: string;
+  logoIcon?: string;
+  optionsTitle?: string;
+  optionsLinks?: OptionLink[];
+  sticky?: boolean;
+  floating?: boolean;
+  className?: string;
+}
+
+const {
+  title = 'Lity UI',
+  logoIcon = 'lucide:sparkles',
+  optionsTitle = 'Opciones',
+  optionsLinks = [],
+  sticky = false,
+  floating = false,
+  className = '',
+} = Astro.props;
+---
+
+<header
+  class:list={[
+    'flex items-center justify-between transition-all duration-300 bg-[var(--bg-secondary)] border border-[var(--border-color)]',
+    floating
+      ? 'w-[calc(100%-2rem)] max-w-6xl mx-auto my-4 rounded-2xl px-6 py-3.5 shadow-xl'
+      : 'w-full px-6 py-4 border-x-0 border-t-0',
+    sticky ? 'sticky top-4 z-50' : 'relative',
+    className,
+  ]}
+>
+  <!-- Marca / Logo y Título (Izquierda) -->
+  <a href="/" class="flex items-center gap-3 text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+    <div class="flex items-center justify-center p-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--accent)]">
+      <Icon name={logoIcon} class="w-6 h-6" />
+    </div>
+    <span class="text-xl font-bold tracking-tight">{title}</span>
+  </a>
+
+  <!-- Acciones y Menús Desplegables (Derecha) -->
+  <div class="flex items-center gap-3">
+    <DropdownMenu title={optionsTitle} options={optionsLinks} />
+    <ThemeSelector />
+  </div>
+</header>
+
+
+<!--
+Prop,Tipo,Por defecto,Descripción
+title,string,'Lity UI',Título o nombre de la marca que acompaña al logo.
+logoIcon,string,'lucide:sparkles',Icono de Lucide para el logo (lucide:<nombre>).
+optionsTitle,string,'Opciones',Texto que muestra el botón del menú desplegable.
+optionsLinks,OptionLink[],(Lista por defecto),"Array de objetos { label, href, icon? } para los enlaces del menú."
+sticky,boolean,false,Activa la posición fija en la parte superior al hacer scroll.
+floating,boolean,false,"Cambia el diseño a una barra flotante (ancho reducido, bordes redondeados rounded-2xl, margen e integración con sombra)."
+className,string,'',Clases adicionales de Tailwind CSS para extender estilos.
+ -->

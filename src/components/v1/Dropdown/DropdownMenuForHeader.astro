@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface OptionLink {
+  label: string;
+  href: string;
+  icon?: string;
+}
+
+interface Props {
+  title?: string;
+  options?: OptionLink[];
+  className?: string;
+}
+
+const {
+  title = 'Opciones',
+  options,
+  className = '',
+} = Astro.props;
+
+const safeOptions = Array.isArray(options) ? options : [];
+const hasOptions = safeOptions.length > 0;
+---
+
+{
+  hasOptions && (
+    <div class:list={['relative inline-block dropdown-container', className]}>
+      <button
+        type="button"
+        class="dropdown-toggle-btn flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--bg-primary)] text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-200 cursor-pointer font-medium text-sm"
+      >
+        <span>{title}</span>
+        <Icon name="lucide:chevron-down" class="dropdown-chevron w-4 h-4 transition-transform duration-200" />
+      </button>
+
+      <div
+        class="dropdown-menu hidden absolute right-0 top-full mt-2 p-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-2xl min-w-[180px] flex-col gap-1 z-50"
+      >
+        {
+          safeOptions.map((link) => (
+            <a
+              href={link.href}
+              class="flex items-center gap-3 w-full px-3 py-2.5 text-sm rounded-xl hover:bg-[var(--bg-primary)] hover:text-[var(--accent)] transition-colors text-[var(--text-primary)]"
+            >
+              {link.icon && <Icon name={link.icon} class="w-4 h-4 text-[var(--text-secondary)]" />}
+              <span>{link.label}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const initDropdownMenus = () => {
+    // 1. Buscamos todos los contenedores de dropdown en la página
+    const containers = document.querySelectorAll<HTMLElement>('.dropdown-container');
+
+    containers.forEach((container) => {
+      // Prevenimos agregar listeners duplicados si el script reejecuta
+      if (container.dataset.dropdownInitialized === 'true') return;
+      container.dataset.dropdownInitialized = 'true';
+
+      // 2. Buscamos los elementos hijos relativos a ESTE contenedor específico
+      const btn = container.querySelector<HTMLButtonElement>('.dropdown-toggle-btn');
+      const menu = container.querySelector<HTMLElement>('.dropdown-menu');
+      const chevron = container.querySelector<HTMLElement>('.dropdown-chevron');
+
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // Cerramos los demás dropdowns abiertos en la página antes de alternar el actual
+        document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach((otherMenu) => {
+          if (otherMenu !== menu) {
+            otherMenu.classList.add('hidden');
+            otherMenu.classList.remove('flex');
+            const otherChevron = otherMenu.parentElement?.querySelector<HTMLElement>('.dropdown-chevron');
+            if (otherChevron) otherChevron.style.transform = 'rotate(0deg)';
+          }
+        });
+
+        const isHidden = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+
+        if (chevron) {
+          chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+      });
+    });
+  };
+
+  // Cierra todos los menús al hacer clic fuera
+  const handleGlobalClick = () => {
+    document.querySelectorAll<HTMLElement>('.dropdown-menu').forEach((menu) => {
+      menu.classList.add('hidden');
+      menu.classList.remove('flex');
+    });
+    document.querySelectorAll<HTMLElement>('.dropdown-chevron').forEach((chevron) => {
+      chevron.style.transform = 'rotate(0deg)';
+    });
+  };
+
+  // Inicialización e integración con View Transitions de Astro
+  initDropdownMenus();
+  document.addEventListener('click', handleGlobalClick);
+  document.addEventListener('astro:after-swap', () => {
+    initDropdownMenus();
+    document.addEventListener('click', handleGlobalClick);
+  });
+</script>
