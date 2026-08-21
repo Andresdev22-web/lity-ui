@@ -1,0 +1,90 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface ThemeOption {
+  id: string;
+  label: string;
+  icon: string;
+}
+
+interface Props {
+  className?: string;
+}
+
+const { className = '' } = Astro.props;
+
+const themes: ThemeOption[] = [
+  { id: 'dark', label: 'Dark', icon: 'lucide:moon' },
+  { id: 'light', label: 'Light', icon: 'lucide:sun' },
+  { id: 'pink', label: 'Pink', icon: 'lucide:sparkles' },
+  { id: 'blue', label: 'Blue', icon: 'lucide:palette' },
+];
+---
+
+<div class:list={['relative inline-block', className]}>
+  <button
+    id="theme-toggle-btn"
+    type="button"
+    aria-label="Cambiar tema de la página"
+    class="flex items-center justify-center w-10 h-10 rounded-xl bg-[var(--bg-primary)] text-[var(--text-primary)] border border-[var(--border-color)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all duration-200 cursor-pointer"
+  >
+    <Icon name="lucide:palette" class="w-5 h-5" />
+  </button>
+
+  <div
+    id="theme-menu"
+    class="hidden absolute right-0 top-full mt-2 p-2 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-2xl min-w-[150px] flex-col gap-1 z-50"
+  >
+    {
+      themes.map((t) => (
+        <button
+          data-theme-select={t.id}
+          type="button"
+          class="flex items-center gap-3 w-full px-3 py-2.5 text-sm rounded-xl hover:bg-[var(--bg-primary)] hover:text-[var(--accent)] transition-colors text-[var(--text-primary)] cursor-pointer"
+        >
+          <Icon name={t.icon} class="w-4 h-4 text-[var(--accent)]" />
+          <span>{t.label}</span>
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  const initThemeSelector = () => {
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    const themeMenu = document.getElementById('theme-menu');
+    const themeOptions = document.querySelectorAll('[data-theme-select]');
+
+    if (!themeBtn || !themeMenu) return;
+
+    themeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      themeMenu.classList.toggle('hidden');
+      themeMenu.classList.toggle('flex');
+    });
+
+    document.addEventListener('click', () => {
+      themeMenu.classList.add('hidden');
+      themeMenu.classList.remove('flex');
+    });
+
+    themeOptions.forEach((option) => {
+      option.addEventListener('click', () => {
+        const selectedTheme = option.getAttribute('data-theme-select');
+        if (selectedTheme) {
+          document.documentElement.setAttribute('data-theme', selectedTheme);
+          localStorage.setItem('theme', selectedTheme);
+        }
+      });
+    });
+  };
+
+  initThemeSelector();
+  document.addEventListener('astro:after-swap', initThemeSelector);
+</script>
+
+<script is:inline>
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>

@@ -1,0 +1,76 @@
+---
+
+import Layout from "../../layouts/v2/Documentation/Layout.astro";
+import Header from "../../components/v2/LandingPage/header/Header.astro";
+
+const titlePage: string = "Documentacion"
+
+
+// Estructura organizada por grupos
+const misSecciones = [
+  {
+    title: 'Primeros Pasos',
+    items: [
+      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
+      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
+    ],
+  },
+  {
+    title: 'Componentes UI',
+    items: [
+      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
+      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
+      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
+    ],
+  },
+  {
+    title: 'Primeros Pasos',
+    items: [
+      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
+      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
+    ],
+  },
+  {
+    title: 'Componentes UI',
+    items: [
+      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
+      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
+      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
+    ],
+  },
+  {
+    title: 'Primeros Pasos',
+    items: [
+      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
+      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
+    ],
+  },
+  {
+    title: 'Componentes UI',
+    items: [
+      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
+      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
+      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
+    ],
+  },
+];
+
+---
+
+<Layout title={titlePage} navGroups={misSecciones}>
+  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
+  <Header 
+    slot="header" 
+    title="Lity UI Docs" 
+    showThemeSelector={true} 
+  />
+
+  <!-- 2. El contenido sin atributo "slot" entra automáticamente al slot principal -->
+  <section id="introduccion" class="mb-12">
+    <h1 class="text-3xl font-bold mb-4">Introducción</h1>
+    <p class="text-[var(--text-secondary)] mb-6">
+      El sidebar ahora queda completamente pegado a la izquierda de la pantalla.
+    </p>
+    
+  </section>
+</Layout>

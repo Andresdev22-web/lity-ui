@@ -39,71 +39,25 @@ Añade los plugins de **Tailwind CSS** y **Astro Icon** a la configuración de t
 ```javascript
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import icon from 'astro-icon';
+import tailwindcss from '@tailwindcss/vite'; // usar tailwindcss en la pagina
+import icon from 'astro-icon'; // poder usar iconos en los componentes
 
 export default defineConfig({
   integrations: [
-    icon() // Habilita el soporte para los íconos de la librería
+    icon()  // poder usar iconos en los componentes
   ],
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()], // usar tailwindcss en la pagina
   },
 });
 
 ```
 
-### 3. Configurar tu CSS Global e incluir la fuente de la librería
-
-En tu archivo de estilos globales (por ejemplo, `src/styles/global.css`), importa Tailwind, los estilos globales de Lity UI y la regla `@source` para que Tailwind escanee las clases contenidas en los componentes de la librería:
-
-```css
-/* src/styles/global.css */
-@import "tailwindcss";
-
-/* 1. Carga los estilos globales propios de Lity UI */
-@import "lity-ui/global.css";
-
-/* 2. Permite a Tailwind procesar las clases dentro de los componentes en node_modules */
-@source "../../node_modules/lity-ui";
-
-```
 
 ---
 
 ## 🧩 Importación y Uso de Componentes y Estilos
 
-### Paso 1: Importar el CSS Global en tu Layout Principal
-
-En tu archivo de plantilla principal (por ejemplo, `src/layouts/Layout.astro`), importa únicamente tu archivo `global.css`. Al importar este archivo, se cargarán automáticamente tanto Tailwind CSS como los estilos base de **Lity UI**:
-
-```astro
----
-// src/layouts/Layout.astro
-
-// Carga de estilos globales (incluye Tailwind y Lity UI)
-import '../styles/global.css';
-
-interface Props {
-  title?: string;
-}
-
-const { title = "Mi Web con Lity UI" } = Astro.props;
----
-
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-  </head>
-  <body class="bg-slate-950 text-white">
-    <slot />
-  </body>
-</html>
-
-```
 
 ---
 

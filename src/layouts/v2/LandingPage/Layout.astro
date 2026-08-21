@@ -1,0 +1,25 @@
+---
+// importar los estilos globales del proyecto
+import "../../../styles/global.css"
+
+// estructurar los props que resivira el componente
+interface Props {
+	titlePage?: string
+}
+// resivir los porps y asignarle un resultado por defecto en caso de q no se envie nada al componente
+const {
+	titlePage = "Sin titulo"
+} = Astro.props
+
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{titlePage}</title>
+</head>
+<body>
+	<slot></slot>
+</body>
+</html>

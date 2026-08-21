@@ -1,0 +1,257 @@
+---
+import '../../../styles/global.css';
+import { Icon } from 'astro-icon/components';
+
+export interface NavItem {
+  label: string;
+  href: string;
+  icon?: string;
+  badge?: string;
+}
+
+export interface NavGroup {
+  title?: string;
+  items: NavItem[];
+}
+
+interface Props {
+  title?: string;
+  navGroups?: NavGroup[];
+}
+
+const {
+  title = 'Documentación UI',
+  navGroups = [
+    {
+      title: 'General',
+      items: [
+        { label: 'Introducción', href: '#introduccion', icon: 'lucide:book-open' },
+        { label: 'Instalación', href: '#instalacion', icon: 'lucide:download' },
+      ],
+    },
+    {
+      title: 'Componentes',
+      items: [
+        { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
+        { label: 'Botones', href: '#botones', badge: 'Nuevo' },
+        { label: 'Tarjetas', href: '#tarjetas' },
+      ],
+    },
+  ],
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300 relative">
+
+    <!-- FILA 1: Header Inyectado -->
+    <header class="w-full border-b border-[var(--border-color)] bg-[var(--bg-secondary)] sticky top-0 z-40">
+      <slot name="header" />
+    </header>
+
+    <!-- FILA 2: Layout Principal -->
+    <div class="flex-1 flex w-full">
+      
+      <!-- DESKTOP SIDEBAR -->
+      <aside class="w-72 shrink-0 p-5 border-r border-[var(--border-color)] bg-[var(--bg-secondary)]/30 hidden md:block sticky top-[65px] h-[calc(100vh-65px)] overflow-y-auto custom-scrollbar">
+        <nav class="space-y-6">
+          {navGroups.map((group) => (
+            <div class="space-y-2">
+              {/* Título de la Sección */}
+              {group.title && (
+                <h3 class="px-2 text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]/80">
+                  {group.title}
+                </h3>
+              )}
+
+              {/* Lista de Enlaces con Línea Guía */}
+              <ul class="space-y-1 border-l border-[var(--border-color)]/60 ml-2 pl-2">
+                {group.items.map((item) => (
+                  <li>
+                    <a
+                      href={item.href}
+                      class="group flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] transition-all duration-200"
+                    >
+                      <div class="flex items-center gap-2.5">
+                        {/* Icono Especificado o Fallback (Punto minimalista) */}
+                        {item.icon ? (
+                          <Icon name={item.icon} class="w-4 h-4 text-[var(--text-secondary)] group-hover:text-[var(--accent)] transition-colors" />
+                        ) : (
+                          <span class="w-1.5 h-1.5 rounded-full bg-[var(--text-secondary)]/40 group-hover:bg-[var(--accent)] group-hover:scale-125 transition-all ml-1 mr-0.5"></span>
+                        )}
+                        <span>{item.label}</span>
+                      </div>
+
+                      {/* Badge opcional (ej: 'Nuevo', 'Beta') */}
+                      {item.badge && (
+                        <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+                          {item.badge}
+                        </span>
+                      )}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <!-- CONTENIDO PRINCIPAL -->
+      <main class="flex-1 p-6 md:p-10 max-w-7xl overflow-y-auto">
+        <slot />
+      </main>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- NAVEGACIÓN MÓVIL (FAB + DRAWER MEJORADO)   -->
+    <!-- ========================================== -->
+
+    <!-- Botón Flotante (FAB) -->
+    <button
+      id="open-nav-btn"
+      aria-label="Abrir menú de navegación"
+      class="md:hidden fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[var(--accent)] text-white shadow-xl shadow-[var(--accent)]/25 hover:scale-105 active:scale-95 transition-all"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+      </svg>
+      <span class="text-sm font-semibold tracking-wide">Menú</span>
+    </button>
+
+    <!-- Drawer Móvil + Overlay -->
+    <div id="mobile-nav-container" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0 md:hidden">
+      <div id="mobile-nav-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+      <aside 
+        id="mobile-nav-drawer"
+        class="absolute top-0 right-0 w-80 h-full bg-[var(--bg-secondary)] border-l border-[var(--border-color)] p-6 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto"
+      >
+        <div class="overflow-y-auto custom-scrollbar pr-1 -mr-1">
+          <!-- Cabecera del Drawer -->
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-[var(--border-color)]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[var(--accent)]"></span>
+              <h3 class="font-bold text-sm uppercase tracking-wider text-[var(--text-primary)]">
+                Navegación
+              </h3>
+            </div>
+            <button
+              id="close-nav-btn"
+              aria-label="Cerrar menú"
+              class="p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-primary)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Grupos en Móvil -->
+          <nav class="space-y-6">
+            {navGroups.map((group) => (
+              <div class="space-y-2">
+                {group.title && (
+                  <h4 class="px-2 text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)]">
+                    {group.title}
+                  </h4>
+                )}
+
+                <ul class="space-y-1 border-l border-[var(--border-color)]/60 ml-2 pl-2">
+                  {group.items.map((item) => (
+                    <li>
+                      <a
+                        href={item.href}
+                        class="mobile-nav-link flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-primary)] transition-all"
+                      >
+                        <div class="flex items-center gap-3">
+                          {item.icon ? (
+                            <Icon name={item.icon} class="w-4 h-4 text-[var(--accent)]" />
+                          ) : (
+                            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] ml-1 mr-0.5"></span>
+                          )}
+                          <span>{item.label}</span>
+                        </div>
+
+                        {item.badge && (
+                          <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[var(--accent)]/15 text-[var(--accent)]">
+                            {item.badge}
+                          </span>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </div>
+
+        <div class="pt-4 mt-4 border-t border-[var(--border-color)] text-xs text-[var(--text-secondary)] text-center">
+          Presiona la X o toca afuera para cerrar
+        </div>
+      </aside>
+    </div>
+
+  </body>
+</html>
+
+<!-- Estilos para scrollbar estilizado en sidebar -->
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+</style>
+
+<script>
+  function setupMobileNav() {
+    const openBtn = document.getElementById('open-nav-btn');
+    const closeBtn = document.getElementById('close-nav-btn');
+    const backdrop = document.getElementById('mobile-nav-backdrop');
+    const container = document.getElementById('mobile-nav-container');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function openMenu() {
+      container?.classList.remove('pointer-events-none', 'opacity-0');
+      container?.classList.add('opacity-100');
+      drawer?.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      container?.classList.remove('opacity-100');
+      container?.classList.add('opacity-0', 'pointer-events-none');
+      drawer?.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+    }
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    backdrop?.addEventListener('click', closeMenu);
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+
+  setupMobileNav();
+  document.addEventListener('astro:after-swap', setupMobileNav);
+</script>
