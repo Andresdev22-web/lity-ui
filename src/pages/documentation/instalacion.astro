@@ -1,0 +1,103 @@
+---
+
+import Layout from "../../layouts/v2/Documentation/Layout.astro";
+import Header from "../../components/v2/LandingPage/header/Header.astro";
+
+const titlePage: string = "Documentacion"
+
+import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber";
+
+
+---
+
+<Layout title={titlePage} navGroups={misSecciones}>
+  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
+  <Header 
+    slot="header" 
+    title="Lity UI Docs" 
+    showThemeSelector={true} 
+  />
+<!-- SECCIÓN: INSTALACIÓN Y CONFIGURACIÓN -->
+  <section id="instalacion" class="mb-16 border-t border-[var(--border-color)] pt-12">
+    <!-- Badge & Título Principal -->
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+        Guía de Inicio
+      </span>
+      <h2 class="text-3xl font-bold">Instalación y Configuración</h2>
+    </div>
+
+    <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
+      <strong>Lity UI</strong> es una librería de componentes reusables construida con Astro, Tailwind CSS v4 y TypeScript. Sigue estos pasos para integrarla correctamente en tu proyecto.
+    </p>
+
+    <!-- Paso 1: Instalación de la librería -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+        <span class="text-[var(--accent)]">1.</span> Instalar la librería Lity UI
+      </h3>
+      <p class="text-sm text-[var(--text-secondary)] mb-3">
+        Puedes instalar la librería directamente desde el repositorio oficial de GitHub:
+      </p>
+      
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-2">
+        <pre class="text-[var(--text-primary)]"><code>npm install github:Andresdev22-web/lity-ui</code></pre>
+      </div>
+      <p class="text-xs text-[var(--text-secondary)]">
+        * Si usas pnpm: <code class="px-1 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--accent)]">pnpm add github:Andresdev22-web/lity-ui</code>
+      </p>
+    </div>
+
+    <!-- Paso 2: Requisitos y Dependencias -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+        <span class="text-[var(--accent)]">2.</span> Instalar Dependencias (Tailwind v4 & Iconos)
+      </h3>
+      <p class="text-sm text-[var(--text-secondary)] mb-3">
+        Para garantizar el funcionamiento de las clases utilitarias y la iconografía, instala Tailwind v4, su plugin de Vite y la integración de iconos:
+      </p>
+
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-2">
+        <pre class="text-[var(--text-primary)]"><code>npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide</code></pre>
+      </div>
+      <p class="text-xs text-[var(--text-secondary)] mb-4">
+        * Si usas pnpm: <code class="px-1 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--accent)]">pnpm add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide</code>
+      </p>
+    </div>
+
+    <!-- Paso 3: Configuración de astro.config.mjs -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+        <span class="text-[var(--accent)]">3.</span> Configurar astro.config.mjs
+      </h3>
+      <p class="text-sm text-[var(--text-secondary)] mb-3">
+        Añade las integraciones necesarias en el archivo de configuración global de Astro:
+      </p>
+
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto">
+        <pre class="text-[var(--text-primary)]"><code>{"import { defineConfig } from 'astro/config';\nimport tailwindcss from '@tailwindcss/vite';\nimport icon from 'astro-icon';\n\nexport default defineConfig({\n  integrations: [\n    icon() // Permite renderizar iconos SVG\n  ],\n  vite: {\n    plugins: [tailwindcss()], // Soporte para Tailwind CSS v4\n  },\n});"}</code></pre>
+      </div>
+    </div>
+
+    <!-- Paso 4: Importación y Uso -->
+    <div class="mb-10">
+      <h3 class="text-xl font-bold mb-3 flex items-center gap-2">
+        <span class="text-[var(--accent)]">4.</span> Importar y Usar Componentes
+      </h3>
+      <p class="text-sm text-[var(--text-secondary)] mb-3">
+        Puedes importar componentes directamente desde el punto de entrada centralizado de <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-xs text-[var(--accent)]">'lity-ui'</code>:
+      </p>
+
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-4">
+        <pre class="text-[var(--text-primary)]"><code>{"---\nimport Layout from '../layouts/Layout.astro';\nimport { HelloWorld, Button, Card } from 'lity-ui';\n---\n\n<Layout title=\"Página Principal - Lity UI\">\n  <main class=\"min-h-screen flex items-center justify-center\">\n    <HelloWorld title=\"¡Bienvenido a mi web creada con Lity UI!\" />\n  </main>\n</Layout>"}</code></pre>
+      </div>
+
+      <div class="p-4 rounded-lg bg-[var(--bg-secondary)]/60 border border-[var(--border-color)]">
+        <div class="font-bold text-xs uppercase tracking-wider text-[var(--accent)] mb-1">💡 Nota sobre las importaciones</div>
+        <p class="text-xs text-[var(--text-secondary)]">
+          No necesitas buscar rutas internas de archivos. Todos los componentes exportados están disponibles en la raíz de la librería.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

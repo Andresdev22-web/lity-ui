@@ -1,0 +1,99 @@
+---
+
+import Layout from "../../../layouts/v2/Documentation/Layout.astro";
+import Header from "../../../components/v2/LandingPage/header/Header.astro";
+
+const titlePage: string = "Documentacion"
+
+import { docsNavSections as  misSecciones } from "../../../data/dataNavegationSiber";
+
+---
+
+<Layout title={titlePage} navGroups={misSecciones}>
+  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
+  <Header 
+    slot="header" 
+    title="Lity UI Docs" 
+    showThemeSelector={true} 
+  />
+
+<!-- SECCIÓN: DOCUMENTACIÓN DEL LAYOUT DE DOCUMENTACIÓN -->
+  <section id="layout-doc" class="mb-16 border-t border-[var(--border-color)] pt-12">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+        Componente Layout
+      </span>
+      <h2 class="text-2xl font-bold">Documentation Layout</h2>
+    </div>
+
+    <p class="text-[var(--text-secondary)] mb-6 leading-relaxed">
+      El <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm">Documentation Layout</code> estructura automáticamente una vista de documentación completa. Incluye un <strong>header pegajoso (sticky)</strong>, un <strong>sidebar izquierdo con navegación categorizada</strong> en escritorio y un <strong>menú drawer responsive</strong> para dispositivos móviles.
+    </p>
+
+    <!-- Subsección: Props & Interfaces -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-4">Props y Estructura de Datos</h3>
+      
+      <!-- Tabla de Props -->
+      <div class="overflow-x-auto border border-[var(--border-color)] rounded-lg mb-6">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] text-[var(--text-primary)]">
+            <tr>
+              <th class="p-3 font-semibold">Prop / Property</th>
+              <th class="p-3 font-semibold">Tipo</th>
+              <th class="p-3 font-semibold">Valor Por Defecto</th>
+              <th class="p-3 font-semibold">Descripción</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-color)] text-[var(--text-secondary)]">
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">title</td>
+              <td class="p-3 font-mono">string</td>
+              <td class="p-3 font-mono">'Documentación UI'</td>
+              <td>Título que se asigna a la etiqueta <code class="text-xs">&lt;title&gt;</code> de la página.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">navGroups</td>
+              <td class="p-3 font-mono">NavGroup[]</td>
+              <td class="p-3 font-mono">Array de demostración</td>
+              <td>Listado de grupos y sus respectivos elementos para construir el menú de navegación.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Definición de Tipos TypeScript -->
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Tipos en TypeScript</h4>
+        <pre class="text-xs font-mono overflow-x-auto text-[var(--text-primary)]"><code>{"export interface NavItem {\n  label: string;      // Texto visible del enlace\n  href: string;       // Ancla (#id) o URL de destino\n  icon?: string;      // Nombre del icono de Astro Icon (opcional)\n  badge?: string;     // Etiqueta destacada como \"Nuevo\" o \"Beta\" (opcional)\n}\n\nexport interface NavGroup {\n  title?: string;     // Título de la categoría (opcional)\n  items: NavItem[];   // Enlaces pertenecientes al grupo\n}"}</code></pre>
+      </div>
+    </div>
+
+    <!-- Subsección: Slots Disponibles -->
+    <div class="mb-8">
+      <h3 class="text-xl font-semibold mb-3">Slots Disponibles</h3>
+      <ul class="space-y-3">
+        <li class="p-4 rounded-lg bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+          <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-1">slot="header"</div>
+          <p class="text-sm text-[var(--text-secondary)]">
+            Inyecta el componente de cabecera superior. Queda fijo en la parte superior mediante <code class="text-xs">sticky top-0</code>.
+          </p>
+        </li>
+        <li class="p-4 rounded-lg bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+          <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-1">&lt;slot /&gt; (Default)</div>
+          <p class="text-sm text-[var(--text-secondary)]">
+            Todo el marcado o elementos colocados directamente dentro del Layout se renderizarán en el área de contenido principal scrollable.
+          </p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Subsección: Ejemplo de Uso -->
+    <div>
+      <h3 class="text-xl font-semibold mb-3">Ejemplo Integrado</h3>
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto">
+        <pre class="text-[var(--text-primary)]"><code>{"---\nimport Layout from '../../layouts/v2/Documentation/Layout.astro';\nimport Header from '../../components/v2/LandingPage/header/Header.astro';\n\nconst misSecciones = [\n  {\n    title: 'General',\n    items: [\n      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' }\n    ]\n  }\n];\n---\n\n<Layout title=\"Mi Documentación\" navGroups={misSecciones}>\n  <Header slot=\"header\" title=\"Lity UI Docs\" />\n\n  <section id=\"introduccion\">\n    <h1>Hola Mundo</h1>\n  </section>\n</Layout>"}</code></pre>
+      </div>
+    </div>
+  </section>
+</Layout>

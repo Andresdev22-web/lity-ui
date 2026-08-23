@@ -5,55 +5,8 @@ import Header from "../../components/v2/LandingPage/header/Header.astro";
 
 const titlePage: string = "Documentacion"
 
+import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber";
 
-// Estructura organizada por grupos
-const misSecciones = [
-  {
-    title: 'Primeros Pasos',
-    items: [
-      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
-      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
-    ],
-  },
-  {
-    title: 'Componentes UI',
-    items: [
-      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
-      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
-      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
-    ],
-  },
-  {
-    title: 'Primeros Pasos',
-    items: [
-      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
-      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
-    ],
-  },
-  {
-    title: 'Componentes UI',
-    items: [
-      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
-      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
-      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
-    ],
-  },
-  {
-    title: 'Primeros Pasos',
-    items: [
-      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' },
-      { label: 'Instalación', href: '#instalacion', icon: 'lucide:terminal' },
-    ],
-  },
-  {
-    title: 'Componentes UI',
-    items: [
-      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },
-      { label: 'Botones', href: '#botones' }, // Sin icono -> muestra el punto sutil
-      { label: 'Modales', href: '#modales', badge: 'Nuevo' },
-    ],
-  },
-];
 
 ---
 
@@ -64,13 +17,88 @@ const misSecciones = [
     title="Lity UI Docs" 
     showThemeSelector={true} 
   />
+<!-- SECCIÓN: PRIMEROS PASOS E INTRODUCCIÓN -->
+  <section id="introduccion" class="mb-16">
+    <!-- Badge & Título Principal -->
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+        Primeros Pasos
+      </span>
+      <h1 class="text-3xl font-bold">Introducción a la Documentación</h1>
+    </div>
 
-  <!-- 2. El contenido sin atributo "slot" entra automáticamente al slot principal -->
-  <section id="introduccion" class="mb-12">
-    <h1 class="text-3xl font-bold mb-4">Introducción</h1>
-    <p class="text-[var(--text-secondary)] mb-6">
-      El sidebar ahora queda completamente pegado a la izquierda de la pantalla.
+    <!-- Descripción General -->
+    <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
+      Bienvenido a la guía oficial. Este ecosistema está diseñado como un kit flexible de alto rendimiento para construir rápidamente desde <strong>Landing Pages persuasivas</strong> hasta <strong>sistemas completos de Documentación</strong> con un diseño cohesivo y adaptativo.
     </p>
-    
+
+    <!-- Grid: Cómo Navegar -->
+    <div class="mb-12">
+      <h2 class="text-xl font-bold mb-4">¿Cómo navegar por la documentación?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        
+        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">1</div>
+          <h3 class="font-semibold text-base mb-2">Sidebar Lateral</h3>
+          <p class="text-sm text-[var(--text-secondary)]">
+            En computadoras, usa el menú fijo a la izquierda para saltar directamente entre secciones y componentes UI.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">2</div>
+          <h3 class="font-semibold text-base mb-2">Navegación Móvil</h3>
+          <p class="text-sm text-[var(--text-secondary)]">
+            En dispositivos móviles, interactúa con el botón flotante inferior (FAB) para abrir el drawer deslizable.
+          </p>
+        </div>
+
+        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">3</div>
+          <h3 class="font-semibold text-base mb-2">Etiquetas e Indicadores</h3>
+          <p class="text-sm text-[var(--text-secondary)]">
+            Identifica rápidamente qué componentes son nuevos o están en versión beta mediante las insignias integradas.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tecnologías Utilizadas -->
+    <div class="mb-12">
+      <h2 class="text-xl font-bold mb-4">Stack Tecnológico</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Astro</div>
+          <p class="text-xs text-[var(--text-secondary)]">
+            Framework enfocado en rendimiento con arquitectura de islas y cero JS innecesario enviado al cliente.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Tailwind CSS</div>
+          <p class="text-xs text-[var(--text-secondary)]">
+            Estilizado utilitario rápido respaldado por variables CSS dinámicas para soporte nativo de temas (Dark/Light).
+          </p>
+        </div>
+
+        <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Astro Icon</div>
+          <p class="text-xs text-[var(--text-secondary)]">
+            Incrustación eficiente de iconografías (como Lucide Icons) en tiempo de compilación mediante vectores SVG.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Casos de Uso / Propósito -->
+    <div class="p-6 rounded-xl bg-gradient-to-r from-[var(--bg-secondary)] to-transparent border border-[var(--border-color)]">
+      <h3 class="text-lg font-bold mb-2">Diseñado para dos mundos</h3>
+      <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+        Tanto si necesitas construir la landing page principal para presentar tu producto como si estás estructurando una documentación técnica con múltiples niveles de navegación, los componentes reutilizables permiten escalar tu sitio rápidamente manteniendo el mismo lenguaje visual.
+      </p>
+    </div>
   </section>
 </Layout>

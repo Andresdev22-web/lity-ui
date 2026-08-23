@@ -1,0 +1,87 @@
+---
+
+import Layout from "../../../layouts/v2/Documentation/Layout.astro";
+import Header from "../../../components/v2/LandingPage/header/Header.astro";
+
+const titlePage: string = "Documentacion"
+
+import { docsNavSections as  misSecciones } from "../../../data/dataNavegationSiber";
+
+---
+
+<Layout title={titlePage} navGroups={misSecciones}>
+  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
+  <Header 
+    slot="header" 
+    title="Lity UI Docs" 
+    showThemeSelector={true} 
+  />
+<!-- SECCIÓN: DOCUMENTACIÓN DEL LAYOUT DE LANDING PAGE -->
+  <section id="landing-layout-doc" class="mb-16 border-t border-[var(--border-color)] pt-12">
+    <!-- Badge & Título Principal -->
+    <div class="flex items-center gap-3 mb-4">
+      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+        Componente Layout
+      </span>
+      <h2 class="text-3xl font-bold">Landing Page Layout</h2>
+    </div>
+
+    <!-- Descripción General -->
+    <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
+      El <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm">Landing Page Layout</code> es una plantilla minimalista y ligera diseñada para páginas de inicio, promocionales o de aterrizaje. Incluye la inyección automática de estilos globales y un lienzo limpio y flexible que abarca todo el ancho del navegador.
+    </p>
+
+    <!-- Props & Interfaces -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold mb-4">Props y Parámetros</h3>
+      
+      <!-- Tabla de Props -->
+      <div class="overflow-x-auto border border-[var(--border-color)] rounded-lg mb-6">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] text-[var(--text-primary)]">
+            <tr>
+              <th class="p-3 font-semibold">Prop</th>
+              <th class="p-3 font-semibold">Tipo</th>
+              <th class="p-3 font-semibold">Valor Por Defecto</th>
+              <th class="p-3 font-semibold">Descripción</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-color)] text-[var(--text-secondary)]">
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">titlePage</td>
+              <td class="p-3 font-mono">string</td>
+              <td class="p-3 font-mono">'Sin titulo'</td>
+              <td>Asigna el título que se mostrará en la pestaña del navegador (<code class="text-xs">&lt;title&gt;</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Definición de Tipos TypeScript -->
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Interfaz TypeScript</h4>
+        <pre class="text-xs font-mono overflow-x-auto text-[var(--text-primary)]"><code>{"interface Props {\n    titlePage?: string;\n}"}</code></pre>
+      </div>
+    </div>
+
+    <!-- Slots Disponibles -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold mb-3">Slots Disponibles</h3>
+      <div class="p-4 rounded-lg bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+        <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-1">&lt;slot /&gt; (Default)</div>
+        <p class="text-sm text-[var(--text-secondary)]">
+          Slot por defecto donde se renderiza todo el contenido HTML o componentes que coloques dentro del Layout (secciones hero, características, footers, etc.).
+        </p>
+      </div>
+    </div>
+
+    <!-- Ejemplo de Uso -->
+    <div>
+      <h3 class="text-xl font-bold mb-3">Ejemplo de Uso</h3>
+      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-4">
+        <pre class="text-[var(--text-primary)]"><code>{"---\nimport LandingLayout from '../../layouts/v2/LandingPage/Layout.astro';\nimport Header from '../../components/v2/LandingPage/header/Header.astro';\nimport Hero from '../../components/v2/LandingPage/Hero.astro';\n---\n\n<LandingLayout titlePage=\"Lity UI - Bienvenido\">\n  <Header />\n  <main>\n    <Hero />\n  </main>\n</LandingLayout>"}</code></pre>
+      </div>
+    </div>
+  </section>
+</Layout>
+
