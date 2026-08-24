@@ -13,4 +13,11 @@ export const docsNavSections = [
        { label: 'landing Page', href: '/documentation/layout/landingPage', icon: 'lucide:layout-template' },
     ],
   },
+   {
+    title: 'Componnetes para Landing page',
+    items: [
+      { label: 'Header', href: '/documentation/componentesForLandingPage/Header', icon: 'lucide:layout-template' },
+       { label: 'landing Page', href: '/documentation/layout/landingPage', icon: 'lucide:layout-template' },
+    ],
+  },
 ];

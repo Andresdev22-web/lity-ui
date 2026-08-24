@@ -1,47 +1,37 @@
 ---
 
-import Layout from "../../../layouts/v2/Documentation/Layout.astro";
-import Header from "../../../components/v2/LandingPage/header/Header.astro";
+import Layout from "../../../layouts/layoutDocumentacion.astro";
 
 const titlePage: string = "Documentacion"
 
-import { docsNavSections as  misSecciones } from "../../../data/dataNavegationSiber";
-
 ---
 
-<Layout title={titlePage} navGroups={misSecciones}>
-  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
-  <Header 
-    slot="header" 
-    title="Lity UI Docs" 
-    showThemeSelector={true} 
-  />
-
+<Layout titlePage={titlePage}>
 <!-- SECCIÓN: DOCUMENTACIÓN DEL LAYOUT DE DOCUMENTACIÓN -->
   <section id="layout-doc" class="mb-16 border-t border-[var(--border-color)] pt-12">
     <div class="flex items-center gap-3 mb-4">
       <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
-        Componente Layout
+        Layout Principal
       </span>
-      <h2 class="text-2xl font-bold">Documentation Layout</h2>
+      <h2 class="text-3xl font-bold">Documentation Layout</h2>
     </div>
 
-    <p class="text-[var(--text-secondary)] mb-6 leading-relaxed">
-      El <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm">Documentation Layout</code> estructura automáticamente una vista de documentación completa. Incluye un <strong>header pegajoso (sticky)</strong>, un <strong>sidebar izquierdo con navegación categorizada</strong> en escritorio y un <strong>menú drawer responsive</strong> para dispositivos móviles.
+    <p class="text-lg text-[var(--text-secondary)] mb-6 leading-relaxed">
+      El <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm">Documentation Layout</code> provee la estructura base completa para crear paneles de documentación técnica. Integra una cabecera fija, un <strong>Sidebar lateral flotante</strong> con navegación agrupada para escritorio y un <strong>menú colapsable (Drawer + FAB)</strong> optimizado para dispositivos móviles.
     </p>
 
-    <!-- Subsección: Props & Interfaces -->
+    <!-- Subsección: Props & Estructura -->
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-4">Props y Estructura de Datos</h3>
+      <h3 class="text-xl font-bold mb-4">Props y Parámetros</h3>
       
       <!-- Tabla de Props -->
       <div class="overflow-x-auto border border-[var(--border-color)] rounded-lg mb-6">
         <table class="w-full text-left text-sm">
           <thead class="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] text-[var(--text-primary)]">
             <tr>
-              <th class="p-3 font-semibold">Prop / Property</th>
+              <th class="p-3 font-semibold">Prop</th>
               <th class="p-3 font-semibold">Tipo</th>
-              <th class="p-3 font-semibold">Valor Por Defecto</th>
+              <th class="p-3 font-semibold">Por Defecto</th>
               <th class="p-3 font-semibold">Descripción</th>
             </tr>
           </thead>
@@ -50,49 +40,70 @@ import { docsNavSections as  misSecciones } from "../../../data/dataNavegationSi
               <td class="p-3 font-mono text-[var(--accent)]">title</td>
               <td class="p-3 font-mono">string</td>
               <td class="p-3 font-mono">'Documentación UI'</td>
-              <td>Título que se asigna a la etiqueta <code class="text-xs">&lt;title&gt;</code> de la página.</td>
+              <td>Define el título global dentro de la etiqueta HTML <code class="text-xs">&lt;title&gt;</code>.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">navGroups</td>
-              <td class="p-3 font-mono">NavGroup[]</td>
-              <td class="p-3 font-mono">Array de demostración</td>
-              <td>Listado de grupos y sus respectivos elementos para construir el menú de navegación.</td>
+              <td class="p-3 font-mono">Array</td>
+              <td class="p-3 font-mono">Demo por defecto</td>
+              <td>Array de objetos con los grupos y enlaces para la navegación.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Definición de Tipos TypeScript -->
+      <!-- Estructura del Array de Navegación -->
       <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Tipos en TypeScript</h4>
-        <pre class="text-xs font-mono overflow-x-auto text-[var(--text-primary)]"><code>{"export interface NavItem {\n  label: string;      // Texto visible del enlace\n  href: string;       // Ancla (#id) o URL de destino\n  icon?: string;      // Nombre del icono de Astro Icon (opcional)\n  badge?: string;     // Etiqueta destacada como \"Nuevo\" o \"Beta\" (opcional)\n}\n\nexport interface NavGroup {\n  title?: string;     // Título de la categoría (opcional)\n  items: NavItem[];   // Enlaces pertenecientes al grupo\n}"}</code></pre>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Estructura de Objetos para navGroups</h4>
+        <pre class="text-xs font-mono overflow-x-auto text-[var(--text-primary)]"><code>{"// Cada objeto del array representa un grupo en el menú:\n{\n  title: 'Nombre de la Sección', // (Opcional)\n  items: [\n    {\n      label: 'Título del Enlace',\n      href: '#id-o-ruta',\n      icon: 'lucide:book-open', // (Opcional)\n      badge: 'Nuevo'            // (Opcional)\n    }\n  ]\n}"}</code></pre>
       </div>
     </div>
 
     <!-- Subsección: Slots Disponibles -->
     <div class="mb-8">
-      <h3 class="text-xl font-semibold mb-3">Slots Disponibles</h3>
-      <ul class="space-y-3">
-        <li class="p-4 rounded-lg bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
-          <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-1">slot="header"</div>
-          <p class="text-sm text-[var(--text-secondary)]">
-            Inyecta el componente de cabecera superior. Queda fijo en la parte superior mediante <code class="text-xs">sticky top-0</code>.
-          </p>
-        </li>
-        <li class="p-4 rounded-lg bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
-          <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-1">&lt;slot /&gt; (Default)</div>
-          <p class="text-sm text-[var(--text-secondary)]">
-            Todo el marcado o elementos colocados directamente dentro del Layout se renderizarán en el área de contenido principal scrollable.
-          </p>
-        </li>
-      </ul>
+      <h3 class="text-xl font-bold mb-3">Slots Disponibles</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <!-- Slot Header -->
+        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)] flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-2">slot="header"</div>
+            <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
+              Acepta el componente de cabecera (<code class="text-xs">&lt;Header /&gt;</code>) para fijarlo en la parte superior. Permite desplegar el logo, enlaces de opciones y el selector de tema dinámico.
+            </p>
+          </div>
+          
+          <!-- Callout / Botón a la documentación del Header -->
+          <div class="pt-3 border-t border-[var(--border-color)]/60">
+            <p class="text-xs text-[var(--text-secondary)] mb-2">¿Quieres personalizar el logotipo, agregar enlaces o cambiar su modo flotante?</p>
+            <a 
+              href="#headers" 
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30 text-xs font-semibold hover:bg-[var(--accent)]/25 transition-all"
+            >
+              <span>Saber más sobre el Header</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Slot Default -->
+        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)] flex flex-col justify-between">
+          <div>
+            <div class="font-mono text-sm font-semibold text-[var(--accent)] mb-2">&lt;slot /&gt; (Default)</div>
+            <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+              Lienzo principal (<code class="text-xs">&lt;main&gt;</code>) donde se renderizan de forma scrollable los bloques de contenido, ejemplos de código, tablas o guías de tu aplicación.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- Subsección: Ejemplo de Uso -->
     <div>
-      <h3 class="text-xl font-semibold mb-3">Ejemplo Integrado</h3>
+      <h3 class="text-xl font-bold mb-3">Ejemplo Integrado</h3>
       <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto">
-        <pre class="text-[var(--text-primary)]"><code>{"---\nimport Layout from '../../layouts/v2/Documentation/Layout.astro';\nimport Header from '../../components/v2/LandingPage/header/Header.astro';\n\nconst misSecciones = [\n  {\n    title: 'General',\n    items: [\n      { label: 'Introducción', href: '#introduccion', icon: 'lucide:sparkles' }\n    ]\n  }\n];\n---\n\n<Layout title=\"Mi Documentación\" navGroups={misSecciones}>\n  <Header slot=\"header\" title=\"Lity UI Docs\" />\n\n  <section id=\"introduccion\">\n    <h1>Hola Mundo</h1>\n  </section>\n</Layout>"}</code></pre>
+        <pre class="text-[var(--text-primary)]"><code>{"---\nimport { DocumentationLayout, Header } from 'lity-ui';\n\nconst menuNavegacion = [\n  {\n    title: 'Primeros Pasos',\n    items: [\n      { label: 'Introducción', href: '#intro', icon: 'lucide:sparkles' },\n      { label: 'Instalación', href: '#instalacion', icon: 'lucide:download' }\n    ]\n  },\n  {\n    title: 'Componentes UI',\n    items: [\n      { label: 'Headers', href: '#headers', icon: 'lucide:layout-template' },\n      { label: 'Botones', href: '#botones', badge: 'Nuevo' }\n    ]\n  }\n];\n---\n\n<DocumentationLayout title=\"Mi Documentación\" navGroups={menuNavegacion}>\n  <!-- Header inyectado mediante slot -->\n  <Header slot=\"header\" title=\"Lity UI Docs\" sticky={true} />\n\n  <!-- Contenido principal -->\n  <section id=\"intro\">\n    <h1>Contenido de la documentación</h1>\n  </section>\n</DocumentationLayout>"}</code></pre>
       </div>
     </div>
   </section>

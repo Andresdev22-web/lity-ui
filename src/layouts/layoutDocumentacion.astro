@@ -1,0 +1,30 @@
+---
+
+import Layout from "./v2/Documentation/Layout.astro";
+import Header from "../components/v2/LandingPage/header/Header.astro";
+
+interface Props {
+    titlePage?: string;
+}
+
+const {
+    titlePage = "sin titulo"
+} = Astro.props
+
+
+import { docsNavSections as  misSecciones } from "../data/dataNavegationSiber";
+
+
+---
+
+<Layout title={titlePage} navGroups={misSecciones}>
+  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
+  <Header 
+    slot="header" 
+    title="Lity UI Docs" 
+    showThemeSelector={true} 
+  />
+
+  <slot></slot>
+
+</Layout>

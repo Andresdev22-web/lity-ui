@@ -1,103 +1,76 @@
 ---
+import Layout from "../../layouts/layoutDocumentacion.astro";
 
-import Layout from "../../layouts/v2/Documentation/Layout.astro";
-import Header from "../../components/v2/LandingPage/header/Header.astro";
-
-const titlePage: string = "Documentacion"
-
-import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber";
-
-
+const titlePage: string = "Documentación";
 ---
 
-<Layout title={titlePage} navGroups={misSecciones}>
-  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
-  <Header 
-    slot="header" 
-    title="Lity UI Docs" 
-    showThemeSelector={true} 
-  />
-<!-- SECCIÓN: PRIMEROS PASOS E INTRODUCCIÓN -->
+<Layout titlePage={titlePage}>
+  <!-- SECCIÓN: PRIMEROS PASOS E INTRODUCCIÓN -->
   <section id="introduccion" class="mb-16">
     <!-- Badge & Título Principal -->
     <div class="flex items-center gap-3 mb-4">
       <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
-        Primeros Pasos
+        Guía Oficial
       </span>
-      <h1 class="text-3xl font-bold">Introducción a la Documentación</h1>
+      <h1 class="text-3xl font-bold">Introducción a Lity UI</h1>
     </div>
 
     <!-- Descripción General -->
     <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
-      Bienvenido a la guía oficial. Este ecosistema está diseñado como un kit flexible de alto rendimiento para construir rápidamente desde <strong>Landing Pages persuasivas</strong> hasta <strong>sistemas completos de Documentación</strong> con un diseño cohesivo y adaptativo.
+      Esta documentación está diseñada para guiarte en la integración y uso de <strong>Lity UI</strong>, un ecosistema de componentes reusables pensado para acelerar el desarrollo web sin comprometer el rendimiento ni la personalización.
     </p>
 
-    <!-- Grid: Cómo Navegar -->
-    <div class="mb-12">
-      <h2 class="text-xl font-bold mb-4">¿Cómo navegar por la documentación?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        
-        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
-          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">1</div>
-          <h3 class="font-semibold text-base mb-2">Sidebar Lateral</h3>
-          <p class="text-sm text-[var(--text-secondary)]">
-            En computadoras, usa el menú fijo a la izquierda para saltar directamente entre secciones y componentes UI.
-          </p>
-        </div>
+    <!-- Por qué usar Lity UI / Origen -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="p-6 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+        <h2 class="text-lg font-bold mb-2 text-[var(--accent)]">¿Por qué usar Lity UI?</h2>
+        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+          Surgió para resolver la repetición innecesaria de código al construir interfaces web. Ofrece un conjunto de componentes listos para usar con un lenguaje visual unificado, permitiéndote pasar de la idea a la producción en menos tiempo.
+        </p>
+      </div>
 
-        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
-          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">2</div>
-          <h3 class="font-semibold text-base mb-2">Navegación Móvil</h3>
-          <p class="text-sm text-[var(--text-secondary)]">
-            En dispositivos móviles, interactúa con el botón flotante inferior (FAB) para abrir el drawer deslizable.
-          </p>
-        </div>
-
-        <div class="p-5 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
-          <div class="w-8 h-8 rounded-lg bg-[var(--accent)]/15 text-[var(--accent)] flex items-center justify-center font-bold mb-3">3</div>
-          <h3 class="font-semibold text-base mb-2">Etiquetas e Indicadores</h3>
-          <p class="text-sm text-[var(--text-secondary)]">
-            Identifica rápidamente qué componentes son nuevos o están en versión beta mediante las insignias integradas.
-          </p>
-        </div>
-
+      <div class="p-6 rounded-xl bg-[var(--bg-secondary)]/50 border border-[var(--border-color)]">
+        <h2 class="text-lg font-bold mb-2 text-[var(--accent)]">¿Cómo fue creada?</h2>
+        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
+          Desarrollada nativamente para **Astro** y **Tailwind CSS v4**, aprovechando la arquitectura de islas para enviar el mínimo JavaScript posible al navegador, garantizando sitios ligeros, accesibles y con carga instantánea.
+        </p>
       </div>
     </div>
 
-    <!-- Tecnologías Utilizadas -->
+    <!-- Stack Tecnológico -->
     <div class="mb-12">
-      <h2 class="text-xl font-bold mb-4">Stack Tecnológico</h2>
+      <h2 class="text-xl font-bold mb-4">Base Tecnológica</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         
         <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
           <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Astro</div>
           <p class="text-xs text-[var(--text-secondary)]">
-            Framework enfocado en rendimiento con arquitectura de islas y cero JS innecesario enviado al cliente.
+            Estructura estática de alto rendimiento con renderizado óptimo y cero sobrecarga en cliente.
           </p>
         </div>
 
         <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Tailwind CSS</div>
+          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Tailwind CSS v4</div>
           <p class="text-xs text-[var(--text-secondary)]">
-            Estilizado utilitario rápido respaldado por variables CSS dinámicas para soporte nativo de temas (Dark/Light).
+            Estilos utilitarios de última generación acoplados a variables CSS para temas dinámicos.
           </p>
         </div>
 
         <div class="p-4 rounded-lg bg-[var(--bg-secondary)] border border-[var(--border-color)]">
-          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">Astro Icon</div>
+          <div class="font-bold text-sm text-[var(--text-primary)] mb-1">TypeScript & Icons</div>
           <p class="text-xs text-[var(--text-secondary)]">
-            Incrustación eficiente de iconografías (como Lucide Icons) en tiempo de compilación mediante vectores SVG.
+            Tipado estricto en props e integración directa con Lucide Icons a través de Astro Icon.
           </p>
         </div>
 
       </div>
     </div>
 
-    <!-- Casos de Uso / Propósito -->
-    <div class="p-6 rounded-xl bg-gradient-to-r from-[var(--bg-secondary)] to-transparent border border-[var(--border-color)]">
-      <h3 class="text-lg font-bold mb-2">Diseñado para dos mundos</h3>
+<!-- Organización por Categorías -->
+    <div class="p-6 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-color)]">
+      <h3 class="text-lg font-bold mb-2">Diseño Orientado a Objetivos</h3>
       <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
-        Tanto si necesitas construir la landing page principal para presentar tu producto como si estás estructurando una documentación técnica con múltiples niveles de navegación, los componentes reutilizables permiten escalar tu sitio rápidamente manteniendo el mismo lenguaje visual.
+        Cada componente en Lity UI está clasificado estratégicamente según su propósito. Ya sea que busques captar usuarios con elementos promocionales o estructurar guías de información complejas, encontrarás bloques organizados para acelerar el desarrollo y lanzar tu producto en tiempo récord.
       </p>
     </div>
   </section>

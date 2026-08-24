@@ -1,23 +1,11 @@
 ---
+import Layout from "../../layouts/layoutDocumentacion.astro";
 
-import Layout from "../../layouts/v2/Documentation/Layout.astro";
-import Header from "../../components/v2/LandingPage/header/Header.astro";
-
-const titlePage: string = "Documentacion"
-
-import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber";
-
-
+const titlePage: string = "Documentacion";
 ---
 
-<Layout title={titlePage} navGroups={misSecciones}>
-  <!-- 1. Pasa el Header configurado a tu gusto en el slot "header" -->
-  <Header 
-    slot="header" 
-    title="Lity UI Docs" 
-    showThemeSelector={true} 
-  />
-<!-- SECCIÓN: INSTALACIÓN Y CONFIGURACIÓN -->
+<Layout titlePage={titlePage}>
+  <!-- SECCIÓN: INSTALACIÓN Y CONFIGURACIÓN -->
   <section id="instalacion" class="mb-16 border-t border-[var(--border-color)] pt-12">
     <!-- Badge & Título Principal -->
     <div class="flex items-center gap-3 mb-4">
@@ -37,15 +25,34 @@ import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber
         <span class="text-[var(--accent)]">1.</span> Instalar la librería Lity UI
       </h3>
       <p class="text-sm text-[var(--text-secondary)] mb-3">
-        Puedes instalar la librería directamente desde el repositorio oficial de GitHub:
+        Selecciona tu gestor de paquetes e instala directamente desde GitHub:
       </p>
       
-      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-2">
-        <pre class="text-[var(--text-primary)]"><code>npm install github:Andresdev22-web/lity-ui</code></pre>
+      <!-- Selector de comandos para Paso 1 -->
+      <div class="code-package-tabs border border-[var(--border-color)] bg-[var(--bg-secondary)] rounded-xl overflow-hidden my-4"
+        data-npm="npm install github:Andresdev22-web/lity-ui"
+        data-pnpm="pnpm add github:Andresdev22-web/lity-ui"
+        data-yarn="yarn add github:Andresdev22-web/lity-ui"
+        data-bun="bun add github:Andresdev22-web/lity-ui"
+      >
+        <div class="flex items-center justify-between border-b border-[var(--border-color)] px-3 py-2 bg-[var(--bg-primary)]/50">
+          <div class="flex items-center gap-1 tab-buttons">
+            <button data-pm="npm" class="tab-btn active text-xs font-mono px-2.5 py-1 rounded-md text-[var(--accent)] bg-[var(--accent)]/15 border border-[var(--accent)]/30 font-semibold transition-all">npm</button>
+            <button data-pm="pnpm" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">pnpm</button>
+            <button data-pm="yarn" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">yarn</button>
+            <button data-pm="bun" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">bun</button>
+          </div>
+
+          <button class="copy-btn flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-secondary)] px-2.5 py-1 rounded-md border border-[var(--border-color)] transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            <span class="copy-text">Copiar</span>
+          </button>
+        </div>
+
+        <div class="p-4 font-mono text-xs overflow-x-auto text-[var(--text-primary)]">
+          <pre><code class="command-display">npm install github:Andresdev22-web/lity-ui</code></pre>
+        </div>
       </div>
-      <p class="text-xs text-[var(--text-secondary)]">
-        * Si usas pnpm: <code class="px-1 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--accent)]">pnpm add github:Andresdev22-web/lity-ui</code>
-      </p>
     </div>
 
     <!-- Paso 2: Requisitos y Dependencias -->
@@ -54,15 +61,34 @@ import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber
         <span class="text-[var(--accent)]">2.</span> Instalar Dependencias (Tailwind v4 & Iconos)
       </h3>
       <p class="text-sm text-[var(--text-secondary)] mb-3">
-        Para garantizar el funcionamiento de las clases utilitarias y la iconografía, instala Tailwind v4, su plugin de Vite y la integración de iconos:
+        Instala Tailwind CSS v4, el plugin de Vite y la colección de iconos de Lucide:
       </p>
 
-      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto mb-2">
-        <pre class="text-[var(--text-primary)]"><code>npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide</code></pre>
+      <!-- Selector de comandos para Paso 2 -->
+      <div class="code-package-tabs border border-[var(--border-color)] bg-[var(--bg-secondary)] rounded-xl overflow-hidden my-4"
+        data-npm="npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide"
+        data-pnpm="pnpm add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide"
+        data-yarn="yarn add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide"
+        data-bun="bun add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide"
+      >
+        <div class="flex items-center justify-between border-b border-[var(--border-color)] px-3 py-2 bg-[var(--bg-primary)]/50">
+          <div class="flex items-center gap-1 tab-buttons">
+            <button data-pm="npm" class="tab-btn active text-xs font-mono px-2.5 py-1 rounded-md text-[var(--accent)] bg-[var(--accent)]/15 border border-[var(--accent)]/30 font-semibold transition-all">npm</button>
+            <button data-pm="pnpm" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">pnpm</button>
+            <button data-pm="yarn" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">yarn</button>
+            <button data-pm="bun" class="tab-btn text-xs font-mono px-2.5 py-1 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all">bun</button>
+          </div>
+
+          <button class="copy-btn flex items-center gap-1.5 text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-secondary)] px-2.5 py-1 rounded-md border border-[var(--border-color)] transition-all">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            <span class="copy-text">Copiar</span>
+          </button>
+        </div>
+
+        <div class="p-4 font-mono text-xs overflow-x-auto text-[var(--text-primary)]">
+          <pre><code class="command-display">npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide</code></pre>
+        </div>
       </div>
-      <p class="text-xs text-[var(--text-secondary)] mb-4">
-        * Si usas pnpm: <code class="px-1 py-0.5 rounded bg-[var(--bg-secondary)] text-[var(--accent)]">pnpm add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide</code>
-      </p>
     </div>
 
     <!-- Paso 3: Configuración de astro.config.mjs -->
@@ -101,3 +127,61 @@ import { docsNavSections as  misSecciones } from "../../data/dataNavegationSiber
     </div>
   </section>
 </Layout>
+
+<!-- Script ejecutable en el navegador para controlar las pestañas y la copia -->
+<script>
+  function setupPackageTabs() {
+    const containers = document.querySelectorAll('.code-package-tabs');
+
+    containers.forEach((container) => {
+      const buttons = container.querySelectorAll('.tab-btn');
+      const display = container.querySelector('.command-display');
+      const copyBtn = container.querySelector('.copy-btn');
+      const copyText = container.querySelector('.copy-text');
+
+      // Leer los comandos guardados en los atributos data-
+      const cmds: Record<string, string> = {
+        npm: (container as HTMLElement).dataset.npm || '',
+        pnpm: (container as HTMLElement).dataset.pnpm || '',
+        yarn: (container as HTMLElement).dataset.yarn || '',
+        bun: (container as HTMLElement).dataset.bun || ''
+      };
+
+      // Manejar el cambio de pestañas
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const pm = (btn as HTMLElement).dataset.pm || 'npm';
+
+          // Estilos visuales de la pestaña activa
+          buttons.forEach((b) => {
+            b.classList.remove('active', 'text-[var(--accent)]', 'bg-[var(--accent)]/15', 'border', 'border-[var(--accent)]/30', 'font-semibold');
+            b.classList.add('text-[var(--text-secondary)]');
+          });
+
+          btn.classList.remove('text-[var(--text-secondary)]');
+          btn.classList.add('active', 'text-[var(--accent)]', 'bg-[var(--accent)]/15', 'border', 'border-[var(--accent)]/30', 'font-semibold');
+
+          // Actualizar texto del código
+          if (display && cmds[pm]) {
+            display.textContent = cmds[pm];
+          }
+        });
+      });
+
+      // Manejar el botón de copiar
+      copyBtn?.addEventListener('click', async () => {
+        if (display?.textContent) {
+          await navigator.clipboard.writeText(display.textContent);
+          if (copyText) copyText.textContent = '¡Copiado!';
+          setTimeout(() => {
+            if (copyText) copyText.textContent = 'Copiar';
+          }, 2000);
+        }
+      });
+    });
+  }
+
+  // Ejecutar al cargar la página y en re-navegaciones con ViewTransitions de Astro
+  setupPackageTabs();
+  document.addEventListener('astro:page-load', setupPackageTabs);
+</script>
