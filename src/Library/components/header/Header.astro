@@ -97,22 +97,22 @@ const {
   <div class="flex min-w-0 items-center justify-end gap-3">
     {showNavigation && navigationLinks.length > 0 && (
       <>
-        <nav
-          aria-label={navigationTitle}
-          class="hidden items-center gap-1 min-[900px]:flex"
-        >
-          {navigationLinks.map((link) => (
-            <a
-              href={link.href}
-              class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)]"
-            >
-              {link.icon && (
-                <Icon name={link.icon} class="h-4 w-4 shrink-0" />
-              )}
-              {link.label}
-            </a>
-          ))}
-        </nav>
+    <nav
+  aria-label={navigationTitle}
+  class="hidden min-w-0 items-center gap-1 min-[900px]:flex"
+>
+  {navigationLinks.map((link: OptionLink) => (
+    <a
+      href={link.href}
+      class="flex shrink-0 items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)]"
+    >
+      {link.icon && (
+        <Icon name={link.icon} class="h-4 w-4 shrink-0" />
+      )}
+      <span>{link.label}</span>
+    </a>
+  ))}
+</nav>
 
         <div class="min-[900px]:hidden">
           <DropdownMenu
