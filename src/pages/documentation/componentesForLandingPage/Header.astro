@@ -1,134 +1,346 @@
 ---
-
 import Layout from "../../../layouts/layoutDocumentacion.astro";
 
-
-const titlePage: string = "Documentacion"
-
+const titlePage: string = "Documentación";
 ---
 
 <Layout titlePage={titlePage}>
-<!-- SECCIÓN: DOCUMENTACIÓN DEL COMPONENTE HEADER -->
   <section id="headers" class="mb-16 border-t border-[var(--border-color)] pt-12">
-    <!-- Badge & Título Principal -->
-    <div class="flex items-center gap-3 mb-4">
-      <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">
+    <!-- Título -->
+    <div class="mb-4 flex items-center gap-3">
+      <span class="rounded-full border border-[var(--accent)]/30 bg-[var(--accent)]/15 px-2.5 py-1 text-xs font-semibold text-[var(--accent)]">
         Componentes UI
       </span>
-      <h2 class="text-3xl font-bold">Header Component</h2>
+      <h2 class="text-3xl font-bold">Componente Header</h2>
     </div>
 
-    <!-- Descripción General -->
-    <p class="text-lg text-[var(--text-secondary)] mb-8 leading-relaxed">
-      El <code class="px-1.5 py-0.5 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] text-sm">Header</code> es una barra de navegación adaptable que incluye soporte para logotipos vectoriales o imágenes, menú desplegable para enlaces de navegación y un selector integrado de temas (Dark/Light). Permite configuraciones estáticas, fijas al scroll (<code class="text-xs">sticky</code>) o flotantes (<code class="text-xs">floating</code>).
+    <p class="mb-8 text-lg leading-relaxed text-[var(--text-secondary)]">
+      El componente <code>Header</code> permite crear barras de navegación personalizables con logotipo, enlaces, menús desplegables y un selector de tema opcional. Puedes combinar sus propiedades para crear un encabezado sencillo, flotante o fijo durante el desplazamiento de la página.
     </p>
 
-    <!-- Props & Parámetros -->
-    <div class="mb-8">
-      <h3 class="text-xl font-bold mb-4">Props y Parámetros</h3>
-      
-      <!-- Tabla de Props -->
-      <div class="overflow-x-auto border border-[var(--border-color)] rounded-lg mb-6">
+    <!-- Uso con layouts y slots -->
+    <div class="mb-10">
+      <h3 class="mb-4 text-xl font-bold">Uso con layouts y slots</h3>
+
+      <p class="mb-3 text-[var(--text-secondary)]">
+        El componente <code>Header</code> está pensado para utilizarse dentro de un layout, como <code>LandingPage</code> o <code>Documentation</code>. Estos layouts disponen de un slot llamado <code>header</code> para colocar el encabezado y de un slot principal para mostrar el contenido de la página.
+      </p>
+
+      <p class="mb-3 text-[var(--text-secondary)]">
+        Para colocar el header en la posición correspondiente, utiliza <code>slot="header"</code>. El resto del contenido se coloca dentro del layout sin especificar un slot.
+      </p>
+
+      <div class="mb-4 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <h4 class="mb-3 font-semibold">Ejemplo básico</h4>
+        <pre class="overflow-x-auto text-xs"><code>{`---
+import Layout from "../Library/Layouts/LandingPage.astro";
+import Header from "../Library/components/header/Header.astro";
+---
+
+<Layout titlePage="Mi página">
+  <Header
+    slot="header"
+    title="Mi página"
+    floating={true}
+  />
+
+  <main>
+    <h1>Bienvenido</h1>
+    <p>Contenido de mi página.</p>
+  </main>
+</Layout>`}</code></pre>
+      </div>
+
+      <ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+        <li><code>slot="header"</code>: coloca el componente en el espacio reservado para el encabezado.</li>
+        <li>El contenido restante: se muestra en el slot principal del layout.</li>
+        <li>El layout: se encarga de organizar la estructura general de la página.</li>
+      </ul>
+
+      <p class="mt-4 text-sm text-[var(--text-secondary)]">
+        <strong>Importante:</strong> si no utilizas <code>slot="header"</code>, el componente se insertará en el slot principal y podría aparecer en una posición diferente a la esperada.
+      </p>
+    </div>
+
+    <!-- Modos -->
+    <div class="mb-10">
+      <h3 class="mb-4 text-xl font-bold">Modos de uso</h3>
+
+      <div class="mb-4 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <h4 class="mb-2 font-semibold">1. Header estándar</h4>
+        <p class="mb-3 text-sm text-[var(--text-secondary)]">
+          Ocupa todo el ancho disponible y permanece en su posición normal dentro de la página.
+        </p>
+        <pre class="overflow-x-auto text-xs"><code>{`<Header
+  slot="header"
+  title="Mi página"
+  sticky={false}
+  floating={false}
+/>`}</code></pre>
+      </div>
+
+      <div class="mb-4 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <h4 class="mb-2 font-semibold">2. Header flotante</h4>
+        <p class="mb-3 text-sm text-[var(--text-secondary)]">
+          Tiene un ancho reducido, márgenes, esquinas redondeadas y sombra. Por sí solo, no permanece visible al desplazarse.
+        </p>
+        <pre class="overflow-x-auto text-xs"><code>{`<Header
+  slot="header"
+  title="Mi página"
+  floating={true}
+/>`}</code></pre>
+      </div>
+
+      <div class="mb-4 rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <h4 class="mb-2 font-semibold">3. Header fijo durante el scroll</h4>
+        <p class="mb-3 text-sm text-[var(--text-secondary)]">
+          Al activar <code>sticky</code>, el header permanece visible mientras el usuario se desplaza por la página. El componente utiliza posicionamiento fijo y reserva espacio para evitar que el contenido quede oculto detrás de él.
+        </p>
+        <pre class="overflow-x-auto text-xs"><code>{`<Header
+  slot="header"
+  title="Mi página"
+  sticky={true}
+/>`}</code></pre>
+
+        <p class="mt-3 text-sm text-[var(--text-secondary)]">
+          <strong>Importante:</strong> se recomienda utilizar <code>sticky</code> con el layout <code>LandingPage</code>. El layout de documentación ya organiza el encabezado mediante su propio slot y estructura. Evita activar ambos sistemas de posicionamiento sin revisar cómo están configurados.
+        </p>
+      </div>
+
+      <div class="rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <h4 class="mb-2 font-semibold">4. Header flotante y fijo</h4>
+        <p class="mb-3 text-sm text-[var(--text-secondary)]">
+          Combina ambas propiedades para conseguir una barra compacta, con márgenes y esquinas redondeadas, que permanece visible durante el desplazamiento.
+        </p>
+        <pre class="overflow-x-auto text-xs"><code>{`<Header
+  slot="header"
+  title="Mi página"
+  sticky={true}
+  floating={true}
+/>`}</code></pre>
+      </div>
+    </div>
+
+    <!-- Props -->
+    <div class="mb-10">
+      <h3 class="mb-4 text-xl font-bold">Props y parámetros</h3>
+
+      <div class="mb-6 overflow-x-auto rounded-lg border border-[var(--border-color)]">
         <table class="w-full text-left text-sm">
-          <thead class="bg-[var(--bg-secondary)] border-b border-[var(--border-color)] text-[var(--text-primary)]">
+          <thead class="border-b border-[var(--border-color)] bg-[var(--bg-secondary)] text-[var(--text-primary)]">
             <tr>
-              <th class="p-3 font-semibold">Prop</th>
-              <th class="p-3 font-semibold">Tipo</th>
-              <th class="p-3 font-semibold">Por Defecto</th>
-              <th class="p-3 font-semibold">Descripción</th>
+              <th class="p-3">Propiedad</th>
+              <th class="p-3">Tipo</th>
+              <th class="p-3">Valor por defecto</th>
+              <th class="p-3">Descripción</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-[var(--border-color)] text-[var(--text-secondary)]">
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">title</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">'Sin titulo'</td>
-              <td>Título o nombre de la marca que acompaña al logo.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">"Sin titulo"</td>
+              <td>Nombre de la marca que aparece junto al logo.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">logoIcon</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">'lucide:sparkles'</td>
-              <td>Nombre del icono de Lucide si no se proporciona <code class="text-xs">logoImg</code>.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">"lucide:sparkles"</td>
+              <td>Icono que se muestra cuando no se proporciona una imagen.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">logoImg</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">undefined</td>
-              <td>URL o ruta pública de una imagen para usar como logo.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">undefined</td>
+              <td>Ruta o URL de la imagen que se utilizará como logo. Si se proporciona, reemplaza al icono.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">logoAlt</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">'Logo'</td>
-              <td>Texto alternativo (<code class="text-xs">alt</code>) para la imagen del logo.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">"Logo"</td>
+              <td>Texto alternativo de la imagen del logo.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">showNavigation</td>
+              <td class="p-3">boolean</td>
+              <td class="p-3">false</td>
+              <td>Activa la navegación principal: horizontal en pantallas grandes y desplegable en pantallas pequeñas.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">navigationTitle</td>
+              <td class="p-3">string</td>
+              <td class="p-3">"Navegación"</td>
+              <td>Título del menú de navegación en pantallas pequeñas.</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-mono text-[var(--accent)]">navigationLinks</td>
+              <td class="p-3">OptionLink[]</td>
+              <td class="p-3">[]</td>
+              <td>Lista de enlaces de la navegación principal.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">optionsTitle</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">'Opciones'</td>
-              <td>Texto que muestra el botón del menú desplegable.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">"Opciones"</td>
+              <td>Texto del botón que abre el menú secundario.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">optionsLinks</td>
-              <td class="p-3 font-mono">Array</td>
-              <td class="p-3 font-mono">[]</td>
-              <td>Array de objetos con los enlaces del menú desplegable.</td>
+              <td class="p-3">OptionLink[]</td>
+              <td class="p-3">[]</td>
+              <td>Lista de enlaces del menú secundario. Si está vacía, el menú no se muestra.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">sticky</td>
-              <td class="p-3 font-mono">boolean</td>
-              <td class="p-3 font-mono">false</td>
-              <td>Activa la posición fija en la parte superior al hacer scroll.</td>
+              <td class="p-3">boolean</td>
+              <td class="p-3">false</td>
+              <td>Mantiene el header fijo durante el scroll. Se recomienda para el layout de landing page.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">floating</td>
-              <td class="p-3 font-mono">boolean</td>
-              <td class="p-3 font-mono">false</td>
-              <td>Aplica diseño de barra flotante (ancho reducido y bordes redondeados).</td>
+              <td class="p-3">boolean</td>
+              <td class="p-3">false</td>
+              <td>Aplica un ancho reducido, márgenes, esquinas redondeadas y sombra.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">showThemeSelector</td>
-              <td class="p-3 font-mono">boolean</td>
-              <td class="p-3 font-mono">false</td>
-              <td>Controla si se muestra el selector de tema (Dark/Light).</td>
+              <td class="p-3">boolean</td>
+              <td class="p-3">false</td>
+              <td>Muestra u oculta el selector de tema.</td>
             </tr>
             <tr>
               <td class="p-3 font-mono text-[var(--accent)]">className</td>
-              <td class="p-3 font-mono">string</td>
-              <td class="p-3 font-mono">''</td>
-              <td>Clases adicionales de Tailwind CSS para personalizar o extender estilos.</td>
+              <td class="p-3">string</td>
+              <td class="p-3">""</td>
+              <td>Permite añadir clases de Tailwind CSS para personalizar los estilos.</td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
 
-      <!-- Estructura para optionsLinks -->
-      <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)]">
-        <h4 class="text-xs font-bold uppercase tracking-wider text-[var(--text-secondary)] mb-2">Estructura de Objetos para optionsLinks</h4>
-        <pre class="text-xs font-mono overflow-x-auto text-[var(--text-primary)]"><code>{"// Cada objeto dentro del array 'optionsLinks' acepta:\n{\n  label: 'Texto del enlace',  // (Requerido)\n  href: '/ruta-o-ancla',      // (Requerido)\n  icon: 'lucide:home'         // (Opcional)\n}"}</code></pre>
+    <!-- Enlaces -->
+    <div class="mb-10">
+      <h3 class="mb-4 text-xl font-bold">Cómo definir los enlaces</h3>
+      <p class="mb-3 text-[var(--text-secondary)]">
+        Las propiedades <code>navigationLinks</code> y <code>optionsLinks</code> reciben una lista de objetos. Cada objeto contiene el texto del enlace, su dirección y, opcionalmente, un icono.
+      </p>
+
+      <div class="rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <pre class="overflow-x-auto text-xs"><code>{`const navigationLinks = [
+  {
+    label: "Inicio",
+    href: "/",
+    icon: "lucide:house"
+  },
+  {
+    label: "Componentes",
+    href: "/components",
+    icon: "lucide:blocks"
+  },
+  {
+    label: "Documentación",
+    href: "/docs",
+    icon: "lucide:book-open"
+  }
+];`}</code></pre>
+      </div>
+
+      <ul class="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
+        <li><code>label</code>: texto que verá el usuario.</li>
+        <li><code>href</code>: ruta interna, URL externa o ancla a la que llevará el enlace.</li>
+        <li><code>icon</code>: icono opcional, por ejemplo <code>lucide:house</code>.</li>
+      </ul>
+    </div>
+
+    <!-- Combinaciones -->
+    <div class="mb-10">
+      <h3 class="mb-4 text-xl font-bold">Combinaciones recomendadas</h3>
+
+      <div class="overflow-x-auto rounded-lg border border-[var(--border-color)]">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-[var(--bg-secondary)] text-[var(--text-primary)]">
+            <tr>
+              <th class="p-3">Objetivo</th>
+              <th class="p-3">Configuración</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--border-color)] text-[var(--text-secondary)]">
+            <tr>
+              <td class="p-3">Página sencilla</td>
+              <td class="p-3"><code>sticky={false}</code> y <code>floating={false}</code></td>
+            </tr>
+            <tr>
+              <td class="p-3">Landing page moderna</td>
+              <td class="p-3"><code>sticky={true}</code> y <code>floating={true}</code></td>
+            </tr>
+            <tr>
+              <td class="p-3">Navegación principal</td>
+              <td class="p-3"><code>showNavigation={true}</code> y <code>navigationLinks</code></td>
+            </tr>
+            <tr>
+              <td class="p-3">Enlaces adicionales</td>
+              <td class="p-3"><code>optionsLinks</code> y <code>optionsTitle</code></td>
+            </tr>
+            <tr>
+              <td class="p-3">Logo con imagen</td>
+              <td class="p-3"><code>logoImg</code> y <code>logoAlt</code></td>
+            </tr>
+            <tr>
+              <td class="p-3">Logo con icono</td>
+              <td class="p-3"><code>logoIcon</code></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <!-- Ejemplos de Uso -->
+    <!-- Ejemplo completo -->
     <div>
-      <h3 class="text-xl font-bold mb-3">Ejemplos de Uso</h3>
-      
-      <!-- Ejemplo 1: Flotante con Logo en Imagen -->
-      <div class="mb-6">
-        <h4 class="text-sm font-semibold mb-2 text-[var(--text-primary)]">1. Header Flotante con Imagen y Selector de Tema</h4>
-        <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto">
-          <pre class="text-[var(--text-primary)]"><code>{"---\nimport { Header } from 'lity-ui';\n\nconst enlacesMenu = [\n  { label: 'Inicio', href: '/', icon: 'lucide:home' },\n  { label: 'Documentación', href: '/docs', icon: 'lucide:book' }\n];\n---\n\n<Header \n  title=\"Mi Marca\"\n  logoImg=\"/images/logo.png\"\n  logoAlt=\"Logo Oficial\"\n  optionsTitle=\"Menú\"\n  optionsLinks={enlacesMenu}\n  floating={true}\n  sticky={true}\n  showThemeSelector={true}\n/>"}</code></pre>
-        </div>
-      </div>
+      <h3 class="mb-4 text-xl font-bold">Ejemplo completo</h3>
+      <p class="mb-3 text-[var(--text-secondary)]">
+        Este ejemplo combina un logo, navegación adaptable, un menú de opciones y el selector de tema. Recuerda que el header se coloca en el slot correspondiente del layout.
+      </p>
 
-      <!-- Ejemplo 2: Estándar con Icono Vectorial -->
-      <div>
-        <h4 class="text-sm font-semibold mb-2 text-[var(--text-primary)]">2. Header Estándar para Layouts</h4>
-        <div class="bg-[var(--bg-secondary)] p-4 rounded-lg border border-[var(--border-color)] font-mono text-xs overflow-x-auto">
-          <pre class="text-[var(--text-primary)]"><code>{"<Header \n  title=\"Lity UI Docs\"\n  logoIcon=\"lucide:sparkles\"\n  sticky={true}\n/>"}</code></pre>
-        </div>
+      <div class="rounded-lg border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4">
+        <pre class="overflow-x-auto text-xs"><code>{`---
+import Layout from "../Library/Layouts/LandingPage.astro";
+import Header from "../Library/components/header/Header.astro";
+
+const navigationLinks = [
+  { label: "Inicio", href: "/", icon: "lucide:house" },
+  { label: "Servicios", href: "/services", icon: "lucide:briefcase" },
+  { label: "Proyectos", href: "/projects", icon: "lucide:blocks" }
+];
+
+const optionsLinks = [
+  { label: "GitHub", href: "https://github.com", icon: "lucide:github" },
+  { label: "Contacto", href: "/contact", icon: "lucide:mail" }
+];
+---
+
+<Layout titlePage="Mi página">
+  <Header
+    slot="header"
+    title="Mi Marca"
+    logoIcon="lucide:layers"
+    showNavigation={true}
+    navigationTitle="Secciones"
+    navigationLinks={navigationLinks}
+    optionsTitle="Más opciones"
+    optionsLinks={optionsLinks}
+    showThemeSelector={true}
+    sticky={true}
+    floating={true}
+  />
+
+  <main>
+    <h1>Bienvenido a mi página</h1>
+    <p>Contenido de la landing page.</p>
+  </main>
+</Layout>`}</code></pre>
       </div>
     </div>
   </section>
 </Layout>
+

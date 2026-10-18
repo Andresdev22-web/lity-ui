@@ -20,7 +20,15 @@ const {
 	<title>{titlePage}</title>
 </head>
 <body>
-    <slot name="header"></slot>
-	<slot  name="main"></slot>
+  
+    <!-- FILA 1: Header Inyectado -->
+    <header class="w-full ">
+      <slot name="header" />
+    </header>
+
+    <!-- FILA 2: Layout Principal -->
+    <div class="flex-1 flex w-full">
+		<slot></slot>
+	</div>
 </body>
 </html>

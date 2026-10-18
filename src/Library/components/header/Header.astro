@@ -12,10 +12,16 @@ interface OptionLink {
 interface Props {
   title?: string;
   logoIcon?: string;
-  logoImg?: string; // 👈 URL de la imagen del logo
-  logoAlt?: string; // 👈 Texto alternativo para la imagen
+  logoImg?: string;
+  logoAlt?: string;
+
   optionsTitle?: string;
   optionsLinks?: OptionLink[];
+
+  showNavigation?: boolean;
+  navigationLinks?: OptionLink[];
+  navigationTitle?: string;
+
   sticky?: boolean;
   floating?: boolean;
   showThemeSelector?: boolean;
@@ -27,8 +33,14 @@ const {
   logoIcon = 'lucide:sparkles',
   logoImg,
   logoAlt = 'Logo',
+
   optionsTitle = 'Opciones',
   optionsLinks = [],
+
+  showNavigation = false,
+  navigationLinks = [],
+  navigationTitle = 'Navegación',
+
   sticky = false,
   floating = false,
   showThemeSelector = false,
@@ -36,47 +48,105 @@ const {
 } = Astro.props;
 ---
 
+{sticky && <div aria-hidden="true" class:list={[
+  'w-full',
+  floating ? 'h-20' : 'h-16',
+]} />}
+
 <header
   class:list={[
-    'flex items-center justify-between transition-all duration-300 bg-[var(--bg-secondary)] border border-[var(--border-color)]',
+    'flex items-center justify-between gap-4 transition-all duration-300 bg-[var(--bg-secondary)] border border-[var(--border-color)]',
     floating
-      ? 'w-[calc(100%-2rem)] max-w-6xl mx-auto my-4 rounded-2xl px-6 py-3.5 shadow-xl'
+      ? 'w-[calc(100%-2rem)] max-w-6xl rounded-2xl px-6 py-3.5 shadow-xl'
       : 'w-full px-6 py-4 border-x-0 border-t-0',
-    sticky ? 'sticky top-4 z-50' : 'relative',
+    sticky
+      ? floating
+        ? 'fixed top-4 left-1/2 -translate-x-1/2 z-50'
+        : 'fixed top-0 left-0 z-50'
+      : floating
+        ? 'relative mx-auto my-4'
+        : 'relative',
     className,
   ]}
 >
-  <!-- Marca / Logo y Título (Izquierda) -->
-  <a href="/" class="flex items-center gap-3 text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
-    <div class="flex items-center justify-center p-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--accent)] overflow-hidden">
-      {/* Condicional: Muestra imagen si existe logoImg, de lo contrario muestra el Icon */}
+  <!-- Logo y título -->
+  <a
+    href="/"
+    class="flex shrink-0 items-center gap-3 text-[var(--text-primary)] transition-colors hover:text-[var(--accent)]"
+  >
+    <div
+      class="flex shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--border-color)] bg-[var(--bg-primary)] p-2 text-[var(--accent)]"
+    >
       {logoImg ? (
-        <img src={logoImg} alt={logoAlt} class="w-6 h-6 object-contain" />
+        <img
+          src={logoImg}
+          alt={logoAlt}
+          class="h-6 w-6 object-contain"
+        />
       ) : (
-        <Icon name={logoIcon} class="w-6 h-6" />
+        <Icon name={logoIcon} class="h-6 w-6" />
       )}
     </div>
-    <span class="text-xl font-bold tracking-tight">{title}</span>
+
+    <span class="whitespace-nowrap text-xl font-bold tracking-tight">
+      {title}
+    </span>
   </a>
 
-  <!-- Acciones y Menús Desplegables (Derecha) -->
-  <div class="flex items-center gap-3">
-    <DropdownMenu title={optionsTitle} options={optionsLinks} />
-    
+  <!-- Navegación y acciones -->
+  <div class="flex min-w-0 items-center justify-end gap-3">
+    {showNavigation && navigationLinks.length > 0 && (
+      <>
+        <nav
+          aria-label={navigationTitle}
+          class="hidden items-center gap-1 min-[900px]:flex"
+        >
+          {navigationLinks.map((link) => (
+            <a
+              href={link.href}
+              class="flex items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)]"
+            >
+              {link.icon && (
+                <Icon name={link.icon} class="h-4 w-4 shrink-0" />
+              )}
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        <div class="min-[900px]:hidden">
+          <DropdownMenu
+            title={navigationTitle}
+            options={navigationLinks}
+          />
+        </div>
+      </>
+    )}
+
+    {optionsLinks.length > 0 && (
+      <DropdownMenu
+        title={optionsTitle}
+        options={optionsLinks}
+      />
+    )}
+
     {showThemeSelector && <ThemeSelector />}
   </div>
 </header>
 
+
 <!--
-Prop,Tipo,Por defecto,Descripción
-title,string,'Sin titulo',Título o nombre de la marca que acompaña al logo.
-logoIcon,string,'lucide:sparkles',Nombre del icono si no se pasa logoImg.
-logoImg,string,undefined,URL o ruta pública de una imagen para usar como logo.
-logoAlt,string,'Logo',Texto alternativo (alt) para la imagen del logo.
-optionsTitle,string,'Opciones',Texto que muestra el botón del menú desplegable.
-optionsLinks,OptionLink[],[],Array de objetos { label, href, icon? } para los enlaces del menú.
-sticky,boolean,false,Activa la posición fija en la parte superior al hacer scroll.
-floating,boolean,false,Cambia el diseño a una barra flotante (ancho reducido, bordes redondeados rounded-2xl).
-showThemeSelector,boolean,false,Controla si se renderiza el componente selector de tema.
-className,string,'',Clases adicionales de Tailwind CSS para extender estilos.
+title: Texto del nombre que aparece junto al logo.
+logoIcon: Icono que se muestra si no se utiliza una imagen.
+logoImg: Ruta de la imagen del logo. Es opcional.
+logoAlt: Texto alternativo de la imagen.
+showNavigation: Activa o desactiva la navegación horizontal.
+navigationTitle: Título del menú de navegación en pantallas pequeñas.
+navigationLinks: Lista de enlaces de navegación. Cada enlace puede tener label (texto), href (ruta) e icon (icono opcional).
+optionsTitle: Título del botón de opciones.
+optionsLinks: Lista de enlaces del menú de opciones. Cada enlace puede tener label, href e icon.
+sticky: Mantiene el header fijo al desplazarse por la página.
+floating: Aplica un diseño flotante con bordes redondeados y márgenes.
+showThemeSelector: Muestra u oculta el selector de tema.
+className: Permite agregar clases CSS personalizadas.
  -->

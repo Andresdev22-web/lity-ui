@@ -17,12 +17,13 @@ export interface NavGroup {
 }
 
 interface Props {
+  titlePage?: string;
   title?: string;
   navGroups?: NavGroup[];
 }
 
 const {
-  title = 'Documentación UI',
+  titlePage = 'Documentación UI',
   navGroups = [
     {
       title: 'General',
@@ -48,7 +49,7 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
+    <title>{titlePage}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300 relative">
 
