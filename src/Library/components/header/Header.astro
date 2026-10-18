@@ -1,0 +1,82 @@
+---
+import { Icon } from 'astro-icon/components';
+import DropdownMenu from './Dropdown.astro';
+import ThemeSelector from './ThemeSelector.astro';
+
+interface OptionLink {
+  label: string;
+  href: string;
+  icon?: string;
+}
+
+interface Props {
+  title?: string;
+  logoIcon?: string;
+  logoImg?: string; // 👈 URL de la imagen del logo
+  logoAlt?: string; // 👈 Texto alternativo para la imagen
+  optionsTitle?: string;
+  optionsLinks?: OptionLink[];
+  sticky?: boolean;
+  floating?: boolean;
+  showThemeSelector?: boolean;
+  className?: string;
+}
+
+const {
+  title = 'Sin titulo',
+  logoIcon = 'lucide:sparkles',
+  logoImg,
+  logoAlt = 'Logo',
+  optionsTitle = 'Opciones',
+  optionsLinks = [],
+  sticky = false,
+  floating = false,
+  showThemeSelector = false,
+  className = '',
+} = Astro.props;
+---
+
+<header
+  class:list={[
+    'flex items-center justify-between transition-all duration-300 bg-[var(--bg-secondary)] border border-[var(--border-color)]',
+    floating
+      ? 'w-[calc(100%-2rem)] max-w-6xl mx-auto my-4 rounded-2xl px-6 py-3.5 shadow-xl'
+      : 'w-full px-6 py-4 border-x-0 border-t-0',
+    sticky ? 'sticky top-4 z-50' : 'relative',
+    className,
+  ]}
+>
+  <!-- Marca / Logo y Título (Izquierda) -->
+  <a href="/" class="flex items-center gap-3 text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
+    <div class="flex items-center justify-center p-2 rounded-xl bg-[var(--bg-primary)] border border-[var(--border-color)] text-[var(--accent)] overflow-hidden">
+      {/* Condicional: Muestra imagen si existe logoImg, de lo contrario muestra el Icon */}
+      {logoImg ? (
+        <img src={logoImg} alt={logoAlt} class="w-6 h-6 object-contain" />
+      ) : (
+        <Icon name={logoIcon} class="w-6 h-6" />
+      )}
+    </div>
+    <span class="text-xl font-bold tracking-tight">{title}</span>
+  </a>
+
+  <!-- Acciones y Menús Desplegables (Derecha) -->
+  <div class="flex items-center gap-3">
+    <DropdownMenu title={optionsTitle} options={optionsLinks} />
+    
+    {showThemeSelector && <ThemeSelector />}
+  </div>
+</header>
+
+<!--
+Prop,Tipo,Por defecto,Descripción
+title,string,'Sin titulo',Título o nombre de la marca que acompaña al logo.
+logoIcon,string,'lucide:sparkles',Nombre del icono si no se pasa logoImg.
+logoImg,string,undefined,URL o ruta pública de una imagen para usar como logo.
+logoAlt,string,'Logo',Texto alternativo (alt) para la imagen del logo.
+optionsTitle,string,'Opciones',Texto que muestra el botón del menú desplegable.
+optionsLinks,OptionLink[],[],Array de objetos { label, href, icon? } para los enlaces del menú.
+sticky,boolean,false,Activa la posición fija en la parte superior al hacer scroll.
+floating,boolean,false,Cambia el diseño a una barra flotante (ancho reducido, bordes redondeados rounded-2xl).
+showThemeSelector,boolean,false,Controla si se renderiza el componente selector de tema.
+className,string,'',Clases adicionales de Tailwind CSS para extender estilos.
+ -->
