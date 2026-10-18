@@ -117,19 +117,14 @@ Por ejemplo, en `src/pages/index.astro`:
 
 ```astro
 ---
-import LayoutDocumentation from "../layouts/DocumentationLayout.astro";
-import { Header } from "lity-ui";
+import "../style/global.css"
+import { LayoutLandingPage, Header } from 'lity-ui';
+
 ---
-
-<LayoutDocumentation>
-  <Header title="¡Bienvenido a mi web creada con Lity UI!" />
-
-  <main class="min-h-screen flex items-center justify-center">
-    <h1 class="text-3xl font-bold">
-      Mi proyecto con Lity UI
-    </h1>
-  </main>
-</LayoutDocumentation>
+<LayoutLandingPage>
+    <Header slot="header"></Header>
+    <div> prueba </div>
+</LayoutLandingPage>
 ```
 
 El ejemplo presupone que `DocumentationLayout.astro` importa el CSS global descrito anteriormente. Ajusta los nombres y las propiedades de los componentes según tu proyecto.
