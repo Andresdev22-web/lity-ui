@@ -1,96 +1,334 @@
 ---
-import Layout from '../layouts/v2/LandingPage/Layout.astro';
-import Header from '../components/v2/LandingPage/header/Header.astro';
+import Layout from '../Library/Layouts/LandingPage.astro';
+import Header from '../Library/components/header/Header.astro';
 
-const titlePage: string = "Lity Ui";
-
+const titlePage: string = "Lity UI";
 ---
 
 <Layout titlePage={titlePage}>
-   <Header
-  title={titlePage} 
-    showThemeSelector={true} 
-  
+ <Header
+  slot="header"
+  title={titlePage}
+  logoIcon="lucide:layers"
+  showNavigation={true}
+  navigationTitle="Navegación"
+  navigationLinks={[
+    {
+      label: "Inicio",
+      href: "/",
+      icon: "lucide:house",
+    },
+    {
+      label: "Componentes",
+      href: "/components",
+      icon: "lucide:component",
+    },
+    {
+      label: "Documentación",
+      href: "/documentation2/init/Introduccion",
+      icon: "lucide:book-open",
+    },
+  ]}
+  optionsTitle="Más opciones"
+  optionsLinks={[
+    {
+      label: "GitHub",
+      href: "https://github.com/Andresdev22-web/lity-ui",
+      icon: "lucide:github",
+    },
+  ]}
+  showThemeSelector={true}
+  sticky={true}
+  floating={false}
 />
-<!-- HERO & SOBRE LITY UI -->
-  <section class="relative overflow-hidden py-20 px-6 md:px-12 max-w-7xl mx-auto border-b border-[var(--border-color)]">
-    
-    <!-- Decoración de Fondo (Glow Effect) -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[var(--accent)]/10 rounded-full blur-3xl -z-10 pointer-events-none"></div>
-
-    <div class="max-w-3xl mx-auto text-center space-y-6">
-      
-      <!-- Badge Superior -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent)]/10 border border-[var(--accent)]/20 text-xs font-semibold text-[var(--accent)]">
-        <span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"></span>
-        Librería de Componentes para Astro & Tailwind
+  <main>
+    <!-- HERO -->
+    <section class="relative isolate overflow-hidden border-b border-[var(--border-color)]">
+      <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div class="absolute left-1/2 top-0 h-80 w-80 -translate-x-1/2 rounded-full bg-[var(--accent)]/10 blur-[100px]"></div>
       </div>
 
-      <!-- Título Principal -->
-      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-[var(--text-primary)]">
-        Construye sitios web <span class="text-transparent bg-clip-text bg-gradient-to-r from-[var(--accent)] to-purple-400">ultrarrápidos</span> y modernos.
-      </h1>
+      <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:px-12 md:py-32 lg:grid-cols-[1.15fr_0.85fr]">
 
-      <!-- Subtítulo / Qué es Lity UI -->
-      <p class="text-lg sm:text-xl text-[var(--text-secondary)] leading-relaxed">
-        <strong>Lity UI</strong> es un kit de UI ligero y accesible creado para desarrolladores que buscan acelerar la creación de Landing Pages persuasivas y sistemas de documentación sin perder el control sobre el diseño.
-      </p>
+        <div class="max-w-2xl">
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm text-[var(--text-secondary)]">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            Una librería para desarrolladores Astro
+          </div>
 
-      <!-- Botones de Acción (Call to Action) -->
-      <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
-        
-        <!-- Botón a la Documentación -->
-        <a 
-          href="/documentation" 
-          class="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--accent)] text-white font-semibold shadow-lg shadow-[var(--accent)]/25 hover:opacity-90 hover:scale-[1.02] active:scale-[0.98] transition-all"
-        >
-          <span>Ir a la Documentación</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        </a>
+          <h1 class="text-4xl font-bold tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl">
+            Construye interfaces web
+            <span class="text-[var(--accent)]">sin empezar desde cero.</span>
+          </h1>
 
-        <!-- Botón Ver en GitHub -->
-        <a 
-          href="https://github.com/Andresdev22-web/lity-ui" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] font-medium hover:bg-[var(--border-color)]/30 transition-all"
-        >
-          <span>GitHub</span>
-        </a>
+          <p class="mt-6 max-w-xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+            <strong class="text-[var(--text-primary)]">Lity UI</strong> reúne componentes reutilizables y estructuras de interfaz para ayudarte a crear Landing Pages y páginas de documentación con Astro y Tailwind CSS.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/documentation2/init/Introduccion"
+              class="inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 font-semibold text-white transition-all hover:opacity-90 active:scale-[0.98]"
+            >
+              Explorar documentación
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17 17 7M7 7h10v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+
+            <a
+              href="https://github.com/Andresdev22-web/lity-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--accent)]"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.59 2 12.253c0 4.534 2.865 8.376 6.839 9.736.5.095.682-.222.682-.494 0-.244-.009-.888-.014-1.744-2.782.619-3.369-1.375-3.369-1.375-.455-1.185-1.11-1.5-1.11-1.5-.908-.637.069-.624.069-.624 1.003.073 1.531 1.058 1.531 1.058.892 1.568 2.341 1.115 2.91.852.091-.663.35-1.115.636-1.372-2.22-.259-4.555-1.14-4.555-5.077 0-1.122.39-2.04 1.029-2.76-.103-.26-.446-1.307.098-2.724 0 0 .84-.276 2.75 1.054A9.31 9.31 0 0 1 12 6.948a9.3 9.3 0 0 1 2.502.347c1.91-1.33 2.748-1.054 2.748-1.054.546 1.417.203 2.464.1 2.724.64.72 1.027 1.638 1.027 2.76 0 3.947-2.339 4.815-4.566 5.069.359.319.679.949.679 1.913 0 1.381-.012 2.493-.012 2.832 0 .274.18.593.688.493C19.135 20.625 22 16.785 22 12.253 22 6.59 17.523 2 12 2Z" />
+              </svg>
+              Ver en GitHub
+            </a>
+          </div>
+
+          <p class="mt-5 text-sm text-[var(--text-secondary)]">
+            Diseñada para trabajar con Astro y Tailwind CSS v4.
+          </p>
+        </div>
+
+        <!-- VISTA PREVIA ILUSTRATIVA -->
+        <div class="relative mx-auto w-full max-w-lg">
+          <div class="absolute -inset-4 -z-10 rounded-3xl bg-[var(--accent)]/5 blur-2xl"></div>
+
+          <div class="overflow-hidden rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] shadow-2xl">
+            <div class="flex items-center justify-between border-b border-[var(--border-color)] px-4 py-3">
+              <div class="flex items-center gap-2">
+                <span class="h-2.5 w-2.5 rounded-full bg-[var(--text-secondary)]/40"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-[var(--text-secondary)]/40"></span>
+                <span class="h-2.5 w-2.5 rounded-full bg-[var(--text-secondary)]/40"></span>
+              </div>
+              <span class="text-xs text-[var(--text-secondary)]">Vista previa de interfaz</span>
+            </div>
+
+            <div class="space-y-5 p-5 sm:p-7">
+              <div class="space-y-3">
+                <div class="h-2.5 w-20 rounded-full bg-[var(--accent)]/60"></div>
+                <div class="h-5 w-4/5 rounded-md bg-[var(--text-primary)]/15"></div>
+                <div class="h-5 w-3/5 rounded-md bg-[var(--text-primary)]/15"></div>
+                <div class="h-2.5 w-full rounded-full bg-[var(--text-secondary)]/15"></div>
+                <div class="h-2.5 w-4/5 rounded-full bg-[var(--text-secondary)]/15"></div>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <div class="rounded-lg bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-white">Botón principal</div>
+                <div class="rounded-lg border border-[var(--border-color)] px-4 py-2 text-xs font-medium text-[var(--text-primary)]">Secundario</div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-xl border border-[var(--border-color)] p-4">
+                  <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.7"/>
+                      <path d="M3 9h18" stroke="currentColor" stroke-width="1.7"/>
+                    </svg>
+                  </div>
+                  <div class="mb-2 h-2 w-3/4 rounded-full bg-[var(--text-primary)]/20"></div>
+                  <div class="h-2 w-full rounded-full bg-[var(--text-secondary)]/10"></div>
+                </div>
+
+                <div class="rounded-xl border border-[var(--border-color)] p-4">
+                  <div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <div class="mb-2 h-2 w-3/4 rounded-full bg-[var(--text-primary)]/20"></div>
+                  <div class="h-2 w-full rounded-full bg-[var(--text-secondary)]/10"></div>
+                </div>
+              </div>
+
+              <div class="rounded-xl border border-dashed border-[var(--border-color)] p-4 text-center">
+                <p class="text-xs text-[var(--text-secondary)]">Componentes reutilizables · Diseño adaptable</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-3 text-center text-xs text-[var(--text-secondary)]">
+            Representación ilustrativa de una interfaz construida con componentes.
+          </p>
+        </div>
       </div>
+    </section>
 
-    </div>
-
-    <!-- SECCIÓN: ¿CÓMO NACIÓ LITY UI? -->
-    <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
-      
-      <div class="p-6 rounded-2xl bg-[var(--bg-secondary)]/40 border border-[var(--border-color)] space-y-2">
-        <div class="text-2xl mb-2">💡</div>
-        <h3 class="text-lg font-bold">El Origen</h3>
-        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
-          Nació de la necesidad de unificar componentes reutilizables en un solo lugar, evitando rehacer estructuras comunes de interfaz en cada proyecto web.
+    <!-- PROPUESTA DE VALOR -->
+    <section class="mx-auto max-w-7xl px-6 py-20 md:px-12">
+      <div class="max-w-2xl">
+        <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[var(--accent)]">
+          Menos trabajo repetitivo
+        </p>
+        <h2 class="text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+          Lo esencial para construir mejores interfaces.
+        </h2>
+        <p class="mt-4 leading-7 text-[var(--text-secondary)]">
+          Organiza las partes comunes de tus proyectos y dedica más tiempo a desarrollar las funcionalidades y el diseño que hacen diferente a cada sitio.
         </p>
       </div>
 
-      <div class="p-6 rounded-2xl bg-[var(--bg-secondary)]/40 border border-[var(--border-color)] space-y-2">
-        <div class="text-2xl mb-2">⚡</div>
-        <h3 class="text-lg font-bold">Rendimiento Cero-JS</h3>
-        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
-          Diseñado sobre la arquitectura de islas de Astro y Tailwind CSS v4 para entregar el menor footprint de JavaScript al navegador.
-        </p>
-      </div>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
 
-      <div class="p-6 rounded-2xl bg-[var(--bg-secondary)]/40 border border-[var(--border-color)] space-y-2">
-        <div class="text-2xl mb-2">🎨</div>
-        <h3 class="text-lg font-bold">Ecosistema Cohesivo</h3>
-        <p class="text-sm text-[var(--text-secondary)] leading-relaxed">
-          Pensado con variables CSS semánticas para integrarse de forma fluida tanto en layouts promocionales como en documentaciones de producto.
-        </p>
-      </div>
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+              <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+              <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Componentes reutilizables</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Reutiliza estructuras de interfaz para reducir la duplicación de código y mantener tus proyectos organizados.
+          </p>
+        </article>
 
-    </div>
-  </section>
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m13 2-3 8h7l-6 12 2-9H6l7-11Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Flujo de trabajo ágil</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Parte de una base reutilizable en lugar de reconstruir desde cero las mismas secciones en cada proyecto.
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <rect x="5" y="5" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.7"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Personalización flexible</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Adapta los componentes a la identidad visual de tu proyecto mediante estilos y variables CSS.
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 5h16v14H4zM8 9h8M8 13h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Landing Pages</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Construye páginas promocionales con secciones organizadas y una estructura fácil de mantener.
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Documentación</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Organiza guías, explicaciones y ejemplos para presentar tus proyectos y facilitar su comprensión.
+          </p>
+        </article>
+
+        <article class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/50 p-6 transition-colors hover:border-[var(--accent)]/50">
+          <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-[var(--text-primary)]">Código organizado</h3>
+          <p class="mt-2 text-sm leading-6 text-[var(--text-secondary)]">
+            Separa las piezas de la interfaz en componentes para que el código sea más fácil de revisar y modificar.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- TECNOLOGÍAS -->
+    <section class="border-y border-[var(--border-color)] bg-[var(--bg-secondary)]/30">
+      <div class="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 md:items-center md:px-12">
+        <div>
+          <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-[var(--accent)]">
+            El ecosistema
+          </p>
+          <h2 class="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
+            Creada para tu flujo de trabajo.
+          </h2>
+          <p class="mt-4 leading-7 text-[var(--text-secondary)]">
+            Lity UI combina herramientas del ecosistema frontend para ayudarte a desarrollar interfaces modernas con una base de código organizada.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-5">
+            <p class="font-semibold text-[var(--text-primary)]">Astro</p>
+            <p class="mt-1 text-sm text-[var(--text-secondary)]">Arquitectura de componentes y páginas.</p>
+          </div>
+          <div class="rounded-xl border border//localhost-[var(--border-color)] bg-[var(--bg-secondary)] p-5">
+            <p class="font-semibold text-[var(--text-primary)]">Tailwind CSS v4</p>
+            <p class="mt-1 text-sm text-[var(--text-secondary)]">Estilos mediante clases utilitarias.</p>
+          </div>
+          <div class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-5">
+            <p class="font-semibold text-[var(--text-primary)]">TypeScript</p>
+            <p class="mt-1 text-sm text-[var(--text-secondary)]">Tipos para las propiedades de componentes que lo utilizan.</p>
+          </div>
+          <div class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-5">
+            <p class="font-semibold text-[var(--text-primary)]">Lucide Icons</p>
+            <p class="mt-1 text-sm text-[var(--text-secondary)]">Iconografía para interfaces.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÓMO EMPEZAR -->
+    <section class="mx-auto max-w-7xl px-6 py-20 md:px-12">
+      <div class="rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-8 sm:p-12">
+        <div class="mx-auto max-w-2xl text-center">
+          <div class="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--accent)]/10 text-[var(--accent)]">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m8 17-5-5 5-5M16 7l5 5-5 5M14 4l-4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <h2 class="text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
+            Empieza a construir con Lity UI.
+          </h2>
+
+          <p class="mt-4 leading-7 text-[var(--text-secondary)]">
+            Consulta la documentación para conocer la estructura de la librería, aprender a instalarla y descubrir cómo utilizar sus componentes.
+          </p>
+
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a
+              href="/documentation2/init/Introduccion"
+              class="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              Leer la documentación
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <a
+              href="https://github.com/Andresdev22-web/lity-ui"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-xl border border-[var(--border-color)] px-5 py-3 font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--accent)]"
+            >
+              Explorar el repositorio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
-

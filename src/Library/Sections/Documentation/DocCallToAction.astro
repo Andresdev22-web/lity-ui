@@ -1,0 +1,96 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  icon?: string;
+  title: string;
+  description: string;
+  buttonText?: string;
+  buttonHref?: string;
+  buttonIcon?: string;
+}
+
+const {
+  icon = "lucide:rocket",
+  title,
+  description,
+  buttonText = "Comenzar",
+  buttonHref = "/components",
+  buttonIcon = "lucide:arrow-right",
+} = Astro.props;
+---
+
+<section
+  class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-6 md:p-8"
+>
+  <!-- Título e icono -->
+  <div class="mb-3 flex items-center gap-3">
+    {icon && (
+      <Icon
+        name={icon}
+        class="h-6 w-6 shrink-0 text-[var(--accent)]"
+      />
+    )}
+
+    <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+      {title}
+    </h2>
+  </div>
+
+  <!-- Descripción -->
+  <p class="mb-5 max-w-3xl leading-7 text-[var(--text-secondary)]">
+    {description}
+  </p>
+
+  <!-- Botón de acción -->
+  {buttonText && buttonHref && (
+    <a
+      href={buttonHref}
+      class="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+    >
+      {buttonText}
+
+      {buttonIcon && (
+        <Icon name={buttonIcon} class="h-4 w-4" />
+      )}
+    </a>
+  )}
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocCallToAction
+
+Descripción:
+  Sección de cierre que invita al usuario a realizar una acción.
+  Incluye un título, una descripción y un botón opcional.
+
+Props:
+  icon        (string, opcional): Icono junto al título.
+              Predeterminado: "lucide:rocket".
+              Usa "" para ocultarlo.
+
+  title       (string, obligatorio): Título de la sección.
+
+  description (string, obligatorio): Texto descriptivo.
+
+  buttonText  (string, opcional): Texto del botón.
+              Predeterminado: "Comenzar".
+
+  buttonHref  (string, opcional): URL de destino del botón.
+              Predeterminado: "/components".
+
+  buttonIcon  (string, opcional): Icono del botón.
+              Predeterminado: "lucide:arrow-right".
+              Usa "" para ocultarlo.
+
+Ejemplo de uso:
+
+<DocCallToAction
+  icon="lucide:rocket"
+  title="Empieza a utilizar Lity UI"
+  description="Explora la documentación y descubre los componentes disponibles."
+  buttonText="Explorar componentes"
+  buttonHref="/components"
+/>
+-->

@@ -1,0 +1,195 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Documentación de componentes"
+    badgeIcon="lucide:book-open"
+    title="Componente"
+    highlight="DocIntroduction"
+    description="Aprende a crear encabezados para tus páginas de documentación utilizando etiquetas, títulos, texto destacado y descripciones."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="¿Qué es DocIntroduction?"
+    paragraphs={[
+      "DocIntroduction es un componente reutilizable diseñado para presentar el contenido principal de una página.",
+      "Permite combinar una etiqueta superior con icono, un título, un texto destacado y una descripción. Puedes utilizar todos estos elementos o mostrar únicamente los que necesites."
+    ]}
+    items={[
+      {
+        icon: "lucide:layers",
+        title: "Reutilizable",
+        description: "Utiliza la misma estructura en distintas páginas."
+      },
+      {
+        icon: "lucide:settings-2",
+        title: "Flexible",
+        description: "Todas sus propiedades son opcionales."
+      },
+      {
+        icon: "lucide:palette",
+        title: "Personalizable",
+        description: "Adapta el contenido a cada sección de tu documentación."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="Uso recomendado">
+    Utiliza este componente al inicio de una página para presentar el tema
+    y ayudar al usuario a identificar rápidamente el contenido que va a consultar.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:settings-2"
+    title="Propiedades disponibles"
+    description="Todas las propiedades son opcionales. Los elementos que no tengan contenido no se mostrarán."
+  />
+
+  <DocTable
+    icon="lucide:table"
+    title="Referencia de propiedades"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "badge",
+        type: "string",
+        required: "No",
+        description: "Texto de la etiqueta superior. Se muestra si tiene contenido."
+      },
+      {
+        name: "badgeIcon",
+        type: "string",
+        required: "No",
+        description: 'Icono de la etiqueta. Predeterminado: "lucide:book-open". Usa "" para ocultarlo.'
+      },
+      {
+        name: "title",
+        type: "string",
+        required: "No",
+        description: "Título principal. Puede utilizarse sin highlight."
+      },
+      {
+        name: "highlight",
+        type: "string",
+        required: "No",
+        description: "Texto destacado que aparece después de title. También puede utilizarse solo."
+      },
+      {
+        name: "description",
+        type: "string",
+        required: "No",
+        description: "Descripción debajo del título. Se oculta si no tiene contenido."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:code"
+    title="Ejemplos de uso"
+    description="Puedes combinar las propiedades según las necesidades de cada página."
+  />
+
+  <DocCodeBlock
+    title="1. Introducción completa"
+    icon="lucide:layers"
+    language="astro"
+    code={`<DocIntroduction
+  badge="Guía de componentes"
+  badgeIcon="lucide:layers"
+  title="Bienvenido a"
+  highlight="Lity UI"
+  description="Una librería de componentes para Astro y Tailwind CSS v4."
+/>`}
+  />
+
+  <DocCodeBlock
+    title="2. Título y descripción"
+    icon="lucide:align-left"
+    language="astro"
+    code={`<DocIntroduction
+  title="Instalación"
+  description="Aprende a instalar y configurar Lity UI."
+/>`}
+  />
+
+  <DocCodeBlock
+    title="3. Título con texto destacado"
+    icon="lucide:type"
+    language="astro"
+    code={`<DocIntroduction
+  title="Explora"
+  highlight="los componentes"
+/>`}
+  />
+
+  <DocCodeBlock
+    title="4. Solo texto destacado"
+    icon="lucide:highlighter"
+    language="astro"
+    code={`<DocIntroduction highlight="Lity UI" />`}
+  />
+
+  <DocCodeBlock
+    title="5. Etiqueta sin icono"
+    icon="lucide:tag"
+    language="astro"
+    code={`<DocIntroduction
+  badge="Guía rápida"
+  badgeIcon=""
+  title="Configuración"
+/>`}
+  />
+
+  <DocCodeBlock
+    title="6. Solo descripción"
+    icon="lucide:align-left"
+    language="astro"
+    code={`<DocIntroduction
+  description="Guías para utilizar los componentes."
+/>`}
+  />
+
+  <DocAlert type="warning" title="Ten en cuenta">
+    La propiedad badgeIcon solo se muestra cuando badge tiene contenido.
+    Si title y highlight están vacíos u omitidos, el título no se muestra.
+    La descripción también se oculta cuando no tiene contenido.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:package"
+    title="Importación"
+    paragraphs={[
+      "Importa el componente desde la ruta donde lo hayas guardado. Ajusta la ruta relativa según la ubicación de la página y del archivo."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Importar DocIntroduction"
+    icon="lucide:package"
+    language="astro"
+    code={`import { DocIntroduction } from "lity-ui";`}
+  />
+
+  
+  <DocNextStep
+    icon="lucide:book-open"
+    title="¿Qué sigue?"
+    description="Continúa aprendiendo a organizar el contenido de tus páginas con secciones de texto y listas."
+    buttonText="Ver DocArticleSection"
+    buttonHref="/components/doc-article-section"
+  />
+</Layout>

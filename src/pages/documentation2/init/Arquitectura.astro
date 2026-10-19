@@ -1,0 +1,348 @@
+---
+import Layout from "../layout.astro";
+import DocIntroduction from "../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Acerca del proyecto"
+    badgeIcon="lucide:layers"
+    title="Arquitectura de"
+    highlight="Lity UI"
+    description="Conoce las tecnologías, la estructura y los principios utilizados para construir una librería de componentes reutilizables, personalizables y fáciles de mantener."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="¿Qué es Lity UI?"
+    paragraphs={[
+      "Lity UI es una librería de componentes de interfaz diseñada para facilitar la creación de páginas web con Astro y Tailwind CSS v4.",
+      "Su objetivo es ofrecer componentes reutilizables que permitan construir interfaces consistentes sin tener que desarrollar cada elemento desde cero.",
+      "La librería utiliza una arquitectura modular: cada componente tiene una responsabilidad concreta, recibe las propiedades que necesita y puede combinarse con otros componentes para construir interfaces más completas."
+    ]}
+  />
+
+  <DocGrid
+    icon="lucide:layers"
+    title="Principios del proyecto"
+    columns={2}
+    items={[
+      {
+        icon: "lucide:blocks",
+        title: "Modularidad",
+        description: "Cada componente se desarrolla de forma independiente y cumple una función específica."
+      },
+      {
+        icon: "lucide:repeat",
+        title: "Reutilización",
+        description: "Los componentes pueden utilizarse en distintas páginas y proyectos."
+      },
+      {
+        icon: "lucide:settings-2",
+        title: "Personalización",
+        description: "Las propiedades permiten adaptar el contenido y el comportamiento visual de cada componente."
+      },
+      {
+        icon: "lucide:code-2",
+        title: "Mantenibilidad",
+        description: "Una estructura organizada facilita corregir errores y añadir mejoras."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:cpu"
+    title="Tecnologías utilizadas"
+    description="Cada tecnología cumple una función dentro del desarrollo de la librería."
+  />
+
+  <DocTable
+    icon="lucide:table"
+    title="Tecnologías principales"
+    columns={[
+      { key: "technology", label: "Tecnología" },
+      { key: "purpose", label: "Función" },
+      { key: "usage", label: "Uso en el proyecto" }
+    ]}
+    rows={[
+      {
+        technology: "Astro",
+        purpose: "Framework web",
+        usage: "Estructura las páginas y permite crear componentes con archivos .astro."
+      },
+      {
+        technology: "Tailwind CSS v4",
+        purpose: "Estilos",
+        usage: "Permite definir diseños y estilos mediante clases utilitarias."
+      },
+      {
+        technology: "TypeScript",
+        purpose: "Tipado",
+        usage: "Permite definir y comprobar los tipos de las propiedades de los componentes."
+      },
+      {
+        technology: "Astro Icon",
+        purpose: "Iconografía",
+        usage: "Permite integrar iconos en títulos, botones y otros elementos de la interfaz."
+      },
+      {
+        technology: "CSS personalizado",
+        purpose: "Variables de diseño",
+        usage: "Centraliza colores y otros valores visuales reutilizados por los componentes."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="Una arquitectura enfocada en componentes">
+    Astro organiza la estructura de los componentes, TypeScript ayuda a definir
+    sus propiedades y Tailwind CSS se encarga de gran parte de su presentación.
+    Las variables CSS permiten mantener una identidad visual coherente.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:folder-tree"
+    title="Organización de la arquitectura"
+    description="El proyecto separa las responsabilidades para mantener el código ordenado y facilitar su evolución."
+    items={[
+      {
+        icon: "lucide:layout-template",
+        title: "Componentes",
+        description: "Contienen la estructura y presentación de cada elemento reutilizable."
+      },
+      {
+        icon: "lucide:palette",
+        title: "Estilos y diseño",
+        description: "Definen colores, fondos, bordes, espaciados y otros aspectos visuales."
+      },
+      {
+        icon: "lucide:book-open",
+        title: "Documentación",
+        description: "Explica la función de cada componente, sus propiedades y ejemplos de uso."
+      },
+      {
+        icon: "lucide:package",
+        title: "Exportación de la librería",
+        description: "Permite que los componentes publicados puedan importarse desde los proyectos que utilizan Lity UI."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:component"
+    title="Cómo se construye un componente"
+    paragraphs={[
+      "Los componentes se desarrollan en archivos Astro. Cada archivo puede incluir una sección de configuración para importar dependencias, definir una interfaz de propiedades y establecer valores predeterminados.",
+      "Después de la configuración, se escribe el marcado que representa la interfaz y se aplican los estilos mediante clases de Tailwind CSS y, cuando corresponde, variables CSS."
+    ]}
+    items={[
+      {
+        icon: "lucide:settings",
+        title: "1. Definir las propiedades",
+        description: "Se establece qué información puede recibir el componente y qué propiedades son obligatorias u opcionales."
+      },
+      {
+        icon: "lucide:code",
+        title: "2. Preparar la configuración",
+        description: "Se importan las dependencias necesarias y se extraen las propiedades recibidas."
+      },
+      {
+        icon: "lucide:layout",
+        title: "3. Construir la interfaz",
+        description: "Se organiza el marcado y se aplican los estilos correspondientes."
+      },
+      {
+        icon: "lucide:check-check",
+        title: "4. Documentar y probar",
+        description: "Se comprueba su funcionamiento y se añaden ejemplos claros de utilización."
+      }
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Estructura básica de un componente Astro"
+    icon="lucide:file-code"
+    language="astro"
+    code={`---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Descripción predeterminada",
+} = Astro.props as Props;
+---
+
+<section class="rounded-xl border border-[var(--border-color)] p-6">
+  <h2 class="text-xl font-bold text-[var(--text-primary)]">
+    {title}
+  </h2>
+
+  <p class="mt-2 text-[var(--text-secondary)]">
+    {description}
+  </p>
+</section>`}
+  />
+
+  <DocAlert type="info" title="Ejemplo ilustrativo">
+    Este código muestra la estructura general de un componente Astro con
+    propiedades y estilos. No representa necesariamente el código interno
+    de un componente específico de Lity UI.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:sliders-horizontal"
+    title="Uso de propiedades (props)"
+    paragraphs={[
+      "Las props permiten personalizar un componente desde el lugar donde se utiliza, sin modificar su implementación interna.",
+      "Pueden representar textos, iconos, enlaces, variantes visuales, listas de elementos y otras opciones. Las propiedades obligatorias deben proporcionarse, mientras que las opcionales pueden omitirse."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Definir propiedades con TypeScript"
+    icon="lucide:file-code-2"
+    language="typescript"
+    code={`interface Props {
+  title: string;
+  description?: string;
+  icon?: string;
+  columns?: 1 | 2 | 3 | 4;
+}`}
+  />
+
+  <DocCodeBlock
+    title="Utilizar un componente de la librería"
+    icon="lucide:package"
+    language="astro"
+    code={`import { DocIntroduction } from "lity-ui";
+
+<DocIntroduction
+  badge="Guía"
+  title="Bienvenido a"
+  highlight="Lity UI"
+  description="Componentes reutilizables para tus proyectos."
+/>`}
+  />
+
+  <DocArticleSection
+    icon="lucide:palette"
+    title="Sistema de estilos"
+    paragraphs={[
+      "Lity UI utiliza Tailwind CSS v4 para construir las interfaces mediante clases utilitarias directamente en el marcado de los componentes.",
+      "Para mantener la coherencia visual, también utiliza variables CSS compartidas, especialmente para colores de fondo, texto, bordes y acentos. Esto permite modificar la apariencia general sin tener que cambiar cada componente individualmente."
+    ]}
+    items={[
+      {
+        icon: "lucide:paintbrush",
+        title: "Clases utilitarias",
+        description: "Controlan aspectos como el espaciado, la distribución, los tamaños y los estados visuales."
+      },
+      {
+        icon: "lucide:palette",
+        title: "Variables CSS",
+        description: "Centralizan los valores visuales compartidos entre los componentes."
+      },
+      {
+        icon: "lucide:monitor",
+        title: "Diseño adaptable",
+        description: "Las utilidades responsivas permiten adaptar la interfaz a diferentes tamaños de pantalla cuando se necesitan."
+      }
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Ejemplo de estilos reutilizables"
+    icon="lucide:code"
+    language="html"
+    code={`<div class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-6">
+  <h2 class="text-xl font-bold text-[var(--text-primary)]">
+    Título del componente
+  </h2>
+
+  <p class="mt-2 text-[var(--text-secondary)]">
+    Descripción del contenido.
+  </p>
+</div>`}
+  />
+
+  <DocArticleSection
+    icon="lucide:book-open"
+    title="Importancia de la documentación"
+    paragraphs={[
+      "Cada componente debe contar con una explicación clara de su propósito, sus propiedades, los valores predeterminados y los ejemplos de uso.",
+      "La documentación permite que otros desarrolladores entiendan cómo utilizar la librería sin tener que estudiar primero su implementación interna."
+    ]}
+    items={[
+      {
+        icon: "lucide:list-checks",
+        title: "Propiedades",
+        description: "Documentar los nombres, tipos, requisitos y valores predeterminados."
+      },
+      {
+        icon: "lucide:terminal",
+        title: "Ejemplos",
+        description: "Mostrar código práctico que pueda adaptarse a un proyecto real."
+      },
+      {
+        icon: "lucide:message-square-text",
+        title: "Explicaciones claras",
+        description: "Describir cuándo utilizar cada componente y qué opciones ofrece."
+      }
+    ]}
+  />
+
+  <DocAlert type="warning" title="Mantén la documentación actualizada">
+    Cuando cambies las propiedades o el funcionamiento de un componente,
+    actualiza también su documentación y sus ejemplos para evitar información
+    incorrecta o código que ya no funcione.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:workflow"
+    title="Flujo de desarrollo"
+    description="El desarrollo de un componente sigue un proceso sencillo y organizado."
+    items={[
+      {
+        icon: "lucide:target",
+        title: "1. Identificar la necesidad",
+        description: "Determinar qué problema resuelve el componente y dónde se utilizará."
+      },
+      {
+        icon: "lucide:code-2",
+        title: "2. Implementar",
+        description: "Crear la estructura Astro, las props y los estilos."
+      },
+      {
+        icon: "lucide:flask-conical",
+        title: "3. Verificar",
+        description: "Comprobar los casos de uso, las propiedades opcionales y la presentación visual."
+      },
+      {
+        icon: "lucide:book-open",
+        title: "4. Documentar",
+        description: "Añadir la referencia de propiedades y ejemplos de código."
+      },
+      {
+        icon: "lucide:package-check",
+        title: "5. Publicar",
+        description: "Preparar la exportación del componente para que pueda utilizarse desde la librería."
+      }
+    ]}
+  />
+
+  <DocNextStep
+    icon="lucide:blocks"
+    title="Conoce los componentes"
+    description="Ahora que conoces la arquitectura de Lity UI, explora los componentes disponibles y aprende a integrarlos en tus proyectos."
+    buttonText="Explorar componentes"
+    buttonHref="/components"
+  />
+</Layout>

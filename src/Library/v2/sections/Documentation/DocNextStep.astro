@@ -1,0 +1,98 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  icon?: string;
+  title?: string;
+  description?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  buttonIcon?: string;
+}
+
+const {
+  icon = "lucide:rocket",
+  title,
+  description,
+  buttonText = "Continuar",
+  buttonHref = "/components",
+  buttonIcon = "lucide:arrow-right",
+} = Astro.props as Props;
+---
+
+<section class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-6 md:p-8">
+  {(icon || title) && (
+    <div class="mb-3 flex items-center gap-3">
+      {icon && (
+        <Icon
+          name={icon}
+          class="h-6 w-6 shrink-0 text-[var(--accent)]"
+        />
+      )}
+
+      {title && (
+        <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+          {title}
+        </h2>
+      )}
+    </div>
+  )}
+
+  {description && (
+    <p class="mb-5 max-w-3xl leading-7 text-[var(--text-secondary)]">
+      {description}
+    </p>
+  )}
+
+  {buttonText && buttonHref && (
+    <a
+      href={buttonHref}
+      class="inline-flex items-center gap-2 rounded-lg bg-[var(--accent)] px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90"
+    >
+      {buttonText}
+
+      {buttonIcon && (
+        <Icon name={buttonIcon} class="h-4 w-4" />
+      )}
+    </a>
+  )}
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocNextStep
+
+Descripción:
+  Sección de cierre que orienta al usuario hacia otro contenido,
+  recurso o acción al terminar de leer una página.
+
+Props:
+  icon        (string, opcional): Icono junto al título.
+              Predeterminado: "lucide:rocket".
+              Usa "" para ocultarlo.
+
+  title       (string, opcional): Título del bloque.
+
+  description (string, opcional): Texto que explica el siguiente paso.
+
+  buttonText  (string, opcional): Texto del botón.
+              Predeterminado: "Continuar".
+              Usa "" para ocultar el botón.
+
+  buttonHref  (string, opcional): URL de destino.
+              Predeterminado: "/components".
+
+  buttonIcon  (string, opcional): Icono del botón.
+              Predeterminado: "lucide:arrow-right".
+              Usa "" para ocultarlo.
+
+Ejemplo de uso:
+
+<DocNextStep
+  icon="lucide:book-open"
+  title="¿Qué sigue?"
+  description="Ahora que conoces los fundamentos, explora los componentes disponibles."
+  buttonText="Explorar componentes"
+  buttonHref="/components"
+/>
+-->

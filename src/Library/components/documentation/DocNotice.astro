@@ -1,0 +1,69 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  type?: "info" | "tip" | "warning" | "important";
+}
+
+const {
+  title,
+  type = "info",
+} = Astro.props;
+
+const styles = {
+  info: {
+    icon: "lucide:info",
+    label: "Información",
+    color: "var(--accent)",
+  },
+  tip: {
+    icon: "lucide:lightbulb",
+    label: "Consejo",
+    color: "#22C55E",
+  },
+  warning: {
+    icon: "lucide:triangle-alert",
+    label: "Advertencia",
+    color: "#F59E0B",
+  },
+  important: {
+    icon: "lucide:circle-alert",
+    label: "Importante",
+    color: "var(--accent)",
+  },
+};
+
+const current = styles[type];
+---
+
+<aside
+  class="my-6 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)]/60 p-4"
+  style={`border-left: 3px solid ${current.color}`}
+  role={type === "warning" ? "alert" : "note"}
+>
+  <div class="mb-2 flex items-center gap-2 font-semibold text-[var(--text-primary)]">
+    <Icon
+      name={current.icon}
+      class="h-5 w-5 shrink-0"
+      style={`color: ${current.color}`}
+    />
+    {title ?? current.label}
+  </div>
+
+  <div class="text-sm leading-7 text-[var(--text-secondary)]">
+    <slot />
+  </div>
+</aside>
+
+<!--
+DocNotice.astro
+----------------
+Propiedades:
+- title: título personalizado del aviso.
+- type: info, tip, warning o important.
+
+Uso:
+Componente reutilizable para mostrar información, consejos,
+advertencias y mensajes importantes en la documentación.
+-->

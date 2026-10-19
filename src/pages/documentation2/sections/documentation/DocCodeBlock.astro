@@ -1,0 +1,264 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <main class="space-y-12">
+    <DocIntroduction
+      badge="Documentación"
+      badgeIcon="lucide:code-2"
+      title="Doc"
+      highlight="CodeBlock"
+      description="Muestra fragmentos de código de forma clara y permite copiarlos con un solo clic. Ideal para instrucciones, ejemplos de uso y documentación técnica."
+    />
+
+    <DocArticleSection
+      icon="lucide:info"
+      title="¿Qué es DocCodeBlock?"
+      description="DocCodeBlock es un componente de documentación diseñado para presentar código que los usuarios puedan consultar y copiar fácilmente."
+      paragraphs={[
+        "Puedes utilizarlo para mostrar comandos de terminal, ejemplos de JavaScript, configuraciones y otros fragmentos de código.",
+        "El componente incluye un título opcional, un icono, textos explicativos y una indicación del lenguaje del código."
+      ]}
+      items={[
+        {
+          icon: "lucide:copy",
+          title: "Copiar código",
+          description: "Permite copiar el contenido del bloque sin tener que seleccionarlo manualmente."
+        },
+        {
+          icon: "lucide:terminal",
+          title: "Indicar el lenguaje",
+          description: "Puedes especificar el lenguaje o tipo de contenido para identificar el fragmento."
+        },
+        {
+          icon: "lucide:align-left",
+          title: "Añadir explicaciones",
+          description: "Incluye textos antes del código para orientar al usuario sobre cómo utilizarlo."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:settings-2"
+      title="Propiedades"
+      description="Todas las propiedades, excepto code, son opcionales."
+    />
+
+    <DocTable
+      title="Referencia de propiedades"
+      icon="lucide:table"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "predeterminado", label: "Predeterminado" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "code",
+          tipo: "string",
+          predeterminado: "Obligatorio",
+          descripcion: "Contenido del código que se mostrará y podrá copiarse."
+        },
+        {
+          propiedad: "title",
+          tipo: "string",
+          predeterminado: "Sin título",
+          descripcion: "Título que aparece en la parte superior del bloque."
+        },
+        {
+          propiedad: "icon",
+          tipo: "string",
+          predeterminado: "Sin icono personalizado",
+          descripcion: "Nombre del icono que acompaña al título, por ejemplo lucide:terminal."
+        },
+        {
+          propiedad: "paragraphs",
+          tipo: "string[]",
+          predeterminado: "[]",
+          descripcion: "Lista de textos explicativos que se muestran junto al bloque."
+        },
+        {
+          propiedad: "language",
+          tipo: "string",
+          predeterminado: '"text"',
+          descripcion: "Lenguaje o tipo de contenido indicado en el bloque."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:play"
+      title="Ejemplos de uso"
+      description="Estos ejemplos muestran distintas maneras de utilizar DocCodeBlock en tus páginas de documentación."
+    />
+
+    <DocArticleSection
+      title="1. Comando sencillo"
+      description="Utiliza el componente para mostrar un comando que el usuario deba ejecutar en su terminal."
+    />
+
+    <DocCodeBlock
+      title="Instalar dependencias"
+      icon="lucide:terminal"
+      paragraphs={["Ejecuta este comando en la terminal de tu proyecto."]}
+      language="bash"
+      code="npm install"
+    />
+
+    <DocCodeBlock
+      title="Código del ejemplo"
+      language="astro"
+      code={'<DocCodeBlock\n  title="Instalar dependencias"\n  icon="lucide:terminal"\n  paragraphs={["Ejecuta este comando en la terminal de tu proyecto."]}\n  language="bash"\n  code="npm install"\n/>'}
+    />
+
+    <DocArticleSection
+      title="2. Código de varias líneas"
+      description="Cuando necesites mostrar varias líneas, utiliza una plantilla de texto con comillas invertidas."
+    />
+
+    <DocCodeBlock
+      title="Saludo en JavaScript"
+      icon="lucide:code"
+      language="javascript"
+      code={'const greeting = "Hola";\nconsole.log(greeting);'}
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocCodeBlock\n  language="javascript"\n  code={`const greeting = "Hola";\nconsole.log(greeting);`}\n/>'}
+    />
+
+    <DocArticleSection
+      title="3. Código con título e icono personalizado"
+      description="Puedes identificar visualmente el contenido mediante un título y un icono."
+    />
+
+    <DocCodeBlock
+      title="Iniciar servidor de desarrollo"
+      icon="lucide:rocket"
+      paragraphs={[
+        "Ejecuta el siguiente comando desde la carpeta raíz del proyecto."
+      ]}
+      language="bash"
+      code="npm run dev"
+    />
+
+    <DocCodeBlock
+      title="Implementación"
+      language="astro"
+      code={'<DocCodeBlock\n  title="Iniciar servidor de desarrollo"\n  icon="lucide:rocket"\n  paragraphs={["Ejecuta el siguiente comando desde la carpeta raíz del proyecto."]}\n  language="bash"\n  code="npm run dev"\n/>'}
+    />
+
+    <DocArticleSection
+      icon="lucide:layers"
+      title="Comportamiento del componente"
+      description="Hay algunos detalles importantes que debes conocer antes de utilizar DocCodeBlock."
+    />
+
+    <DocGrid
+      columns={2}
+      items={[
+        {
+          icon: "lucide:copy",
+          title: "Botón de copia",
+          description: "Copia el contenido de la propiedad code al portapapeles."
+        },
+        {
+          icon: "lucide:file-code",
+          title: "Contenido como texto",
+          description: "El código se muestra como texto y no se ejecuta en la página."
+        },
+        {
+          icon: "lucide:code-2",
+          title: "Sin resaltado de sintaxis",
+          description: "La propiedad language indica el tipo de contenido, pero no activa el resaltado de sintaxis."
+        },
+        {
+          icon: "lucide:shield-check",
+          title: "Uso seguro",
+          description: "Los fragmentos se presentan para consulta; no se ejecutan como código de la aplicación."
+        }
+      ]}
+    />
+
+    <DocAlert
+      type="warning"
+      title="Requisito del portapapeles"
+      icon="lucide:clipboard"
+    >
+      La función de copiar requiere que el navegador permita el acceso al portapapeles. En los navegadores habituales, esto normalmente necesita un contexto seguro, como HTTPS o localhost. En otros entornos, la función puede no estar disponible.
+    </DocAlert>
+
+    <DocArticleSection
+      icon="lucide:check-circle"
+      title="Buenas prácticas"
+      description="Sigue estas recomendaciones para que tus bloques sean fáciles de entender y utilizar."
+      items={[
+        {
+          icon: "lucide:heading",
+          title: "Usa títulos descriptivos",
+          description: "Indica brevemente qué hace el código o para qué sirve el comando."
+        },
+        {
+          icon: "lucide:message-square",
+          title: "Explica cuándo ejecutarlo",
+          description: "Utiliza paragraphs para indicar dónde y cuándo debe utilizarse el fragmento."
+        },
+        {
+          icon: "lucide:braces",
+          title: "Mantén el código claro",
+          description: "Evita incluir contenido innecesario y separa los ejemplos complejos en bloques más pequeños."
+        },
+        {
+          icon: "lucide:tag",
+          title: "Indica el lenguaje correcto",
+          description: "Usa valores como bash, javascript, typescript, astro o json según el contenido."
+        }
+      ]}
+    />
+
+    <DocAlert
+      type="info"
+      title="Importante"
+      icon="lucide:info"
+    >
+      La propiedad language identifica el lenguaje indicado en el bloque, pero no proporciona resaltado de sintaxis. Si necesitas colorear palabras clave y estructuras del código, tendrás que incorporar una solución de resaltado por separado.
+    </DocAlert>
+
+    <DocArticleSection
+      icon="lucide:package"
+      title="Importación"
+      description="Si utilizas Lity UI como paquete, importa el componente desde el punto de entrada público de la biblioteca."
+    />
+
+    <DocCodeBlock
+      title="Importar DocCodeBlock"
+      icon="lucide:package"
+      language="typescript"
+      code={'import { DocCodeBlock } from "lity-ui";'}
+    />
+
+    <DocAlert type="warning" title="Nota sobre la exportación">
+      Esta importación requiere que DocCodeBlock esté exportado desde el punto de entrada público de Lity UI. Si todavía no lo has añadido, tendrás que incorporarlo antes de utilizar este ejemplo.
+    </DocAlert>
+
+    <DocNextStep
+      icon="lucide:arrow-right"
+      title="Continúa con DocTable"
+      description="Aprende a presentar propiedades, configuraciones y otros datos organizados en tablas dentro de tu documentación."
+      buttonText="Ver DocTable"
+      buttonHref="/components/doc-table"
+      buttonIcon="lucide:arrow-right"
+    />
+  </main>
+</Layout>

@@ -1,0 +1,141 @@
+---
+import Layout from "../layout.astro";
+import DocIntroduction from "../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocAlert from "../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <main class="space-y-12">
+    <!-- Introducción -->
+    <DocIntroduction
+      badge="Guía de componentes"
+      badgeIcon="lucide:layers"
+      title="Bienvenido a"
+      highlight="Lity UI"
+      description="Una biblioteca de componentes reutilizables para Astro y Tailwind CSS v4, diseñada para ayudarte a desarrollar interfaces de forma más rápida, organizada y consistente."
+    />
+
+    <!-- Qué es Lity UI -->
+    <DocArticleSection
+      icon="lucide:layers"
+      title="¿Qué es Lity UI?"
+      description="Una base reutilizable para construir interfaces web sin empezar desde cero."
+      paragraphs={[
+        "Lity UI es una colección de componentes y estructuras diseñados para simplificar el desarrollo de proyectos web. En lugar de construir cada elemento desde cero, puedes reutilizar componentes preparados y adaptarlos a las necesidades de tu aplicación.",
+        "La biblioteca ayuda a resolver tareas habituales de interfaz, como organizar contenido, construir secciones y mantener una apariencia visual coherente. De esta manera, puedes dedicar más tiempo a desarrollar las funcionalidades específicas de tu proyecto.",
+        "Sus componentes están pensados para ofrecer una base flexible que puedas personalizar mediante propiedades y estilos, manteniendo el control sobre el resultado final."
+      ]}
+    />
+
+    <!-- Objetivos -->
+    <DocGrid
+      icon="lucide:target"
+      title="¿Por qué fue creada?"
+      columns={2}
+      items={[
+        {
+          icon: "lucide:refresh-cw",
+          title: "Reutilizar código",
+          description: "Evita reconstruir los mismos elementos en cada proyecto. Crea componentes reutilizables y úsalos cuando los necesites."
+        },
+        {
+          icon: "lucide:palette",
+          title: "Mantener consistencia",
+          description: "Utiliza estilos y patrones compartidos para conservar una identidad visual coherente en toda la aplicación."
+        },
+        {
+          icon: "lucide:zap",
+          title: "Desarrollar más rápido",
+          description: "Parte de componentes existentes para concentrarte en las características específicas de tu proyecto."
+        },
+        {
+          icon: "lucide:sliders-horizontal",
+          title: "Personalizar con libertad",
+          description: "Adapta los componentes mediante sus propiedades y estilos según las necesidades de tu interfaz."
+        }
+      ]}
+    />
+
+    <!-- Tecnologías -->
+    <DocArticleSection
+      icon="lucide:code-2"
+      title="Tecnologías utilizadas"
+      description="Lity UI se apoya en herramientas del ecosistema frontend para construir componentes mantenibles y personalizables."
+      items={[
+        {
+          icon: "lucide:zap",
+          title: "Astro",
+          description: "Es la base de la biblioteca. Permite crear componentes y páginas con un enfoque orientado al rendimiento y enviar JavaScript al navegador cuando es necesario."
+        },
+        {
+          icon: "lucide:palette",
+          title: "Tailwind CSS v4",
+          description: "Permite construir interfaces mediante clases utilitarias y personalizar la apariencia con estilos y variables CSS."
+        },
+        {
+          icon: "lucide:code-2",
+          title: "TypeScript",
+          description: "Ayuda a definir las propiedades de los componentes, mejorar el autocompletado y detectar errores de tipos durante el desarrollo."
+        },
+        {
+          icon: "lucide:shapes",
+          title: "Astro Icon y Lucide",
+          description: "Facilitan la incorporación de iconos para mejorar la identificación visual de acciones, secciones y elementos de la interfaz."
+        }
+      ]}
+    />
+
+    <!-- Organización -->
+    <DocArticleSection
+      icon="lucide:layout-grid"
+      title="¿Qué encontrarás en la biblioteca?"
+      description="La documentación está organizada para que puedas conocer los elementos disponibles y aprender a utilizarlos."
+      items={[
+        {
+          icon: "lucide:panels-top-left",
+          title: "Layouts",
+          description: "Estructuras que organizan las páginas y proporcionan una base común para distribuir el contenido."
+        },
+        {
+          icon: "lucide:component",
+          title: "Componentes reutilizables",
+          description: "Elementos configurables que puedes integrar en distintas partes de tus proyectos."
+        },
+        {
+          icon: "lucide:book-open",
+          title: "Documentación y ejemplos",
+          description: "Explicaciones, propiedades y ejemplos de implementación para aprender a utilizar cada componente."
+        }
+      ]}
+    />
+
+    <!-- Filosofía -->
+    <DocArticleSection
+      icon="lucide:lightbulb"
+      title="Una biblioteca para construir, no para limitar"
+      description="Lity UI no busca reemplazar Astro ni Tailwind CSS. Su objetivo es ofrecer una base reutilizable que puedas ampliar, modificar y adaptar. Los componentes son un punto de partida: tú decides cómo integrarlos y qué aspecto tendrá tu proyecto."
+    />
+
+    <!-- Aviso -->
+    <DocAlert
+      type="info"
+      title="Adapta los componentes a tu proyecto"
+      icon="lucide:info"
+    >
+      Puedes utilizar los componentes como vienen o personalizarlos según tus necesidades. Consulta la documentación de cada uno para conocer sus propiedades, ejemplos y limitaciones.
+    </DocAlert>
+
+    <!-- Cierre -->
+    <DocNextStep
+      icon="lucide:rocket"
+      title="Empieza a utilizar Lity UI"
+      description="Explora los componentes disponibles, consulta sus propiedades y aprende a integrarlos en tu proyecto. Puedes comenzar con una estructura sencilla y añadir los elementos que necesites a medida que avances."
+      buttonText="Explorar componentes"
+      buttonHref="/components"
+      buttonIcon="lucide:arrow-right"
+    />
+  </main>
+</Layout>

@@ -1,0 +1,322 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <main class="space-y-12">
+    <DocIntroduction
+      badge="Documentación"
+      badgeIcon="lucide:book-open"
+      title="Doc"
+      highlight="Table"
+      description="Organiza información técnica en tablas claras y fáciles de consultar. Ideal para documentar propiedades, tipos de datos, configuraciones, parámetros y valores."
+    />
+
+    <DocArticleSection
+      icon="lucide:info"
+      title="¿Qué es DocTable?"
+      description="DocTable es un componente diseñado para presentar información estructurada en filas y columnas dentro de tus páginas de documentación."
+      paragraphs={[
+        "Puedes utilizarlo para explicar las propiedades de un componente, comparar configuraciones o describir los parámetros que necesita una función.",
+        "Las columnas definen los encabezados de la tabla y las filas contienen los datos correspondientes. Cada fila utiliza claves que deben coincidir con las key definidas en las columnas."
+      ]}
+      items={[
+        {
+          icon: "lucide:layout-grid",
+          title: "Información organizada",
+          description: "Distribuye los datos en columnas para facilitar su lectura y comparación."
+        },
+        {
+          icon: "lucide:list-check",
+          title: "Estructura configurable",
+          description: "Define los encabezados y la cantidad de filas según la información que necesites mostrar."
+        },
+        {
+          icon: "lucide:book-open",
+          title: "Documentación técnica",
+          description: "Explica propiedades, tipos, valores predeterminados y requisitos de configuración."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:settings-2"
+      title="Propiedades"
+      description="DocTable dispone de propiedades para personalizar el encabezado y definir la información de la tabla."
+    />
+
+    <DocTable
+      title="Referencia de propiedades"
+      icon="lucide:table"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "requerida", label: "Obligatoria" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "icon",
+          tipo: "string",
+          requerida: "No",
+          descripcion: "Icono que acompaña al título de la tabla."
+        },
+        {
+          propiedad: "title",
+          tipo: "string",
+          requerida: "No",
+          descripcion: "Título que describe la información presentada."
+        },
+        {
+          propiedad: "paragraphs",
+          tipo: "string[]",
+          requerida: "No",
+          descripcion: "Lista de textos introductorios que se muestran junto a la tabla."
+        },
+        {
+          propiedad: "columns",
+          tipo: "TableColumn[]",
+          requerida: "Sí",
+          descripcion: "Arreglo que define las columnas, sus claves y sus encabezados."
+        },
+        {
+          propiedad: "rows",
+          tipo: "TableRow[]",
+          requerida: "Sí",
+          descripcion: "Arreglo de objetos con los valores que se mostrarán en cada fila."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:layers"
+      title="Estructura de columnas y filas"
+      description="Para construir una tabla, debes definir las columnas y después proporcionar las filas que contienen sus datos."
+    />
+
+    <DocGrid
+      columns={2}
+      items={[
+        {
+          icon: "lucide:columns-3",
+          title: "Columnas",
+          description: "Cada columna debe incluir key, que identifica el dato, y label, que establece el encabezado visible."
+        },
+        {
+          icon: "lucide:rows-3",
+          title: "Filas",
+          description: "Cada fila es un objeto con valores de texto. Sus claves deben coincidir con las key de las columnas."
+        }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Estructura de una columna"
+      icon="lucide:code-2"
+      language="typescript"
+      code={'{\n  key: "name",\n  label: "Propiedad"\n}'}
+    />
+
+    <DocCodeBlock
+      title="Estructura de una fila"
+      icon="lucide:code-2"
+      language="typescript"
+      code={'{\n  name: "title",\n  type: "string",\n  required: "No"\n}'}
+    />
+
+    <DocAlert
+      type="warning"
+      title="Las claves deben coincidir"
+      icon="lucide:alert-triangle"
+    >
+      Si una columna utiliza key: "name", las filas deben incluir la propiedad name para mostrar ese dato en la columna correspondiente. Además, los valores de las filas deben ser textos.
+    </DocAlert>
+
+    <DocArticleSection
+      icon="lucide:play"
+      title="Ejemplos de uso"
+      description="A continuación puedes ver cómo utilizar DocTable en distintos escenarios de documentación."
+    />
+
+    <DocArticleSection
+      title="1. Tabla de propiedades"
+      description="Este es uno de los usos más habituales: documentar las propiedades de un componente y explicar cuáles son obligatorias."
+    />
+
+    <DocTable
+      title="Propiedades"
+      icon="lucide:settings-2"
+      columns={[
+        { key: "name", label: "Propiedad" },
+        { key: "type", label: "Tipo" },
+        { key: "required", label: "Obligatoria" }
+      ]}
+      rows={[
+        { name: "title", type: "string", required: "No" },
+        { name: "code", type: "string", required: "Sí" }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocTable\n  title="Propiedades"\n  columns={[\n    { key: "name", label: "Propiedad" },\n    { key: "type", label: "Tipo" },\n    { key: "required", label: "Obligatoria" }\n  ]}\n  rows={[\n    { name: "title", type: "string", required: "No" },\n    { name: "code", type: "string", required: "Sí" }\n  ]}\n/>'}
+    />
+
+    <DocArticleSection
+      title="2. Tabla con descripción"
+      description="Puedes añadir más columnas para explicar el propósito de cada propiedad."
+    />
+
+    <DocTable
+      title="Configuración del componente"
+      icon="lucide:sliders-horizontal"
+      paragraphs={[
+        "Referencia de las propiedades disponibles para configurar un componente."
+      ]}
+      columns={[
+        { key: "name", label: "Propiedad" },
+        { key: "type", label: "Tipo" },
+        { key: "default", label: "Predeterminado" },
+        { key: "description", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          name: "title",
+          type: "string",
+          default: "Sin título",
+          description: "Texto principal del componente."
+        },
+        {
+          name: "disabled",
+          type: "boolean",
+          default: "false",
+          description: "Indica si la interacción está deshabilitada."
+        },
+        {
+          name: "size",
+          type: "string",
+          default: "medium",
+          description: "Define el tamaño visual del componente."
+        }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocTable\n  title="Configuración del componente"\n  icon="lucide:sliders-horizontal"\n  paragraphs={[\n    "Referencia de las propiedades disponibles para configurar un componente."\n  ]}\n  columns={[\n    { key: "name", label: "Propiedad" },\n    { key: "type", label: "Tipo" },\n    { key: "default", label: "Predeterminado" },\n    { key: "description", label: "Descripción" }\n  ]}\n  rows={[\n    {\n      name: "title",\n      type: "string",\n      default: "Sin título",\n      description: "Texto principal del componente."\n    },\n    {\n      name: "disabled",\n      type: "boolean",\n      default: "false",\n      description: "Indica si la interacción está deshabilitada."\n    }\n  ]}\n/>'}
+    />
+
+    <DocArticleSection
+      title="3. Tabla de parámetros"
+      description="También puedes documentar los parámetros de una función, una API o una configuración."
+    />
+
+    <DocTable
+      title="Parámetros de una solicitud"
+      icon="lucide:network"
+      columns={[
+        { key: "parameter", label: "Parámetro" },
+        { key: "type", label: "Tipo" },
+        { key: "required", label: "Obligatorio" },
+        { key: "description", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          parameter: "name",
+          type: "string",
+          required: "Sí",
+          description: "Nombre del recurso solicitado."
+        },
+        {
+          parameter: "limit",
+          type: "number",
+          required: "No",
+          description: "Cantidad máxima de resultados."
+        },
+        {
+          parameter: "offset",
+          type: "number",
+          required: "No",
+          description: "Posición desde la que se consultan los resultados."
+        }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocTable\n  title="Parámetros de una solicitud"\n  icon="lucide:network"\n  columns={[\n    { key: "parameter", label: "Parámetro" },\n    { key: "type", label: "Tipo" },\n    { key: "required", label: "Obligatorio" },\n    { key: "description", label: "Descripción" }\n  ]}\n  rows={[\n    {\n      parameter: "name",\n      type: "string",\n      required: "Sí",\n      description: "Nombre del recurso solicitado."\n    },\n    {\n      parameter: "limit",\n      type: "number",\n      required: "No",\n      description: "Cantidad máxima de resultados."\n    }\n  ]}\n/>'}
+    />
+
+    <DocArticleSection
+      icon="lucide:check-circle"
+      title="Buenas prácticas"
+      description="Ten en cuenta estas recomendaciones para mantener tus tablas claras y consistentes."
+      items={[
+        {
+          icon: "lucide:tag",
+          title: "Usa claves descriptivas",
+          description: "Elige nombres como name, type o description para identificar fácilmente cada dato."
+        },
+        {
+          icon: "lucide:align-left",
+          title: "Mantén los encabezados claros",
+          description: "Utiliza labels breves que expliquen el contenido de cada columna."
+        },
+        {
+          icon: "lucide:rows-3",
+          title: "Conserva la estructura",
+          description: "Comprueba que todas las filas utilicen las claves correspondientes a las columnas."
+        },
+        {
+          icon: "lucide:file-text",
+          title: "Evita información innecesaria",
+          description: "Divide la información en varias tablas cuando una sola resulte demasiado extensa."
+        }
+      ]}
+    />
+
+    <DocAlert
+      type="info"
+      title="Los valores de las filas son textos"
+      icon="lucide:info"
+    >
+      Aunque documentes tipos como number o boolean, debes escribir sus valores como cadenas de texto dentro de rows. Por ejemplo, utiliza type: "number" y default: "false", no valores numéricos o booleanos directamente.
+    </DocAlert>
+
+    <DocArticleSection
+      icon="lucide:package"
+      title="Importación"
+      description="Si utilizas Lity UI como paquete, importa el componente desde el punto de entrada público de la biblioteca."
+    />
+
+    <DocCodeBlock
+      title="Importar DocTable"
+      icon="lucide:package"
+      language="typescript"
+      code={'import { DocTable } from "lity-ui";'}
+    />
+
+    <DocAlert type="warning" title="Nota sobre la exportación">
+      Esta importación requiere que DocTable esté exportado desde el punto de entrada público de Lity UI.
+    </DocAlert>
+
+    <DocNextStep
+      icon="lucide:arrow-right"
+      title="Continúa con el siguiente componente"
+      description="Sigue explorando los componentes de Lity UI para construir páginas de documentación claras, coherentes y fáciles de mantener."
+      buttonText="Ver componentes"
+      buttonHref="/components"
+      buttonIcon="lucide:arrow-right"
+    />
+  </main>
+</Layout>

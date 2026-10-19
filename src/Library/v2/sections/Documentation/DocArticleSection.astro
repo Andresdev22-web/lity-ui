@@ -1,0 +1,270 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Item {
+  icon?: string;
+  title?: string;
+  description?: string;
+}
+
+interface Props {
+  icon?: string;
+  title?: string;
+  description?: string;
+  paragraphs?: string[];
+  items?: Item[];
+}
+
+const {
+  icon,
+  title,
+  description,
+  paragraphs = [],
+  items = [],
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <!-- Título e icono opcionales -->
+  {(icon || title) && (
+    <div class="mb-4 flex items-center gap-3">
+      {icon && (
+        <Icon
+          name={icon}
+          class="h-6 w-6 shrink-0 text-[var(--accent)]"
+        />
+      )}
+
+      {title && (
+        <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+          {title}
+        </h2>
+      )}
+    </div>
+  )}
+
+  <!-- Descripción y párrafos opcionales -->
+  {(description || paragraphs.length > 0) && (
+    <div class="mb-5 space-y-4 leading-7 text-[var(--text-secondary)]">
+      {description && <p>{description}</p>}
+
+      {paragraphs.map((paragraph: string) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+  )}
+
+  <!-- Lista opcional -->
+  {items.length > 0 && (
+    <ul class="space-y-4">
+      {items.map((item: Item) => (
+        <li class="flex items-start gap-3">
+          {item.icon && (
+            <Icon
+              name={item.icon}
+              class="mt-1 h-5 w-5 shrink-0 text-[var(--accent)]"
+            />
+          )}
+
+          {(item.title || item.description) && (
+            <div>
+              {item.title && (
+                <h3 class="font-semibold text-[var(--text-primary)]">
+                  {item.title}
+                </h3>
+              )}
+
+              {item.description && (
+                <p class="leading-7 text-[var(--text-secondary)]">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocArticleSection
+
+Descripción:
+  Muestra una sección de contenido para páginas de documentación,
+  guías, artículos o páginas informativas.
+
+  Puedes utilizarlo para presentar un título, una descripción,
+  varios párrafos y una lista de elementos con iconos y subtítulos.
+
+  Todas las propiedades son opcionales. Puedes utilizar únicamente
+  las partes que necesites, sin tener que rellenar las demás.
+
+PROPIEDADES DEL COMPONENTE:
+
+  icon (string, opcional):
+    Icono que aparece a la izquierda del título.
+    Utiliza el nombre de un icono compatible con Astro Icon.
+    Ejemplo: "lucide:book-open".
+
+    Si se omite, el título se muestra sin icono.
+
+  title (string, opcional):
+    Título principal de la sección.
+    Ejemplo: "¿Qué es Lity UI?".
+
+    Si se omite, no se muestra el encabezado.
+
+  description (string, opcional):
+    Texto introductorio que aparece debajo del título.
+    Útil para explicar brevemente el tema de la sección.
+
+  paragraphs (string[], opcional):
+    Array de párrafos adicionales.
+    Cada elemento del array se muestra como un párrafo independiente.
+    Úsalo cuando necesites desarrollar un tema con varios bloques de texto.
+
+  items (Item[], opcional):
+    Array de elementos que se muestran como una lista.
+    Cada elemento puede tener su propio icono, título y descripción.
+
+PROPIEDADES DE CADA ELEMENTO DE items:
+
+  icon (string, opcional):
+    Icono que aparece junto al elemento.
+    Ejemplo: "lucide:check-circle".
+
+  title (string, opcional):
+    Título o subtítulo del elemento.
+    Ejemplo: "Fácil de utilizar".
+
+  description (string, opcional):
+    Texto que explica el elemento.
+    Ejemplo: "Permite reutilizar componentes en distintas páginas".
+
+COMPORTAMIENTO:
+
+  - Todas las propiedades son opcionales.
+  - Si no proporcionas icon, el título principal no tendrá icono.
+  - Si no proporcionas title ni icon, no se muestra el encabezado.
+  - Si omites description, no se muestra el texto introductorio.
+  - Si paragraphs está vacío o se omite, no se muestran párrafos adicionales.
+  - Si items está vacío o se omite, no se muestra la lista.
+  - Cada elemento de items puede omitir cualquiera de sus propiedades.
+  - Los iconos deben utilizar nombres válidos para Astro Icon.
+  - El componente aplica automáticamente los estilos de la documentación
+    y el espaciado inferior entre secciones.
+
+EJEMPLOS DE USO:
+
+1. Sección sencilla con título y párrafos:
+
+<DocArticleSection
+  title="¿Qué es Lity UI?"
+  paragraphs={[
+    "Lity UI es una librería de componentes reutilizables para Astro.",
+    "Está diseñada para facilitar la creación de interfaces con Tailwind CSS v4."
+  ]}
+/>
+
+2. Sección con icono, título y descripción:
+
+<DocArticleSection
+  icon="lucide:layers"
+  title="Características"
+  description="Conoce las principales características de la librería."
+/>
+
+3. Sección con varios párrafos:
+
+<DocArticleSection
+  icon="lucide:book-open"
+  title="Introducción"
+  description="Una breve introducción al tema."
+  paragraphs={[
+    "Primer párrafo con información general.",
+    "Segundo párrafo con información adicional.",
+    "Tercer párrafo con más detalles."
+  ]}
+/>
+
+4. Sección con una lista de elementos:
+
+<DocArticleSection
+  icon="lucide:target"
+  title="Objetivos"
+  items={[
+    {
+      icon: "lucide:check-circle",
+      title: "Reutilización",
+      description: "Utilizar componentes en distintas páginas."
+    },
+    {
+      icon: "lucide:zap",
+      title: "Productividad",
+      description: "Agilizar el desarrollo de interfaces."
+    }
+  ]}
+/>
+
+5. Sección combinada con texto y lista:
+
+<DocArticleSection
+  icon="lucide:info"
+  title="Requisitos"
+  description="Antes de comenzar, ten en cuenta los siguientes requisitos."
+  paragraphs={[
+    "Debes tener un proyecto Astro configurado.",
+    "También necesitas instalar las dependencias correspondientes."
+  ]}
+  items={[
+    {
+      icon: "lucide:check",
+      title: "Astro",
+      description: "Framework utilizado por el proyecto."
+    },
+    {
+      icon: "lucide:check",
+      title: "Tailwind CSS v4",
+      description: "Sistema de estilos utilizado por la interfaz."
+    }
+  ]}
+/>
+
+6. Elementos de lista sin iconos:
+
+<DocArticleSection
+  title="Ventajas"
+  items={[
+    {
+      title: "Simplicidad",
+      description: "Una estructura fácil de entender."
+    },
+    {
+      title: "Flexibilidad",
+      description: "Puedes combinar títulos y descripciones."
+    }
+  ]}
+/>
+
+7. Solo un título:
+
+<DocArticleSection title="Instalación" />
+
+8. Componente sin propiedades:
+
+<DocArticleSection />
+
+IMPORTACIÓN:
+
+  Importa el componente desde la ruta donde lo hayas guardado.
+  Por ejemplo, si se encuentra en src/Library/Sections/Documentation/:
+
+  import DocArticleSection from
+    "../../../Library/Sections/Documentation/DocArticleSection.astro";
+
+NOTA:
+  Este componente está pensado para contenido textual y listas sencillas.
+  Para bloques de código, avisos, tarjetas o llamadas a la acción,
+  utiliza los componentes especializados correspondientes.
+-->

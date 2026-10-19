@@ -1,0 +1,93 @@
+---
+import Layout from "../../Library/Layouts/Documentation.astro";
+import Header from "../../Library/components/header/Header.astro";
+
+// Navegación vertical de la documentación
+const menuNavegacion = [
+  {
+    title: "Primeros pasos",
+    items: [
+      {
+        label: "Introducción",
+        href: "/documentation2/init/Introduccion",
+        icon: "lucide:sparkles",
+      },
+      {
+        label: "Instalación",
+        href: "/documentation2/init/instalacion",
+        icon: "lucide:download",
+      },
+      {
+        label: "Arquitectura",
+        href: "/documentation2/init/Arquitectura",
+        icon: "lucide:network",
+      },
+    ],
+  },
+  {
+    title: "Layouts",
+    items: [
+      {
+        label: "Layout de documentación",
+        href: "/documentation2/layouts/Documentation",
+        icon: "lucide:panel-left",
+      },
+    ],
+  },
+  {
+    title: "Componentes",
+    items: [
+      {
+        label: "Header",
+        href: "/documentation2/components/header",
+        icon: "lucide:panel-top",
+      },
+    ],
+  },
+  {
+    title: "Componentes de documentación",
+    items: [
+      {
+        label: "Introducción",
+        href: "/documentation2/sections/documentation/introduccion",
+        icon: "lucide:book-open",
+      },
+      {
+        label: "Artículo",
+        href: "/documentation2/sections/documentation/DocArticleSection",
+        icon: "lucide:file-text",
+      },
+      {
+        label: "Bloque de código",
+        href: "/documentation2/sections/documentation/DocCodeBlock",
+        icon: "lucide:code-2",
+      },
+      {
+        label: "Cuadrícula",
+        href: "/documentation2/sections/documentation/DocGrid",
+        icon: "lucide:layout-grid",
+      },
+      {
+        label: "Alertas",
+        href: "/documentation2/sections/documentation/DocAlert",
+        icon: "lucide:message-square-warning",
+      },
+      {
+        label: "Siguiente paso",
+        href: "/documentation2/sections/documentation/DocNextStep",
+        icon: "lucide:move-right",
+      },
+      {
+        label: "Tabla de información",
+        href: "/documentation2/sections/documentation/DocTable",
+        icon: "lucide:table",
+      },
+    ],
+  },
+];
+---
+
+<Layout titlePage="Documentacion" navGroups={menuNavegacion}>
+  <Header title="Documentacion" slot="header" showThemeSelector={true} />
+  <slot />
+</Layout>

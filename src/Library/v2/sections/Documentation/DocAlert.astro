@@ -1,0 +1,113 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  type?: "info" | "success" | "warning" | "error";
+  icon?: string;
+}
+
+const {
+  title,
+  type = "info",
+  icon,
+} = Astro.props as Props;
+
+const styles = {
+  info: {
+    icon: "lucide:info",
+    label: "Información",
+    color: "#3B82F6",
+    background: "rgba(59, 130, 246, 0.08)",
+  },
+  success: {
+    icon: "lucide:circle-check",
+    label: "Correcto",
+    color: "#22C55E",
+    background: "rgba(34, 197, 94, 0.08)",
+  },
+  warning: {
+    icon: "lucide:triangle-alert",
+    label: "Importante",
+    color: "#F59E0B",
+    background: "rgba(245, 158, 11, 0.08)",
+  },
+  error: {
+    icon: "lucide:circle-x",
+    label: "Atención",
+    color: "#EF4444",
+    background: "rgba(239, 68, 68, 0.08)",
+  },
+};
+
+const current = styles[type];
+const currentIcon = icon ?? current.icon;
+const heading = title ?? current.label;
+---
+
+<aside
+  class="my-6 rounded-xl border p-4"
+  style={`border-color: ${current.color}55; border-left: 4px solid ${current.color}; background-color: ${current.background};`}
+  role={type === "error" || type === "warning" ? "alert" : "note"}
+>
+  <div class="mb-2 flex items-center gap-2 font-semibold text-[var(--text-primary)]">
+    <Icon
+      name={currentIcon}
+      class="h-5 w-5 shrink-0"
+      style={`color: ${current.color}`}
+    />
+    <span>{heading}</span>
+  </div>
+
+  <div class="text-sm leading-7 text-[var(--text-secondary)]">
+    <slot />
+  </div>
+</aside>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocAlert
+
+Descripción:
+  Muestra un aviso destacado para resaltar información importante,
+  recomendaciones, advertencias o errores.
+
+Props:
+  title (string, opcional): Título del aviso.
+        Si se omite, se utiliza el título predeterminado del tipo.
+  type  ("info" | "success" | "warning" | "error", opcional):
+        Tipo de aviso. Predeterminado: "info".
+  icon  (string, opcional): Permite personalizar el icono.
+        Si se omite, utiliza el icono predeterminado del tipo.
+
+Contenido:
+  Utiliza el slot para escribir el mensaje del aviso.
+  Admite texto y contenido HTML o componentes Astro.
+
+Tipos disponibles:
+  info:    Información general.
+  success: Confirmaciones o recomendaciones positivas.
+  warning: Advertencias y precauciones.
+  error:   Errores o situaciones que requieren atención.
+
+Ejemplos:
+
+<DocAlert>
+  Puedes consultar la documentación para conocer todos los componentes.
+</DocAlert>
+
+<DocAlert type="warning" title="Importante">
+  Asegúrate de instalar las dependencias antes de continuar.
+</DocAlert>
+
+<DocAlert type="success" title="Instalación completada">
+  Ya puedes comenzar a utilizar los componentes.
+</DocAlert>
+
+<DocAlert
+  type="error"
+  title="No olvides este paso"
+  icon="lucide:shield-alert"
+>
+  Configura las variables de entorno antes de desplegar tu aplicación.
+</DocAlert>
+-->

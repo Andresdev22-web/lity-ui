@@ -1,0 +1,104 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface Feature {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  icon?: string;
+  title?: string;
+  features: Feature[];
+}
+
+const {
+  icon = "lucide:target",
+  title,
+  features,
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <!-- Título opcional -->
+  {(icon || title) && (
+    <div class="mb-6 flex items-center gap-3">
+      {icon && (
+        <Icon
+          name={icon}
+          class="h-6 w-6 shrink-0 text-[var(--accent)]"
+        />
+      )}
+
+      {title && (
+        <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+          {title}
+        </h2>
+      )}
+    </div>
+  )}
+
+  <!-- Cuadrícula de características -->
+  <div class="grid gap-5 sm:grid-cols-2">
+    {features.map((feature) => (
+      <article class="rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-5">
+        {feature.icon && (
+          <Icon
+            name={feature.icon}
+            class="mb-3 h-6 w-6 text-[var(--accent)]"
+          />
+        )}
+
+        <h3 class="mb-2 text-lg font-semibold text-[var(--text-primary)]">
+          {feature.title}
+        </h3>
+
+        <p class="leading-7 text-[var(--text-secondary)]">
+          {feature.description}
+        </p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocFeatureGrid
+
+Descripción:
+  Muestra una cuadrícula de tarjetas para presentar objetivos,
+  características, ventajas u otros grupos de información.
+
+Props:
+  icon     (string, opcional): Icono junto al título principal.
+           Predeterminado: "lucide:target".
+           Usa "" para ocultarlo.
+
+  title    (string, opcional): Título de la sección.
+
+  features (Feature[], obligatorio): Tarjetas que se mostrarán.
+
+Cada elemento de features admite:
+  icon        (string, opcional): Icono de la tarjeta.
+  title       (string, obligatorio): Título de la tarjeta.
+  description (string, obligatorio): Descripción de la tarjeta.
+
+Ejemplo de uso:
+
+<DocFeatureGrid
+  icon="lucide:sparkles"
+  title="Características principales"
+  features={[
+    {
+      icon: "lucide:zap",
+      title: "Rápido",
+      description: "Acelera el desarrollo de tus páginas.",
+    },
+    {
+      title: "Flexible",
+      description: "Adapta los componentes a tus necesidades.",
+    },
+  ]}
+/>
+-->

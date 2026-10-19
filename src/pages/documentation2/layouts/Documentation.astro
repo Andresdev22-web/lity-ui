@@ -1,0 +1,381 @@
+---
+import Layout from "../layout.astro";
+import DocIntroduction from "../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <main class="space-y-12">
+    <!-- Introducción -->
+    <DocIntroduction
+      badge="Layouts"
+      badgeIcon="lucide:panels-top-left"
+      title="Layout"
+      highlight="Documentation"
+      description="Una estructura completa para crear páginas de documentación con encabezado, navegación lateral, contenido principal y menú adaptable a dispositivos móviles."
+    />
+
+    <!-- Qué es -->
+    <DocArticleSection
+      icon="lucide:info"
+      title="¿Qué es LayoutDocumentation?"
+      description="LayoutDocumentation proporciona una estructura reutilizable para organizar las páginas de documentación de Lity UI."
+      paragraphs={[
+        "En lugar de construir el encabezado, la barra lateral y la navegación móvil en cada página, puedes utilizar este layout para mantener una estructura común en toda la documentación.",
+        "El contenido de cada página se inserta mediante slots de Astro. Esto permite reutilizar la misma estructura y cambiar únicamente el contenido y los enlaces de navegación.",
+        "El layout también admite grupos de navegación configurables, iconos opcionales, etiquetas informativas y un menú móvil que se abre mediante un botón flotante."
+      ]}
+      items={[
+        {
+          icon: "lucide:layout-template",
+          title: "Estructura compartida",
+          description: "Organiza todas las páginas con una distribución visual consistente."
+        },
+        {
+          icon: "lucide:panel-left",
+          title: "Navegación lateral",
+          description: "Agrupa los enlaces por secciones para facilitar el acceso a cada página."
+        },
+        {
+          icon: "lucide:smartphone",
+          title: "Diseño adaptable",
+          description: "Utiliza una barra lateral en escritorio y un menú desplegable en dispositivos móviles."
+        }
+      ]}
+    />
+
+    <!-- Características -->
+    <DocGrid
+      icon="lucide:layers"
+      title="Características principales"
+      columns={2}
+      items={[
+        {
+          icon: "lucide:panel-top",
+          title: "Encabezado personalizable",
+          description: "Incluye un slot llamado header donde puedes insertar tu propio encabezado."
+        },
+        {
+          icon: "lucide:menu",
+          title: "Navegación por grupos",
+          description: "Organiza enlaces mediante títulos y listas de elementos."
+        },
+        {
+          icon: "lucide:badge-check",
+          title: "Etiquetas informativas",
+          description: "Añade badges como Nuevo o Beta a los elementos del menú."
+        },
+        {
+          icon: "lucide:smartphone",
+          title: "Menú móvil",
+          description: "Incluye apertura, cierre y un fondo superpuesto para facilitar la navegación en pantallas pequeñas."
+        }
+      ]}
+    />
+
+    <!-- Propiedades -->
+    <DocArticleSection
+      icon="lucide:settings-2"
+      title="Propiedades"
+      description="Puedes configurar el título del documento y los grupos de enlaces que aparecen en la navegación."
+    />
+
+    <DocTable
+      title="Referencia de propiedades"
+      icon="lucide:table"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "predeterminado", label: "Predeterminado" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "titlePage",
+          tipo: "string",
+          predeterminado: '"Documentación UI"',
+          descripcion: "Texto utilizado en la etiqueta title del documento HTML."
+        },
+        {
+          propiedad: "title",
+          tipo: "string",
+          predeterminado: "Sin uso actualmente",
+          descripcion: "Está declarado en Props, pero no se utiliza en la implementación actual."
+        },
+        {
+          propiedad: "navGroups",
+          tipo: "NavGroup[]",
+          predeterminado: "Dos grupos de ejemplo",
+          descripcion: "Define los grupos y los enlaces que aparecen en la navegación lateral y móvil."
+        }
+      ]}
+    />
+
+    <DocAlert
+      type="warning"
+      title="La propiedad title necesita un ajuste"
+      icon="lucide:alert-triangle"
+    >
+      Tu implementación declara title dentro de Props, pero no lo obtiene de Astro.props ni lo utiliza en el HTML. Por tanto, actualmente no produce ningún efecto. Puedes eliminar esa propiedad o implementarla si deseas que controle un título visible.
+    </DocAlert>
+
+    <!-- Tipos -->
+    <DocArticleSection
+      icon="lucide:braces"
+      title="Tipos de navegación"
+      description="La propiedad navGroups utiliza dos estructuras para representar los grupos y sus enlaces."
+    />
+
+    <DocTable
+      title="Estructura NavGroup"
+      icon="lucide:layers"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "obligatoria", label: "Obligatoria" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "title",
+          tipo: "string",
+          obligatoria: "No",
+          descripcion: "Nombre de la sección que agrupa los enlaces."
+        },
+        {
+          propiedad: "items",
+          tipo: "NavItem[]",
+          obligatoria: "Sí",
+          descripcion: "Lista de enlaces pertenecientes al grupo."
+        }
+      ]}
+    />
+
+    <DocTable
+      title="Estructura NavItem"
+      icon="lucide:link"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "obligatoria", label: "Obligatoria" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "label",
+          tipo: "string",
+          obligatoria: "Sí",
+          descripcion: "Texto visible del enlace."
+        },
+        {
+          propiedad: "href",
+          tipo: "string",
+          obligatoria: "Sí",
+          descripcion: "Destino del enlace."
+        },
+        {
+          propiedad: "icon",
+          tipo: "string",
+          obligatoria: "No",
+          descripcion: "Icono que acompaña al texto. Si se omite, se muestra un punto."
+        },
+        {
+          propiedad: "badge",
+          tipo: "string",
+          obligatoria: "No",
+          descripcion: "Etiqueta opcional, por ejemplo Nuevo o Beta."
+        }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Definición de los tipos"
+      icon="lucide:file-code"
+      language="typescript"
+      code={'export interface NavItem {\n  label: string;\n  href: string;\n  icon?: string;\n  badge?: string;\n}\n\nexport interface NavGroup {\n  title?: string;\n  items: NavItem[];\n}'}
+    />
+
+    <!-- Uso básico -->
+    <DocArticleSection
+      icon="lucide:play"
+      title="Ejemplos de uso"
+      description="Aprende a utilizar LayoutDocumentation para crear páginas con una navegación personalizada."
+    />
+
+    <DocArticleSection
+      title="1. Uso básico"
+      description="Importa el layout y coloca el contenido de la página dentro de él. Si no proporcionas navGroups, se utilizarán los grupos de navegación predeterminados."
+    />
+
+    <DocCodeBlock
+      title="Página Astro"
+      icon="lucide:file-code"
+      language="astro"
+      code={'---\nimport { LayoutDocumentation } from "lity-ui";\n---\n\n<LayoutDocumentation titlePage="Mi documentación">\n  <h1>Introducción</h1>\n  <p>Bienvenido a mi documentación.</p>\n</LayoutDocumentation>'}
+    />
+
+    <!-- Navegación personalizada -->
+    <DocArticleSection
+      title="2. Configurar la navegación"
+      description="Puedes definir tus propios grupos, enlaces, iconos y badges mediante la propiedad navGroups."
+    />
+
+    <DocCodeBlock
+      title="Navegación personalizada"
+      icon="lucide:menu"
+      language="astro"
+      code={'---\nimport { LayoutDocumentation } from "lity-ui";\n\nconst navGroups = [\n  {\n    title: "Primeros pasos",\n    items: [\n      {\n        label: "Introducción",\n        href: "/docs/introduccion",\n        icon: "lucide:book-open",\n      },\n      {\n        label: "Instalación",\n        href: "/docs/instalacion",\n        icon: "lucide:download",\n        badge: "Nuevo",\n      },\n    ],\n  },\n  {\n    title: "Componentes",\n    items: [\n      {\n        label: "Botones",\n        href: "/docs/components/buttons",\n        icon: "lucide:mouse-pointer-click",\n      },\n    ],\n  },\n];\n---\n\n<LayoutDocumentation\n  titlePage="Mi biblioteca | Documentación"\n  navGroups={navGroups}\n>\n  <h1>Introducción</h1>\n  <p>Contenido de la documentación.</p>\n</LayoutDocumentation>'}
+    />
+
+    <DocAlert
+      type="info"
+      title="Los enlaces deben apuntar a páginas reales"
+      icon="lucide:info"
+    >
+      Los destinos del ejemplo son ilustrativos. Sustitúyelos por las rutas que existan en tu proyecto Astro.
+    </DocAlert>
+
+    <!-- Slots -->
+    <DocArticleSection
+      icon="lucide:layout-template"
+      title="Slots disponibles"
+      description="El layout ofrece dos espacios principales para insertar contenido."
+    />
+
+    <DocTable
+      title="Referencia de slots"
+      icon="lucide:table"
+      columns={[
+        { key: "slot", label: "Slot" },
+        { key: "ubicacion", label: "Ubicación" },
+        { key: "uso", label: "Uso" }
+      ]}
+      rows={[
+        {
+          slot: "default",
+          ubicacion: "Contenido principal",
+          uso: "Recibe el contenido específico de cada página."
+        },
+        {
+          slot: "header",
+          ubicacion: "Encabezado superior",
+          uso: "Recibe el encabezado personalizado mediante slot=\"header\"."
+        }
+      ]}
+    />
+
+    <DocCodeBlock
+      title="Insertar un encabezado personalizado"
+      icon="lucide:panel-top"
+      language="astro"
+      code={'---\nimport { LayoutDocumentation } from "lity-ui";\nimport Header from "../components/Header.astro";\n---\n\n<LayoutDocumentation titlePage="Documentación">\n  <Header slot="header" />\n\n  <h1>Mi documentación</h1>\n  <p>Este contenido aparece en el área principal.</p>\n</LayoutDocumentation>'}
+    />
+
+    <DocAlert
+      type="warning"
+      title="El encabezado no se crea automáticamente"
+      icon="lucide:alert-triangle"
+    >
+      El layout incluye el espacio para el encabezado, pero debes proporcionar un componente mediante el slot header si quieres mostrar contenido en esa zona.
+    </DocAlert>
+
+    <!-- Comportamiento -->
+    <DocArticleSection
+      icon="lucide:smartphone"
+      title="Comportamiento adaptable"
+      description="El layout modifica la forma de navegar según el tamaño de la pantalla."
+    />
+
+    <DocGrid
+      columns={2}
+      items={[
+        {
+          icon: "lucide:monitor",
+          title: "Escritorio",
+          description: "Muestra una barra lateral fija junto al contenido principal."
+        },
+        {
+          icon: "lucide:smartphone",
+          title: "Móvil",
+          description: "Oculta la barra lateral y ofrece un botón flotante que abre el menú."
+        },
+        {
+          icon: "lucide:panel-right",
+          title: "Panel desplegable",
+          description: "El menú móvil aparece desde la derecha y dispone de un fondo que permite cerrarlo al pulsarlo."
+        },
+        {
+          icon: "lucide:mouse-pointer-click",
+          title: "Cierre automático",
+          description: "El menú se cierra al pulsar el botón de cierre, el fondo o uno de los enlaces."
+        }
+      ]}
+    />
+
+    <!-- Recomendaciones -->
+    <DocArticleSection
+      icon="lucide:check-circle"
+      title="Buenas prácticas"
+      description="Sigue estas recomendaciones para mantener una documentación fácil de navegar y mantener."
+      items={[
+        {
+          icon: "lucide:folder-tree",
+          title: "Agrupa los enlaces por tema",
+          description: "Utiliza títulos de grupo breves, como Primeros pasos, Componentes o API."
+        },
+        {
+          icon: "lucide:link",
+          title: "Utiliza rutas coherentes",
+          description: "Asegúrate de que cada href corresponda a una página válida de tu documentación."
+        },
+        {
+          icon: "lucide:heading",
+          title: "Define el título de la página",
+          description: "Utiliza titlePage para que la pestaña del navegador muestre un título descriptivo."
+        },
+        {
+          icon: "lucide:component",
+          title: "Reutiliza el layout",
+          description: "Usa la misma estructura en todas las páginas que pertenezcan a la documentación."
+        }
+      ]}
+    />
+
+    <!-- Importación -->
+    <DocArticleSection
+      icon="lucide:package"
+      title="Importación"
+      description="Si distribuyes Lity UI como paquete, puedes importar el layout desde su punto de entrada público."
+    />
+
+    <DocCodeBlock
+      title="Importar LayoutDocumentation"
+      icon="lucide:package"
+      language="typescript"
+      code={'import { LayoutDocumentation } from "lity-ui";'}
+    />
+
+    <DocAlert
+      type="warning"
+      title="Comprueba la exportación"
+      icon="lucide:info"
+    >
+      Para utilizar esta importación, exporta el layout desde el index.ts de tu biblioteca. Comprueba también que el proceso de compilación incluya sus estilos globales y permita distribuir componentes Astro.
+    </DocAlert>
+
+    <!-- Siguiente paso -->
+    <DocNextStep
+      icon="lucide:book-open"
+      title="Continúa explorando Lity UI"
+      description="Descubre los componentes disponibles y aprende a combinarlos con tus layouts para crear una documentación consistente."
+      buttonText="Explorar componentes"
+      buttonHref="/components"
+      buttonIcon="lucide:arrow-right"
+    />
+  </main>
+</Layout>

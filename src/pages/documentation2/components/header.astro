@@ -1,0 +1,467 @@
+---
+import Layout from "../layout.astro";
+import DocIntroduction from "../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../Library/v2/sections/Documentation/DocNextStep.astro";
+
+const basicExample = `---
+import { Header } from "lity-ui";
+---
+
+<Header title="Mi aplicación" />`;
+
+const navigationExample = `---
+import { Header } from "lity-ui";
+
+const navigationLinks = [
+  {
+    label: "Inicio",
+    href: "/",
+    icon: "lucide:house",
+  },
+  {
+    label: "Componentes",
+    href: "/components",
+    icon: "lucide:layers",
+  },
+  {
+    label: "Documentación",
+    href: "/docs",
+    icon: "lucide:book-open",
+  },
+];
+---
+
+<Header
+  title="Lity UI"
+  logoIcon="lucide:sparkles"
+  showNavigation={true}
+  navigationTitle="Navegación"
+  navigationLinks={navigationLinks}
+/>`;
+
+const optionsExample = `---
+import { Header } from "lity-ui";
+
+const optionsLinks = [
+  {
+    label: "Perfil",
+    href: "/profile",
+    icon: "lucide:user",
+  },
+  {
+    label: "Configuración",
+    href: "/settings",
+    icon: "lucide:settings",
+  },
+  {
+    label: "Ayuda",
+    href: "/help",
+    icon: "lucide:circle-help",
+  },
+];
+---
+
+<Header
+  title="Mi aplicación"
+  optionsTitle="Opciones"
+  optionsLinks={optionsLinks}
+/>`;
+
+const imageLogoExample = `---
+import { Header } from "lity-ui";
+---
+
+<Header
+  title="Mi marca"
+  logoImg="/images/logo.webp"
+  logoAlt="Logotipo de mi marca"
+/>`;
+
+const floatingExample = `---
+import { Header } from "lity-ui";
+---
+
+<Header
+  title="Lity UI"
+  sticky={true}
+  floating={true}
+  showNavigation={true}
+  navigationLinks={[
+    { label: "Inicio", href: "/" },
+    { label: "Componentes", href: "/components" },
+  ]}
+/>`;
+
+const fullExample = `---
+import { Header } from "lity-ui";
+
+const navigationLinks = [
+  { label: "Inicio", href: "/", icon: "lucide:house" },
+  { label: "Componentes", href: "/components", icon: "lucide:layers" },
+  { label: "Documentación", href: "/docs", icon: "lucide:book-open" },
+];
+
+const optionsLinks = [
+  { label: "Perfil", href: "/profile", icon: "lucide:user" },
+  { label: "Configuración", href: "/settings", icon: "lucide:settings" },
+];
+---
+
+<Header
+  title="Lity UI"
+  logoIcon="lucide:sparkles"
+  showNavigation={true}
+  navigationTitle="Navegación"
+  navigationLinks={navigationLinks}
+  optionsTitle="Opciones"
+  optionsLinks={optionsLinks}
+  sticky={true}
+  floating={true}
+  showThemeSelector={false}
+/>`;
+
+const optionLinkType = `interface OptionLink {
+  label: string;
+  href: string;
+  icon?: string;
+}`;
+
+const usageNotes = [
+  {
+    icon: "lucide:check-circle",
+    title: "Enlaces válidos",
+    description: "Define una ruta válida en href para cada elemento de navegación o del menú de opciones.",
+  },
+  {
+    icon: "lucide:monitor-smartphone",
+    title: "Diseño responsive",
+    description: "La navegación horizontal se muestra a partir de los 900 px. En pantallas más pequeñas utiliza un menú desplegable.",
+  },
+  {
+    icon: "lucide:image",
+    title: "Logotipo",
+    description: "Utiliza logoImg para mostrar una imagen o logoIcon para mostrar un icono cuando no se proporciona una imagen.",
+  },
+  {
+    icon: "lucide:palette",
+    title: "Selector de tema",
+    description: "Activa showThemeSelector únicamente si necesitas mostrar el componente ThemeSelector.",
+  },
+];
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Componentes"
+    badgeIcon="lucide:panel-top"
+    title="Header"
+    highlight="Header"
+    description="Un encabezado reutilizable para tus aplicaciones y sitios web. Incluye identidad de marca, navegación responsive, menús de opciones y configuración de posición y apariencia."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="Descripción general"
+    paragraphs={[
+      "Header es un componente de navegación diseñado para mostrar el logotipo y el nombre de una aplicación junto con sus enlaces principales y acciones adicionales.",
+      "Permite utilizar un icono o una imagen como logotipo, configurar dos grupos de enlaces independientes y elegir entre un encabezado normal, fijo o flotante. También puede integrar un selector de tema."
+    ]}
+  />
+
+  <DocGrid
+    icon="lucide:sparkles"
+    title="Características principales"
+    columns={2}
+    items={usageNotes}
+  />
+
+  <DocArticleSection
+    icon="lucide:package"
+    title="Instalación e importación"
+    paragraphs={[
+      "Importa Header desde el paquete lity-ui. Comprueba que el componente esté exportado desde el punto de entrada de la librería."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Importar el componente"
+    language="astro"
+    code={`import { Header } from "lity-ui";`}
+  />
+
+  <DocAlert type="info" title="Dependencias internas">
+    El componente utiliza los componentes Dropdown y ThemeSelector, además de Icon de astro-icon. Si distribuyes Header como parte de tu librería, asegúrate de que sus dependencias estén disponibles y correctamente configuradas.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:play"
+    title="Uso básico"
+    paragraphs={[
+      "La configuración mínima consiste en proporcionar el título que aparecerá junto al logotipo. Si no defines otras propiedades, el encabezado utilizará sus valores predeterminados y no mostrará la navegación ni el selector de tema."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Header básico"
+    language="astro"
+    code={basicExample}
+  />
+
+  <DocArticleSection
+    icon="lucide:sliders-horizontal"
+    title="Propiedades"
+    paragraphs={[
+      "Todas las propiedades son opcionales. Puedes combinar las distintas opciones para adaptar el encabezado a las necesidades de tu proyecto."
+    ]}
+  />
+
+  <DocTable
+    icon="lucide:settings-2"
+    title="Propiedades generales"
+    columns={[
+      { key: "prop", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "default", label: "Valor predeterminado" },
+      { key: "description", label: "Descripción" },
+    ]}
+    rows={[
+      { prop: "title", type: "string", default: '"Sin titulo"', description: "Texto que aparece junto al logotipo." },
+      { prop: "logoIcon", type: "string", default: '"lucide:sparkles"', description: "Icono mostrado cuando no se proporciona logoImg." },
+      { prop: "logoImg", type: "string", default: "undefined", description: "Ruta de la imagen utilizada como logotipo." },
+      { prop: "logoAlt", type: "string", default: '"Logo"', description: "Texto alternativo de la imagen del logotipo." },
+      { prop: "className", type: "string", default: '""', description: "Clases CSS adicionales aplicadas al encabezado." },
+    ]}
+  />
+
+  <DocTable
+    icon="lucide:menu"
+    title="Propiedades de navegación"
+    columns={[
+      { key: "prop", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "default", label: "Valor predeterminado" },
+      { key: "description", label: "Descripción" },
+    ]}
+    rows={[
+      { prop: "showNavigation", type: "boolean", default: "false", description: "Activa o desactiva la navegación principal." },
+      { prop: "navigationLinks", type: "OptionLink[]", default: "[]", description: "Lista de enlaces de navegación." },
+      { prop: "navigationTitle", type: "string", default: '"Navegación"', description: "Título accesible y título del menú desplegable en pantallas pequeñas." },
+    ]}
+  />
+
+  <DocTable
+    icon="lucide:ellipsis"
+    title="Propiedades del menú de opciones"
+    columns={[
+      { key: "prop", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "default", label: "Valor predeterminado" },
+      { key: "description", label: "Descripción" },
+    ]}
+    rows={[
+      { prop: "optionsTitle", type: "string", default: '"Opciones"', description: "Título del menú de acciones adicionales." },
+      { prop: "optionsLinks", type: "OptionLink[]", default: "[]", description: "Lista de enlaces del menú de opciones." },
+    ]}
+  />
+
+  <DocTable
+    icon="lucide:layout"
+    title="Propiedades de apariencia y comportamiento"
+    columns={[
+      { key: "prop", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "default", label: "Valor predeterminado" },
+      { key: "description", label: "Descripción" },
+    ]}
+    rows={[
+      { prop: "sticky", type: "boolean", default: "false", description: "Fija el encabezado a la parte superior de la ventana al desplazarse." },
+      { prop: "floating", type: "boolean", default: "false", description: "Aplica un diseño flotante con bordes redondeados, márgenes y sombra." },
+      { prop: "showThemeSelector", type: "boolean", default: "false", description: "Muestra el componente selector de tema." },
+    ]}
+  />
+
+  <DocAlert type="warning" title="Combinación de sticky y floating">
+    Para conseguir un encabezado flotante que permanezca visible durante el desplazamiento, activa ambas propiedades. Si floating está activado sin sticky, el encabezado conserva su posición relativa y no queda fijado a la ventana.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:link"
+    title="Estructura de los enlaces"
+    paragraphs={[
+      "Las propiedades navigationLinks y optionsLinks utilizan el mismo tipo de dato: OptionLink. Cada elemento representa un enlace con texto, una ruta y un icono opcional."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Tipo OptionLink"
+    language="typescript"
+    code={optionLinkType}
+  />
+
+  <DocTable
+    icon="lucide:list"
+    title="Propiedades de OptionLink"
+    columns={[
+      { key: "prop", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "description", label: "Descripción" },
+    ]}
+    rows={[
+      { prop: "label", type: "string", required: "Sí", description: "Texto que identifica el enlace." },
+      { prop: "href", type: "string", required: "Sí", description: "Ruta o URL a la que dirige el enlace." },
+      { prop: "icon", type: "string", required: "No", description: "Nombre del icono que aparece junto al texto." },
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:compass"
+    title="Configurar la navegación"
+    paragraphs={[
+      "Para mostrar los enlaces principales, activa showNavigation y proporciona al menos un elemento en navigationLinks. La navegación horizontal se oculta en pantallas inferiores a 900 px y se sustituye por Dropdown."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Ejemplo de navegación"
+    language="astro"
+    code={navigationExample}
+  />
+
+  <DocAlert type="info" title="Activación de la navegación">
+    Establecer showNavigation en true no es suficiente por sí solo: navigationLinks también debe contener al menos un enlace para que se renderice la navegación.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:more-horizontal"
+    title="Menú de opciones"
+    paragraphs={[
+      "El menú de opciones es independiente de la navegación principal. Puedes utilizarlo para enlaces secundarios, ajustes, perfil de usuario u otras secciones de tu aplicación.",
+      "El menú solo aparece cuando optionsLinks contiene al menos un elemento. Su presentación y comportamiento dependen del componente Dropdown utilizado internamente."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Ejemplo de opciones"
+    language="astro"
+    code={optionsExample}
+  />
+
+  <DocArticleSection
+    icon="lucide:image"
+    title="Utilizar una imagen como logotipo"
+    paragraphs={[
+      "Puedes reemplazar el icono predeterminado por una imagen proporcionando la propiedad logoImg. La imagen se muestra con un tamaño de 24 × 24 píxeles y utiliza object-contain para conservar sus proporciones."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Logotipo personalizado"
+    language="astro"
+    code={imageLogoExample}
+  />
+
+  <DocAlert type="warning" title="Ruta de la imagen">
+    Comprueba que la imagen exista en la ruta indicada. En Astro, los archivos ubicados en public suelen referenciarse desde la raíz del sitio, por ejemplo /images/logo.webp. Define logoAlt con una descripción apropiada para mejorar la accesibilidad.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:panel-top"
+    title="Posicionamiento fijo y flotante"
+    paragraphs={[
+      "La propiedad sticky fija el encabezado a la parte superior de la ventana. Cuando se combina con floating, el componente se centra horizontalmente, incorpora esquinas redondeadas y utiliza un margen superior.",
+      "Si sticky está activado, el componente añade también un elemento espaciador antes del encabezado para reducir la posibilidad de que el contenido de la página quede oculto detrás de él."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Encabezado fijo y flotante"
+    language="astro"
+    code={floatingExample}
+  />
+
+  <DocAlert type="info" title="Altura del espaciador">
+    El espaciador se configura con una altura de 4 rem cuando floating es false y de 5 rem cuando floating es true. Si personalizas el tamaño del encabezado mediante className, puede ser necesario ajustar ese espaciado.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:palette"
+    title="Selector de tema"
+    paragraphs={[
+      "La propiedad showThemeSelector controla si se renderiza el componente ThemeSelector. Está desactivada por defecto, por lo que no necesitas configurar un selector de tema si tu aplicación utiliza una única apariencia."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Mostrar el selector"
+    language="astro"
+    code={`---
+import { Header } from "lity-ui";
+---
+
+<Header
+  title="Mi aplicación"
+  showThemeSelector={true}
+/>`}
+  />
+
+  <DocArticleSection
+    icon="lucide:code-2"
+    title="Ejemplo completo"
+    paragraphs={[
+      "El siguiente ejemplo combina un logotipo con icono, enlaces principales, un menú de opciones y un encabezado fijo con estilo flotante. Puedes quitar las propiedades que no necesites."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Header configurado"
+    language="astro"
+    code={fullExample}
+  />
+
+  <DocArticleSection
+    icon="lucide:check-check"
+    title="Buenas prácticas"
+    items={[
+      {
+        icon: "lucide:check",
+        title: "Mantén la navegación clara",
+        description: "Utiliza enlaces breves y organiza las secciones principales en navigationLinks.",
+      },
+      {
+        icon: "lucide:check",
+        title: "Separa las acciones secundarias",
+        description: "Reserva optionsLinks para opciones que no necesitan ocupar el espacio de la navegación principal.",
+      },
+      {
+        icon: "lucide:check",
+        title: "Proporciona texto alternativo",
+        description: "Cuando uses una imagen como logotipo, configura logoAlt con una descripción significativa.",
+      },
+      {
+        icon: "lucide:check",
+        title: "Comprueba los tamaños de pantalla",
+        description: "Verifica que el título, los menús y el selector de tema quepan correctamente en las resoluciones que admite tu aplicación.",
+      },
+    ]}
+  />
+
+  <DocAlert type="warning" title="Consideraciones de accesibilidad">
+    El componente utiliza enlaces para el logotipo y los elementos de navegación. Comprueba también el comportamiento de teclado, el nombre accesible de los botones del componente Dropdown y el contraste de los colores en tu tema. El código de Header por sí solo no garantiza todos estos aspectos.
+  </DocAlert>
+
+  <DocNextStep
+    icon="lucide:layers"
+    title="Continúa con otros componentes"
+    description="Explora los demás componentes de Lity UI para construir interfaces consistentes y reutilizables."
+    buttonText="Ver componentes"
+    buttonHref="/components"
+    buttonIcon="lucide:arrow-right"
+  />
+</Layout>
+

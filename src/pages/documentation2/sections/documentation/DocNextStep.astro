@@ -1,0 +1,281 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocGrid from "../../../../Library/v2/sections/Documentation/DocGrid.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <main class="space-y-12">
+    <DocIntroduction
+      badge="Documentación"
+      badgeIcon="lucide:book-open"
+      title="Doc"
+      highlight="NextStep"
+      description="Cierra tus páginas de documentación con una llamada a la acción clara. Orienta al usuario hacia el siguiente componente, una guía, un recurso o cualquier otra sección de tu sitio."
+    />
+
+    <DocArticleSection
+      icon="lucide:info"
+      title="¿Qué es DocNextStep?"
+      description="DocNextStep es un componente pensado para aparecer al final de una página y ayudar al usuario a continuar su recorrido."
+      paragraphs={[
+        "Presenta un título, una descripción y un botón que dirige a una ruta determinada. También permite personalizar los iconos para adaptarse al contenido de cada página.",
+        "Es especialmente útil en documentación técnica, tutoriales y guías paso a paso, donde conviene indicar claramente qué puede hacer el usuario después de terminar de leer."
+      ]}
+      items={[
+        {
+          icon: "lucide:compass",
+          title: "Orientación",
+          description: "Indica qué contenido puede consultar el usuario a continuación."
+        },
+        {
+          icon: "lucide:mouse-pointer-click",
+          title: "Llamada a la acción",
+          description: "Incluye un botón que dirige al destino que configures."
+        },
+        {
+          icon: "lucide:palette",
+          title: "Personalización",
+          description: "Permite cambiar los textos y los iconos, u ocultar los elementos opcionales."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:settings-2"
+      title="Propiedades"
+      description="Todas las propiedades son opcionales. Si no proporcionas ciertos valores, el componente utiliza sus valores predeterminados."
+    />
+
+    <DocTable
+      title="Referencia de propiedades"
+      icon="lucide:table"
+      columns={[
+        { key: "propiedad", label: "Propiedad" },
+        { key: "tipo", label: "Tipo" },
+        { key: "predeterminado", label: "Predeterminado" },
+        { key: "descripcion", label: "Descripción" }
+      ]}
+      rows={[
+        {
+          propiedad: "icon",
+          tipo: "string",
+          predeterminado: '"lucide:rocket"',
+          descripcion: "Icono que acompaña al título. Usa una cadena vacía para ocultarlo."
+        },
+        {
+          propiedad: "title",
+          tipo: "string",
+          predeterminado: "Sin valor predeterminado especificado",
+          descripcion: "Título principal que presenta el siguiente paso."
+        },
+        {
+          propiedad: "description",
+          tipo: "string",
+          predeterminado: "Sin valor predeterminado especificado",
+          descripcion: "Texto que explica qué puede hacer el usuario."
+        },
+        {
+          propiedad: "buttonText",
+          tipo: "string",
+          predeterminado: '"Continuar"',
+          descripcion: "Texto del botón. Usa una cadena vacía para ocultarlo."
+        },
+        {
+          propiedad: "buttonHref",
+          tipo: "string",
+          predeterminado: '"/components"',
+          descripcion: "Ruta o URL a la que dirige el botón."
+        },
+        {
+          propiedad: "buttonIcon",
+          tipo: "string",
+          predeterminado: '"lucide:arrow-right"',
+          descripcion: "Icono del botón. Usa una cadena vacía para ocultarlo."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:play"
+      title="Ejemplos de uso"
+      description="Prueba distintas configuraciones para adaptar el componente al objetivo de cada página."
+    />
+
+    <DocArticleSection
+      title="1. Siguiente paso básico"
+      description="La configuración habitual incluye un icono, un título, una descripción y un botón para continuar."
+    />
+
+    <DocNextStep
+      icon="lucide:book-open"
+      title="¿Qué sigue?"
+      description="Explora los componentes disponibles y descubre cómo utilizarlos en tus proyectos."
+      buttonText="Ver componentes"
+      buttonHref="/components"
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocNextStep\n  icon="lucide:book-open"\n  title="¿Qué sigue?"\n  description="Explora los componentes disponibles."\n  buttonText="Ver componentes"\n  buttonHref="/components"\n/>'}
+    />
+
+    <DocArticleSection
+      title="2. Enlace a otro componente"
+      description="Puedes dirigir al usuario hacia una página específica de tu documentación, como la guía de instalación."
+    />
+
+    <DocNextStep
+      icon="lucide:terminal"
+      title="Aprende a instalar Lity UI"
+      description="Continúa con la guía de instalación para preparar la biblioteca en tu proyecto."
+      buttonText="Ver instalación"
+      buttonHref="/getting-started/installation"
+      buttonIcon="lucide:arrow-up-right"
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocNextStep\n  icon="lucide:terminal"\n  title="Aprende a instalar Lity UI"\n  description="Continúa con la guía de instalación para preparar la biblioteca en tu proyecto."\n  buttonText="Ver instalación"\n  buttonHref="/getting-started/installation"\n  buttonIcon="lucide:arrow-up-right"\n/>'}
+    />
+
+    <DocArticleSection
+      title="3. Ocultar iconos"
+      description="Si prefieres una presentación más sencilla, puedes ocultar el icono del título, el del botón o ambos utilizando cadenas vacías."
+    />
+
+    <DocNextStep
+      icon=""
+      title="Continúa aprendiendo"
+      description="Consulta la documentación para conocer las opciones disponibles y mejorar tus interfaces."
+      buttonText="Consultar documentación"
+      buttonHref="/components"
+      buttonIcon=""
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocNextStep\n  icon=""\n  title="Continúa aprendiendo"\n  description="Consulta la documentación para conocer las opciones disponibles."\n  buttonText="Consultar documentación"\n  buttonHref="/components"\n  buttonIcon=""\n/>'}
+    />
+
+    <DocArticleSection
+      title="4. Ocultar el botón"
+      description="Puedes utilizar el componente como un mensaje de cierre sin una llamada a la acción visible."
+    />
+
+    <DocNextStep
+      icon="lucide:check-circle"
+      title="Has terminado esta guía"
+      description="Ya conoces las propiedades principales de este componente y cómo personalizar su contenido."
+      buttonText=""
+    />
+
+    <DocCodeBlock
+      title="Implementación en Astro"
+      language="astro"
+      code={'<DocNextStep\n  icon="lucide:check-circle"\n  title="Has terminado esta guía"\n  description="Ya conoces las propiedades principales de este componente."\n  buttonText=""\n/>'}
+    />
+
+    <DocArticleSection
+      icon="lucide:layers"
+      title="Elementos del componente"
+      description="DocNextStep combina varios elementos que cumplen funciones diferentes dentro de la llamada a la acción."
+    />
+
+    <DocGrid
+      columns={2}
+      items={[
+        {
+          icon: "lucide:rocket",
+          title: "Icono principal",
+          description: "Acompaña al título y ayuda a identificar visualmente el propósito del mensaje."
+        },
+        {
+          icon: "lucide:heading",
+          title: "Título",
+          description: "Presenta de forma breve la acción o el contenido recomendado."
+        },
+        {
+          icon: "lucide:align-left",
+          title: "Descripción",
+          description: "Aporta contexto y explica por qué conviene continuar."
+        },
+        {
+          icon: "lucide:mouse-pointer-click",
+          title: "Botón de acción",
+          description: "Permite navegar hacia la ruta configurada mediante buttonHref."
+        }
+      ]}
+    />
+
+    <DocArticleSection
+      icon="lucide:check-circle"
+      title="Buenas prácticas"
+      description="Ten en cuenta estas recomendaciones para que el usuario comprenda fácilmente qué hacer después."
+      items={[
+        {
+          icon: "lucide:target",
+          title: "Define un objetivo claro",
+          description: "Utiliza un título y una descripción que expliquen el siguiente paso sin ambigüedades."
+        },
+        {
+          icon: "lucide:link",
+          title: "Comprueba el destino",
+          description: "Asegúrate de que buttonHref apunte a una ruta válida dentro de tu sitio o a una URL adecuada."
+        },
+        {
+          icon: "lucide:mouse-pointer-click",
+          title: "Usa textos descriptivos",
+          description: "Prefiere textos como Ver instalación o Explorar componentes frente a opciones demasiado genéricas."
+        },
+        {
+          icon: "lucide:eye-off",
+          title: "Oculta lo que no necesites",
+          description: "Utiliza cadenas vacías para eliminar los iconos o el botón cuando no aporten valor."
+        }
+      ]}
+    />
+
+    <DocAlert
+      type="info"
+      title="Sobre las rutas"
+      icon="lucide:info"
+    >
+      El destino predeterminado es /components. Si utilizas otra estructura de rutas en Astro, adapta buttonHref para que coincida con las páginas reales de tu proyecto.
+    </DocAlert>
+
+    <DocArticleSection
+      icon="lucide:package"
+      title="Importación"
+      description="Si utilizas Lity UI como paquete, importa el componente desde el punto de entrada público de la biblioteca."
+    />
+
+    <DocCodeBlock
+      title="Importar DocNextStep"
+      icon="lucide:package"
+      language="typescript"
+      code={'import { DocNextStep } from "lity-ui";'}
+    />
+
+    <DocAlert type="warning" title="Nota sobre la exportación">
+      Esta importación requiere que DocNextStep esté exportado desde el punto de entrada público de Lity UI.
+    </DocAlert>
+
+    <DocNextStep
+      icon="lucide:book-open"
+      title="Explora todos los componentes"
+      description="Continúa descubriendo los componentes de Lity UI y aprende a combinarlos para construir una documentación coherente."
+      buttonText="Ver componentes"
+      buttonHref="/components"
+      buttonIcon="lucide:arrow-right"
+    />
+  </main>
+</Layout>

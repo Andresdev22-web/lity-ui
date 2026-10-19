@@ -1,0 +1,408 @@
+---
+import Layout from "../layout.astro";
+import { Icon } from "astro-icon/components";
+import DocIntroduction from "../../../Library/Sections/Documentation/DocIntroduction.astro";
+import DocNavigationCards from "../../../Library/Sections/Documentation/DocNavigationCards.astro";
+import DocTextCodeSection from "../../../Library/Sections/Documentation/DocTextCodeSection.astro";
+import DocNotice from "../../../Library/components/documentation/DocNotice.astro";
+import DocCallToAction from "../../../Library/Sections/Documentation/DocCallToAction.astro";
+import DocFeatureGrid from "../../../Library/Sections/Documentation/DocFeatureGrid.astro";
+import DocResourceList from "../../../Library/Sections/Documentation/DocResourceList.astro";
+
+---
+
+<Layout>
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <!-- Introducción -->
+    <DocIntroduction
+      badge="Guía de instalación"
+      badgeIcon="lucide:download"
+      title="Instala"
+      highlight="Lity UI"
+      description="Aprende a instalar Lity UI en tu proyecto Astro, configurar sus dependencias y utilizar sus componentes correctamente."
+    />
+
+    <!-- Índice de contenidos -->
+
+    <DocNavigationCards
+      title="En esta guía"
+      items={[
+        {
+          href: "#instalacion",
+          label: "Instalación",
+          icon: "lucide:package",
+          description: "Instala Lity UI en tu proyecto.",
+        },
+        {
+          href: "#requisitos",
+          label: "Requisitos y configuración",
+          icon: "lucide:settings-2",
+          description: "Prepara las dependencias necesarias.",
+        },
+        {
+          href: "#estilos",
+          label: "Configurar los estilos",
+          icon: "lucide:palette",
+          description: "Configura Tailwind CSS y los estilos.",
+        },
+        {
+          href: "#componentes",
+          label: "Utilizar componentes",
+          icon: "lucide:blocks",
+          description: "Aprende a importar y utilizar componentes.",
+        },
+        {
+          href: "#recursos",
+          label: "Recursos",
+          icon: "lucide:folder-code",
+          description: "Conoce los recursos disponibles.",
+        },
+        {
+          href: "#tecnologias",
+          label: "Tecnologías",
+          icon: "lucide:code-2",
+          description: "Explora las tecnologías utilizadas.",
+        },
+      ]}
+    />
+
+    <!-- 1. Instalación -->
+    <DocTextCodeSection
+      id="instalacion"
+      number={1}
+      title="Instalación"
+      icon="lucide:package"
+      description="Puedes instalar Lity UI directamente desde su repositorio de GitHub utilizando npm o pnpm."
+      paragraphs={[
+        "La instalación desde GitHub requiere que el repositorio y sus dependencias sean accesibles. Si el proyecto utiliza dependencias alojadas en Git, asegúrate de tener Git instalado en tu entorno.",
+      ]}
+      items={[
+        {
+          id: "instalacion-npm",
+          number: "1.1",
+          title: "Instalar con npm",
+          codeBlocks: [
+            {
+              code: "npm install github:Andresdev22-web/lity-ui",
+              language: "bash",
+            },
+          ],
+        },
+        {
+          id: "instalacion-pnpm",
+          number: "1.2",
+          title: "Instalar con pnpm",
+          codeBlocks: [
+            {
+              code: "pnpm add github:Andresdev22-web/lity-ui",
+              language: "bash",
+            },
+          ],
+        },
+      ]}
+    />
+
+    <!-- 2. Requisitos y configuración inicial -->
+    <DocTextCodeSection
+      id="requisitos"
+      number={2}
+      title="Requisitos y configuración inicial"
+      icon="lucide:settings-2"
+      description="Configura las dependencias y los archivos necesarios para utilizar Lity UI en tu proyecto Astro."
+      paragraphs={["Ejecuta los comandos desde la raíz de tu proyecto."]}
+      items={[
+        {
+          id: "dependencias",
+          number: "2.1",
+          title: "Instalar las dependencias",
+          paragraphs: [
+            "Instala Tailwind CSS v4, su integración con Vite y las dependencias necesarias para utilizar iconos de Lucide.",
+          ],
+          items: [
+            {
+              id: "dependencias-npm",
+              number: "2.1.1",
+              title: "Con npm",
+              codeBlocks: [
+                {
+                  code: "npm install tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide",
+                  language: "bash",
+                },
+              ],
+            },
+            {
+              id: "dependencias-pnpm",
+              number: "2.1.2",
+              title: "Con pnpm",
+              codeBlocks: [
+                {
+                  code: "pnpm add tailwindcss @tailwindcss/vite astro-icon @iconify-json/lucide",
+                  language: "bash",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "configuracion-astro",
+          number: "2.2",
+          title: "Configurar Astro",
+          paragraphs: [
+            "En astro.config.mjs, configura Tailwind CSS v4 mediante Vite y registra Astro Icon.",
+          ],
+          codeBlocks: [
+            {
+              title: "astro.config.mjs",
+              code: `import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
+import icon from 'astro-icon';
+
+export default defineConfig({
+  integrations: [icon()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+});`,
+              language: "javascript",
+            },
+          ],
+        },
+        {
+          id: "carpeta-iconos",
+          number: "2.3",
+          title: "Crear la carpeta de iconos",
+          paragraphs: [
+            "Astro Icon puede utilizar iconos SVG locales desde la carpeta src/icons. Créala desde la raíz del proyecto si todavía no existe.",
+          ],
+          codeBlocks: [
+            {
+              title: "Crear la carpeta",
+              code: "mkdir -p src/icons",
+              language: "bash",
+            },
+          ],
+          items: [
+            {
+              id: "nota-iconos",
+              title: "Nota",
+              paragraphs: [
+                "Si utilizas únicamente iconos de Lucide mediante astro-icon, puedes dejar esta carpeta vacía.",
+              ],
+            },
+          ],
+        },
+      ]}
+    />
+
+    <!-- 3. Configurar los estilos -->
+    <DocTextCodeSection
+      id="estilos"
+      number={3}
+      title="Configurar los estilos"
+      icon="lucide:palette"
+      description="Tailwind CSS debe detectar las clases utilizadas dentro de Lity UI para generar los estilos de los componentes."
+      paragraphs={[
+        "En tu CSS global, normalmente src/styles/global.css, añade la siguiente configuración:",
+      ]}
+      codeBlocks={[
+        {
+          title: "src/styles/global.css",
+          code: `@import "tailwindcss";
+
+/* Detectar las clases de Tailwind de Lity UI */
+@source "../../node_modules/lity-ui";`,
+          language: "css",
+        },
+      ]}
+      items={[
+        {
+          id: "importar-css-global",
+          number: "3.1",
+          title: "Importar el CSS global",
+          paragraphs: [
+            "Importa el CSS global desde el layout compartido por las páginas que utilizan Lity UI. Por ejemplo, si el archivo se encuentra en src/styles/global.css y el layout está en src/layouts/:",
+          ],
+          codeBlocks: [
+            {
+              title: "Layout de Astro",
+              code: `---
+import "../styles/global.css";
+import { LayoutDocumentation, Header } from "lity-ui";
+---`,
+              language: "astro",
+            },
+          ],
+        },
+      ]}
+    />
+
+    <DocNotice type="important" title="Importante">
+      La ruta de <code class="text-[var(--accent)]">@source</code> es relativa al
+      archivo CSS donde se declara. Ajusta la ruta según la estructura de tu proyecto
+      y verifica dónde se encuentra realmente el paquete instalado.
+    </DocNotice>
+
+    <DocNotice type="tip" title="Consejo">
+      Ajusta la ruta del CSS según la ubicación real del layout. Si todas las
+      páginas utilizan ese mismo layout, no necesitas volver a importar el
+      archivo en cada una.
+    </DocNotice>
+
+<!-- 4. Importar y utilizar componentes -->
+<DocTextCodeSection
+  id="componentes"
+  number={4}
+  title="Importar y utilizar componentes"
+  icon="lucide:blocks"
+  description="Una vez instalada y configurada Lity UI, puedes importar sus componentes y utilizarlos en tus páginas Astro."
+  items={[
+    {
+      id: "ejemplo-uso",
+      number: "4.1",
+      title: "Importar y utilizar un componente",
+      paragraphs: [
+        "Primero, importa los estilos globales y los componentes que necesitas desde lity-ui. Después, utiliza los componentes en el contenido de tu página."
+      ],
+      codeBlocks: [
+        {
+          title: "src/pages/index.astro",
+          language: "astro",
+          code: `---
+import "../styles/global.css";
+import { LayoutLandingPage, Header } from "lity-ui";
+---
+
+<LayoutLandingPage>
+  <Header slot="header" />
+
+  <main>
+    <h1>Mi proyecto con Lity UI</h1>
+  </main>
+</LayoutLandingPage>`
+        }
+      ]
+    },
+    {
+      id: "importar-varios",
+      number: "4.2",
+      title: "Importar varios componentes",
+      paragraphs: [
+        "Puedes importar varios componentes en una sola declaración utilizando llaves. Así podrás utilizar los componentes que necesites sin escribir una importación independiente para cada uno.",
+        "Los nombres importados deben coincidir con los componentes que la librería exporta."
+      ],
+      codeBlocks: [
+        {
+          title: "Importaciones desde lity-ui",
+          language: "astro",
+          code: `---
+import {
+  LayoutDocumentation,
+  LayoutLandingPage,
+  Header,
+} from "lity-ui";
+---`
+        }
+      ]
+    },
+    {
+      id: "iconos-lucide",
+      number: "4.3",
+      title: "Utilizar iconos de Lucide",
+      paragraphs: [
+        "Para utilizar iconos en tus páginas Astro, importa el componente Icon desde astro-icon/components. Luego, indica el icono que deseas mostrar mediante la propiedad name.",
+        "Asegúrate de instalar @iconify-json/lucide en el proyecto donde utilizarás los iconos."
+      ],
+      codeBlocks: [
+        {
+          title: "Importar y mostrar un icono",
+          language: "astro",
+          code: `---
+import { Icon } from "astro-icon/components";
+---
+
+<Icon name="lucide:arrow-right" class="h-5 w-5" />`
+        }
+      ]
+    }
+  ]}
+/>
+
+<DocNotice type="important" title="Ten en cuenta">
+  El ejemplo de `LayoutLandingPage` presupone que el componente admite la propiedad `slot="header"` y la estructura mostrada. Comprueba la API real de cada componente antes de utilizarlo. Si el layout ya importa el CSS global, no necesitas importarlo otra vez en la página.
+</DocNotice>
+
+<DocNotice type="important" title="Consideraciones sobre el ejemplo de uso">
+  Este ejemplo presupone que los componentes exportados aceptan esas propiedades y ese slot. Adapta el uso a la API real de cada componente y evita importar el CSS dos veces si el layout ya lo carga.
+</DocNotice>
+
+<DocNotice type="info" title="Dependencias de iconos">
+  Asegúrate de haber instalado <code class="text-[var(--accent)]">@iconify-json/lucide</code> en el proyecto que utiliza los iconos.
+</DocNotice>
+
+  
+
+<!-- 5. Tecnologías -->
+<div id="tecnologias" class="scroll-mt-8">
+  <DocFeatureGrid
+    icon="lucide:code-2"
+    title="5. Tecnologías utilizadas"
+    features={[
+      {
+        icon: "lucide:rocket",
+        title: "Astro",
+        description:
+          "Framework web orientado al rendimiento y a la creación de páginas y componentes.",
+      },
+      {
+        icon: "lucide:palette",
+        title: "Tailwind CSS v4",
+        description:
+          "Framework CSS basado en clases utilitarias para construir y personalizar interfaces.",
+      },
+      {
+        icon: "lucide:file-code",
+        title: "TypeScript",
+        description:
+          "Añade tipado estático para ayudar a detectar errores y definir las propiedades de los componentes.",
+      },
+      {
+        icon: "lucide:shapes",
+        title: "Astro Icon y Lucide",
+        description:
+          "Facilitan la integración de iconos en la interfaz de los componentes.",
+      },
+    ]}
+  />
+</div>
+<!-- 6. Recursos -->
+<div id="recursos" class="scroll-mt-8">
+  <DocResourceList
+    title="6. Recursos"
+    icon="lucide:external-link"
+    resources={[
+      {
+        title: "Repositorio de GitHub",
+        description: "github.com/Andresdev22-web/lity-ui",
+        href: "https://github.com/Andresdev22-web/lity-ui",
+        external: true,
+      },
+      {
+        title: "Documentación oficial",
+        description: "Consulta las guías y aprende a utilizar Lity UI.",
+        href: "/documentation",
+      },
+    ]}
+  />
+</div>
+
+<!-- Cierre -->
+<DocCallToAction
+  icon="lucide:rocket"
+  title="¡Listo para comenzar!"
+  description="Una vez completada la configuración, ya puedes empezar a incorporar los componentes de Lity UI en tu proyecto. Explora la documentación para descubrir cómo personalizarlos y adaptarlos a tus necesidades."
+  buttonText="Explorar componentes"
+  buttonHref="/components"
+  buttonIcon="lucide:arrow-right"
+/>
+  </main>
+</Layout>

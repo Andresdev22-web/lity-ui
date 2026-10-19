@@ -1,0 +1,141 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface TableColumn {
+  key: string;
+  label: string;
+}
+
+interface TableRow {
+  [key: string]: string;
+}
+
+interface Props {
+  icon?: string;
+  title?: string;
+  paragraphs?: string[];
+  columns: TableColumn[];
+  rows: TableRow[];
+}
+
+const {
+  icon,
+  title,
+  paragraphs = [],
+  columns,
+  rows,
+} = Astro.props as Props;
+---
+
+<section class="mb-16">
+  {(icon || title || paragraphs.length > 0) && (
+    <div class="mb-6">
+      {(icon || title) && (
+        <div class="mb-4 flex items-center gap-3">
+          {icon && (
+            <Icon
+              name={icon}
+              class="h-6 w-6 shrink-0 text-[var(--accent)]"
+            />
+          )}
+
+          {title && (
+            <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+              {title}
+            </h2>
+          )}
+        </div>
+      )}
+
+      {paragraphs.length > 0 && (
+        <div class="space-y-4 leading-7 text-[var(--text-secondary)]">
+          {paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  )}
+
+  <div class="mb-6 overflow-x-auto rounded-xl border border-[var(--border-color)]">
+    <table class="w-full border-collapse text-left text-sm">
+      <thead class="bg-[var(--bg-secondary)]">
+        <tr>
+          {columns.map((column) => (
+            <th
+              scope="col"
+              class="border-b border-[var(--border-color)] px-4 py-3 font-semibold whitespace-nowrap text-[var(--text-primary)]"
+            >
+              {column.label}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {rows.map((row) => (
+          <tr class="border-b border-[var(--border-color)] last:border-b-0 transition-colors hover:bg-[var(--bg-secondary)]/60">
+            {columns.map((column) => (
+              <td class="px-4 py-3 leading-6 text-[var(--text-secondary)]">
+                {row[column.key] || "—"}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocTable
+
+Descripción:
+  Muestra información organizada en una tabla reutilizable.
+  Es útil para documentar propiedades, configuraciones, opciones
+  y parámetros de otros componentes.
+
+Props:
+  icon      (string, opcional): Icono junto al título.
+  title     (string, opcional): Título de la tabla.
+  paragraphs (string[], opcional): Párrafos introductorios.
+  columns   (TableColumn[], obligatorio): Columnas de la tabla.
+  rows      (TableRow[], obligatorio): Filas con los datos.
+
+Cada elemento de columns admite:
+  key   (string, obligatorio): Clave que identifica el dato.
+  label (string, obligatorio): Nombre visible de la columna.
+
+Cada elemento de rows:
+  Es un objeto con valores de texto.
+  Sus claves deben coincidir con las propiedades key de columns.
+
+Ejemplo de uso:
+
+<DocTable
+  icon="lucide:settings-2"
+  title="Propiedades del componente"
+  paragraphs={[
+    "Estas son las propiedades disponibles.",
+    "Las propiedades opcionales pueden omitirse.",
+  ]}
+  columns={[
+    { key: "name", label: "Propiedad" },
+    { key: "type", label: "Tipo" },
+    { key: "required", label: "Obligatoria" },
+  ]}
+  rows={[
+    {
+      name: "title",
+      type: "string",
+      required: "No",
+    },
+    {
+      name: "type",
+      type: '"info" | "success" | "warning" | "error"',
+      required: "No",
+    },
+  ]}
+/>
+-->

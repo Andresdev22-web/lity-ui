@@ -1,0 +1,277 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Documentación de componentes"
+    badgeIcon="lucide:book-open"
+    title="Componente"
+    highlight="DocArticleSection"
+    description="Aprende a organizar contenido textual, párrafos y listas mediante una sección flexible y reutilizable."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="¿Qué es DocArticleSection?"
+    paragraphs={[
+      "DocArticleSection es un componente diseñado para organizar el contenido de una página en secciones claras y fáciles de leer.",
+      "Permite combinar un icono, un título, una descripción inicial, varios párrafos y una lista de elementos. Puedes utilizar únicamente las propiedades que necesites para cada sección."
+    ]}
+    items={[
+      {
+        icon: "lucide:align-left",
+        title: "Contenido organizado",
+        description: "Agrupa textos relacionados bajo una misma sección."
+      },
+      {
+        icon: "lucide:list",
+        title: "Listas flexibles",
+        description: "Presenta elementos con iconos, títulos y descripciones opcionales."
+      },
+      {
+        icon: "lucide:blocks",
+        title: "Reutilizable",
+        description: "Combina el componente con otras secciones de documentación."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="¿Cuándo utilizarlo?">
+    Utiliza DocArticleSection para explicar conceptos, requisitos, características,
+    pasos o cualquier contenido que necesite una estructura textual sencilla.
+    Para tablas, bloques de código o avisos destacados, utiliza los componentes
+    especializados de Lity UI.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:settings-2"
+    title="Propiedades disponibles"
+    description="Todas las propiedades son opcionales. Puedes utilizar el componente con todas ellas o solamente con las que necesites."
+  />
+
+  <DocTable
+    icon="lucide:table"
+    title="Referencia de propiedades"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "icon",
+        type: "string",
+        required: "No",
+        description: "Icono que aparece junto al título de la sección."
+      },
+      {
+        name: "title",
+        type: "string",
+        required: "No",
+        description: "Título principal de la sección."
+      },
+      {
+        name: "description",
+        type: "string",
+        required: "No",
+        description: "Texto introductorio que aparece debajo del título."
+      },
+      {
+        name: "paragraphs",
+        type: "string[]",
+        required: "No",
+        description: "Arreglo de textos para mostrar varios párrafos."
+      },
+      {
+        name: "items",
+        type: "Item[]",
+        required: "No",
+        description: "Arreglo de elementos para mostrar una lista de contenido."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:list"
+    title="Propiedades de los elementos"
+    description="Cada objeto de items representa un elemento de la lista y admite las siguientes propiedades."
+  />
+
+  <DocTable
+    icon="lucide:table-properties"
+    title="Estructura de items"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "icon",
+        type: "string",
+        required: "No",
+        description: "Icono del elemento."
+      },
+      {
+        name: "title",
+        type: "string",
+        required: "No",
+        description: "Título del elemento."
+      },
+      {
+        name: "description",
+        type: "string",
+        required: "No",
+        description: "Descripción del elemento."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="Elementos personalizables">
+    Las propiedades de cada elemento son opcionales. Puedes mostrar un elemento
+    con título y descripción, añadirle un icono o combinar los campos según
+    el contenido que quieras presentar.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:code"
+    title="Ejemplos de uso"
+    description="Estas son algunas formas de utilizar DocArticleSection en tus páginas."
+  />
+
+  <DocCodeBlock
+    title="1. Sección completa"
+    icon="lucide:layers"
+    language="astro"
+    code={`<DocArticleSection
+  icon="lucide:info"
+  title="Requisitos"
+  description="Antes de comenzar, revisa lo siguiente."
+  paragraphs={[
+    "Necesitas un proyecto Astro configurado.",
+    "También debes tener las dependencias necesarias."
+  ]}
+  items={[
+    {
+      icon: "lucide:check",
+      title: "Astro",
+      description: "Framework utilizado por el proyecto."
+    },
+    {
+      icon: "lucide:check",
+      title: "Tailwind CSS v4",
+      description: "Sistema de estilos de la interfaz."
+    }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="2. Solo título y descripción"
+    icon="lucide:heading"
+    language="astro"
+    code={`<DocArticleSection
+  title="Instalación"
+  description="Aprende a configurar la librería."
+/>`}
+  />
+
+  <DocCodeBlock
+    title="3. Varios párrafos"
+    icon="lucide:align-left"
+    language="astro"
+    code={`<DocArticleSection
+  icon="lucide:book-open"
+  title="Introducción"
+  paragraphs={[
+    "Lity UI ofrece componentes reutilizables.",
+    "Puedes combinarlos para construir páginas de documentación."
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="4. Lista sin iconos"
+    icon="lucide:list"
+    language="astro"
+    code={`<DocArticleSection
+  title="Ventajas"
+  items={[
+    {
+      title: "Simplicidad",
+      description: "Una estructura fácil de entender."
+    },
+    {
+      title: "Flexibilidad",
+      description: "Contenido adaptable a cada sección."
+    }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="5. Elementos con solo título"
+    icon="lucide:list-checks"
+    language="astro"
+    code={`<DocArticleSection
+  title="Características"
+  items={[
+    { title: "Reutilizable" },
+    { title: "Personalizable" },
+    { title: "Modular" }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="6. Solo un título"
+    icon="lucide:type"
+    language="astro"
+    code={`<DocArticleSection title="Instalación" />`}
+  />
+
+  <DocCodeBlock
+    title="7. Componente sin propiedades"
+    icon="lucide:code"
+    language="astro"
+    code={`<DocArticleSection />`}
+  />
+
+  <DocAlert type="warning" title="Evita contenido innecesario">
+    Aunque todas las propiedades son opcionales, utiliza el componente con
+    contenido cuando necesites presentar una sección. Si no proporcionas
+    propiedades, el resultado dependerá de la implementación visual del componente.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:package"
+    title="Importación"
+    paragraphs={[
+      "Importa DocArticleSection desde el paquete de Lity UI para utilizarlo en tus proyectos."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Importar DocArticleSection"
+    icon="lucide:package"
+    language="astro"
+    code={`import { DocArticleSection } from "lity-ui";`}
+  />
+
+  <DocNextStep
+    icon="lucide:layout-grid"
+    title="¿Qué sigue?"
+    description="Aprende a presentar características y opciones mediante tarjetas organizadas en una cuadrícula."
+    buttonText="Ver DocGrid"
+    buttonHref="/components/doc-grid"
+  />
+</Layout>

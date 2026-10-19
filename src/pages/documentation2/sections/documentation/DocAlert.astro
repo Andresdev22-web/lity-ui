@@ -1,0 +1,247 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+import DocGrid from "../../../../Library/v2/sections/Documentation/DocGrid.astro";
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Documentación de componentes"
+    badgeIcon="lucide:book-open"
+    title="Componente"
+    highlight="DocAlert"
+    description="Aprende a destacar información importante mediante avisos visuales para comunicar recomendaciones, confirmaciones, advertencias y errores."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="¿Qué es DocAlert?"
+    paragraphs={[
+      "DocAlert es un componente que permite resaltar mensajes importantes dentro de una página de documentación.",
+      "Puedes utilizarlo para proporcionar información adicional, comunicar una operación completada, advertir sobre posibles problemas o señalar situaciones que requieren atención.",
+      "El mensaje se escribe entre las etiquetas del componente, por lo que puedes incluir texto, contenido HTML y otros componentes Astro."
+    ]}
+    items={[
+      {
+        icon: "lucide:message-square",
+        title: "Mensajes claros",
+        description: "Destaca información relevante para facilitar su lectura."
+      },
+      {
+        icon: "lucide:palette",
+        title: "Tipos de aviso",
+        description: "Selecciona un estilo según el propósito del mensaje."
+      },
+      {
+        icon: "lucide:blocks",
+        title: "Contenido flexible",
+        description: "Incluye texto y otros elementos compatibles con Astro."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="Ejemplo de aviso informativo">
+    Utiliza DocAlert para complementar una explicación, comunicar un detalle
+    importante o proporcionar una recomendación al usuario.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:settings-2"
+    title="Propiedades disponibles"
+    description="El componente dispone de tres propiedades opcionales para personalizar el título, el tipo de aviso y su icono."
+  />
+
+  <DocTable
+    icon="lucide:table"
+    title="Referencia de propiedades"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "default", label: "Predeterminado" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "title",
+        type: "string",
+        required: "No",
+        default: "Según el tipo",
+        description: "Título del aviso. Si se omite, se utiliza el título predeterminado correspondiente al tipo."
+      },
+      {
+        name: "type",
+        type: '"info" | "success" | "warning" | "error"',
+        required: "No",
+        default: '"info"',
+        description: "Determina la variante visual y el propósito del aviso."
+      },
+      {
+        name: "icon",
+        type: "string",
+        required: "No",
+        default: "Según el tipo",
+        description: "Permite establecer un icono personalizado. Si se omite, se utiliza el icono predeterminado del tipo."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:palette"
+    title="Tipos de aviso"
+    description="La propiedad type permite elegir entre cuatro variantes según la información que quieras comunicar."
+  />
+
+  <DocGrid
+    columns={2}
+    items={[
+      {
+        icon: "lucide:info",
+        title: "info",
+        description: "Para información general, notas y aclaraciones."
+      },
+      {
+        icon: "lucide:check-circle",
+        title: "success",
+        description: "Para confirmaciones, resultados positivos o acciones completadas."
+      },
+      {
+        icon: "lucide:alert-triangle",
+        title: "warning",
+        description: "Para advertencias, precauciones y posibles problemas."
+      },
+      {
+        icon: "lucide:circle-x",
+        title: "error",
+        description: "Para errores o situaciones que requieren atención."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:eye"
+    title="Vista previa de los avisos"
+    description="Estos ejemplos muestran cómo se presentan los distintos tipos de aviso."
+  />
+
+  <DocAlert title="Información general">
+    Este es un aviso informativo. Puedes utilizarlo para complementar una
+    explicación o compartir detalles importantes.
+  </DocAlert>
+
+  <DocAlert type="success" title="Operación completada">
+    La operación se ha completado correctamente y puedes continuar.
+  </DocAlert>
+
+  <DocAlert type="warning" title="Atención">
+    Comprueba la configuración antes de continuar con el siguiente paso.
+  </DocAlert>
+
+  <DocAlert type="error" title="Se ha producido un error">
+    Revisa los datos y la configuración para identificar el problema.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:code"
+    title="Ejemplos de uso"
+    description="Puedes utilizar los valores predeterminados o personalizar cada aviso según tus necesidades."
+  />
+
+  <DocCodeBlock
+    title="1. Aviso predeterminado"
+    icon="lucide:info"
+    language="astro"
+    code={`<DocAlert>
+  Información general para el usuario.
+</DocAlert>`}
+  />
+
+  <DocCodeBlock
+    title="2. Aviso de advertencia"
+    icon="lucide:alert-triangle"
+    language="astro"
+    code={`<DocAlert type="warning" title="Importante">
+  Revisa la configuración antes de continuar.
+</DocAlert>`}
+  />
+
+  <DocCodeBlock
+    title="3. Aviso de éxito"
+    icon="lucide:check-circle"
+    language="astro"
+    code={`<DocAlert type="success" title="Instalación completada">
+  Ya puedes comenzar a utilizar los componentes.
+</DocAlert>`}
+  />
+
+  <DocCodeBlock
+    title="4. Aviso de error con icono personalizado"
+    icon="lucide:circle-x"
+    language="astro"
+    code={`<DocAlert
+  type="error"
+  title="Configuración incorrecta"
+  icon="lucide:shield-alert"
+>
+  Configura las variables de entorno antes de desplegar la aplicación.
+</DocAlert>`}
+  />
+
+  <DocCodeBlock
+    title="5. Aviso con contenido HTML"
+    icon="lucide:code-2"
+    language="astro"
+    code={`<DocAlert type="info" title="Documentación">
+  Consulta la <a href="/components">lista de componentes</a>
+  para conocer todas las opciones disponibles.
+</DocAlert>`}
+  />
+
+  <DocCodeBlock
+    title="6. Aviso con otro componente Astro"
+    icon="lucide:blocks"
+    language="astro"
+    code={`<DocAlert type="warning" title="Antes de continuar">
+  <p>Revisa los requisitos del proyecto.</p>
+  <DocArticleSection
+    title="Requisitos adicionales"
+    paragraphs={["Comprueba las dependencias instaladas."]}
+  />
+</DocAlert>`}
+  />
+
+  <DocArticleSection
+    icon="lucide:package"
+    title="Importación"
+    paragraphs={[
+      "Importa DocAlert desde el paquete público de Lity UI para utilizarlo en tus páginas Astro."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Importar DocAlert"
+    icon="lucide:package"
+    language="astro"
+    code={`import { DocAlert } from "lity-ui";`}
+  />
+
+  <DocAlert type="warning" title="Uso recomendado">
+    Escoge el tipo de aviso según el significado del mensaje, no únicamente
+    por su apariencia. Mantén los textos breves y utiliza títulos descriptivos
+    cuando ayuden a comprender la información.
+  </DocAlert>
+
+  <DocNextStep
+    icon="lucide:code"
+    title="¿Qué sigue?"
+    description="Aprende a mostrar fragmentos de código que los usuarios puedan consultar y copiar directamente desde la documentación."
+    buttonText="Ver DocCodeBlock"
+    buttonHref="/components/doc-code-block"
+  />
+</Layout>
+

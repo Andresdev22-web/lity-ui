@@ -1,54 +1,78 @@
+
 /* src/styles/global.css */
 @import "tailwindcss";
 
-/* --- 🎨 CONFIGURACIÓN DE TEMAS --- */
+/* --- TEMAS DE LITY UI --- */
 
-/* 1. Tema por defecto (Dark/Oscuro) */
+/* 1. Dark — Oscuro profesional */
 :root,
 [data-theme="dark"] {
-  --bg-primary: #090d16;
-  --bg-secondary: #131b2e;
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent: #3b82f6;
-  --border-color: #1e293b;
+  color-scheme: dark;
+
+  --bg-primary: #0c0c0e;
+  --bg-secondary: #151518;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --accent: #a78bfa;
+  --border-color: #29292e;
 }
 
-/* 2. Tema Claro (Light) */
+/* 2. Light — Claro limpio */
 [data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --accent: #2563eb;
-  --border-color: #e2e8f0;
+  color-scheme: light;
+
+  --bg-primary: #fafafa;
+  --bg-secondary: #ffffff;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --accent: #6d4aff;
+  --border-color: #e4e4e7;
 }
 
-/* 3. Tema Rosa (Pink) */
+/* 3. Pink — Rosa elegante */
 [data-theme="pink"] {
-  --bg-primary: #180914;
-  --bg-secondary: #2a0e24;
-  --text-primary: #fdf2f8;
-  --text-secondary: #f472b6;
-  --accent: #ec4899;
-  --border-color: #3b1132;
+  color-scheme: dark;
+
+  --bg-primary: #120d12;
+  --bg-secondary: #1d141d;
+  --text-primary: #faf4f8;
+  --text-secondary: #c4a8ba;
+  --accent: #f472b6;
+  --border-color: #382438;
 }
 
-/* 4. Tema Azul/Cyan (Blue) */
+/* 4. Blue — Azul tecnológico */
 [data-theme="blue"] {
-  --bg-primary: #031326;
-  --bg-secondary: #072242;
-  --text-primary: #f0f9ff;
-  --text-secondary: #38bdf8;
-  --accent: #06b6d4;
-  --border-color: #0c3866;
+  color-scheme: dark;
+
+  --bg-primary: #0a1018;
+  --bg-secondary: #111d2b;
+  --text-primary: #f0f6fc;
+  --text-secondary: #a1b3c7;
+  --accent: #67c8f3;
+  --border-color: #26384b;
 }
 
-/* --- 🛠️ ESTILOS BASE --- */
+/* --- ESTILOS BASE --- */
 @layer base {
+  html {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }

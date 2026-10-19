@@ -1,0 +1,121 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface Item {
+  icon?: string;
+  title?: string;
+  description?: string;
+}
+
+interface Props {
+  icon?: string;
+  title?: string;
+  description?: string;
+  paragraphs?: string[];
+  items?: Item[];
+}
+
+const {
+  icon,
+  title,
+  description,
+  paragraphs = [],
+  items = [],
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <!-- Título e icono opcionales -->
+  {(icon || title) && (
+    <div class="mb-4 flex items-center gap-3">
+      {icon && (
+        <Icon
+          name={icon}
+          class="h-6 w-6 shrink-0 text-[var(--accent)]"
+        />
+      )}
+
+      {title && (
+        <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+          {title}
+        </h2>
+      )}
+    </div>
+  )}
+
+  <!-- Descripción y párrafos opcionales -->
+  {(description || paragraphs.length > 0) && (
+    <div class="mb-5 space-y-4 leading-7 text-[var(--text-secondary)]">
+      {description && <p>{description}</p>}
+
+      {paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+  )}
+
+  <!-- Lista opcional -->
+  {items.length > 0 && (
+    <ul class="space-y-4">
+      {items.map((item) => (
+        <li class="flex items-start gap-3">
+          {item.icon && (
+            <Icon
+              name={item.icon}
+              class="mt-1 h-5 w-5 shrink-0 text-[var(--accent)]"
+            />
+          )}
+
+          {(item.title || item.description) && (
+            <div>
+              {item.title && (
+                <h3 class="font-semibold text-[var(--text-primary)]">
+                  {item.title}
+                </h3>
+              )}
+
+              {item.description && (
+                <p class="leading-7 text-[var(--text-secondary)]">
+                  {item.description}
+                </p>
+              )}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocContentSection
+
+Descripción:
+  Sección reutilizable para la documentación de Lity UI.
+
+Props:
+  icon        (string, opcional): Icono principal.
+  title       (string, opcional): Título de la sección.
+  description (string, opcional): Un párrafo descriptivo.
+  paragraphs  (string[], opcional): Lista de párrafos adicionales.
+  items       (Item[], opcional): Lista de elementos.
+
+Cada elemento de items admite:
+  icon        (string, opcional): Icono del elemento.
+  title       (string, opcional): Subtítulo.
+  description (string, opcional): Descripción del elemento.
+
+Todos los campos son opcionales.
+
+Ejemplo de uso:
+
+<DocContentSection
+  icon="lucide:layers"
+  title="¿Qué es Lity UI?"
+  paragraphs={[
+    "Primer párrafo de ejemplo.",
+    "Segundo párrafo de ejemplo.",
+  ]}
+/>
+-->

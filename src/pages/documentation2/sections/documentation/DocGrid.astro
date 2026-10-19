@@ -1,0 +1,304 @@
+---
+import Layout from "../../layout.astro";
+import DocIntroduction from "../../../../Library/v2/sections/Documentation/DocIntroduction.astro";
+import DocArticleSection from "../../../../Library/v2/sections/Documentation/DocArticleSection.astro";
+import DocTable from "../../../../Library/v2/sections/Documentation/DocTable.astro";
+import DocCodeBlock from "../../../../Library/v2/sections/Documentation/DocCodeBlock.astro";
+import DocAlert from "../../../../Library/v2/sections/Documentation/DocAlert.astro";
+import DocNextStep from "../../../../Library/v2/sections/Documentation/DocNextStep.astro";
+---
+
+<Layout>
+  <DocIntroduction
+    badge="Documentación de componentes"
+    badgeIcon="lucide:book-open"
+    title="Componente"
+    highlight="DocGrid"
+    description="Aprende a presentar características, ventajas y conceptos mediante una cuadrícula de tarjetas reutilizables y personalizables."
+  />
+
+  <DocArticleSection
+    icon="lucide:info"
+    title="¿Qué es DocGrid?"
+    paragraphs={[
+      "DocGrid es un componente diseñado para organizar información en tarjetas distribuidas dentro de una cuadrícula.",
+      "Cada tarjeta puede mostrar un icono, un título y una descripción. Además, puedes definir la cantidad de columnas y añadir un título general o textos introductorios para explicar el contenido."
+    ]}
+    items={[
+      {
+        icon: "lucide:zap",
+        title: "Claridad",
+        description: "Presenta información de forma visual y fácil de consultar."
+      },
+      {
+        icon: "lucide:layout-grid",
+        title: "Organización",
+        description: "Distribuye las tarjetas en una cuadrícula configurable."
+      },
+      {
+        icon: "lucide:blocks",
+        title: "Reutilización",
+        description: "Utiliza la misma estructura para diferentes tipos de contenido."
+      }
+    ]}
+  />
+
+  <DocAlert type="info" title="¿Cuándo utilizarlo?">
+    Utiliza DocGrid para presentar características, ventajas, servicios,
+    herramientas, tecnologías u opciones relacionadas. Para contenido
+    principalmente textual, puedes utilizar DocArticleSection.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:settings-2"
+    title="Propiedades disponibles"
+    description="Estas propiedades permiten configurar el encabezado, los textos introductorios y la distribución de las tarjetas."
+  />
+
+  <DocTable
+    icon="lucide:table"
+    title="Referencia de propiedades"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "default", label: "Predeterminado" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "icon",
+        type: "string",
+        required: "No",
+        default: "Sin icono",
+        description: "Icono que aparece junto al título principal."
+      },
+      {
+        name: "title",
+        type: "string",
+        required: "No",
+        default: "Sin título",
+        description: "Título general de la cuadrícula."
+      },
+      {
+        name: "paragraphs",
+        type: "string[]",
+        required: "No",
+        default: "Sin párrafos",
+        description: "Arreglo de textos introductorios."
+      },
+      {
+        name: "columns",
+        type: "1 | 2 | 3 | 4",
+        required: "No",
+        default: "2",
+        description: "Número de columnas de la cuadrícula."
+      },
+      {
+        name: "items",
+        type: "GridItem[]",
+        required: "Sí",
+        default: "Sin valor",
+        description: "Arreglo de tarjetas que se mostrarán."
+      }
+    ]}
+  />
+
+  <DocArticleSection
+    icon="lucide:layers"
+    title="Propiedades de las tarjetas"
+    description="Cada elemento del arreglo items representa una tarjeta y admite las siguientes propiedades."
+  />
+
+  <DocTable
+    icon="lucide:table-properties"
+    title="Estructura de GridItem"
+    columns={[
+      { key: "name", label: "Propiedad" },
+      { key: "type", label: "Tipo" },
+      { key: "required", label: "Obligatoria" },
+      { key: "description", label: "Descripción" }
+    ]}
+    rows={[
+      {
+        name: "icon",
+        type: "string",
+        required: "No",
+        description: "Icono que aparece en la tarjeta."
+      },
+      {
+        name: "title",
+        type: "string",
+        required: "Sí",
+        description: "Título de la tarjeta."
+      },
+      {
+        name: "description",
+        type: "string",
+        required: "No",
+        description: "Texto que explica el contenido de la tarjeta."
+      },
+      {
+        name: "href",
+        type: "string",
+        required: "No",
+        description: "Propiedad reservada para posibles enlaces futuros; actualmente no se utiliza como enlace."
+      }
+    ]}
+  />
+
+  <DocAlert type="warning" title="Propiedad href">
+    Aunque cada tarjeta admite href, esta propiedad está reservada y no genera
+    un enlace actualmente. No la utilices esperando que la tarjeta sea
+    navegable.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:code"
+    title="Ejemplos de uso"
+    description="Puedes adaptar la cantidad de tarjetas y columnas según la información que quieras presentar."
+  />
+
+  <DocCodeBlock
+    title="1. Cuadrícula básica"
+    icon="lucide:layout-grid"
+    language="astro"
+    code={`<DocGrid
+  title="Características"
+  columns={2}
+  items={[
+    {
+      icon: "lucide:zap",
+      title: "Rápido",
+      description: "Facilita el desarrollo."
+    },
+    {
+      icon: "lucide:layers",
+      title: "Modular",
+      description: "Reutiliza componentes."
+    }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="2. Cuadrícula con encabezado completo"
+    icon="lucide:heading"
+    language="astro"
+    code={`<DocGrid
+  icon="lucide:sparkles"
+  title="Ventajas de Lity UI"
+  paragraphs={[
+    "Una librería pensada para facilitar el desarrollo.",
+    "Estas son algunas de sus ventajas."
+  ]}
+  columns={3}
+  items={[
+    {
+      icon: "lucide:code",
+      title: "Sencillo",
+      description: "Código fácil de integrar."
+    },
+    {
+      icon: "lucide:palette",
+      title: "Personalizable",
+      description: "Adapta la interfaz a tu proyecto."
+    },
+    {
+      icon: "lucide:blocks",
+      title: "Reutilizable",
+      description: "Usa componentes en distintas páginas."
+    }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="3. Una sola columna"
+    icon="lucide:rows-3"
+    language="astro"
+    code={`<DocGrid
+  title="Pasos principales"
+  columns={1}
+  items={[
+    {
+      title: "Instalar",
+      description: "Prepara las dependencias."
+    },
+    {
+      title: "Configurar",
+      description: "Ajusta el proyecto."
+    },
+    {
+      title: "Desarrollar",
+      description: "Empieza a crear tu interfaz."
+    }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="4. Cuatro columnas"
+    icon="lucide:columns-4"
+    language="astro"
+    code={`<DocGrid
+  title="Tecnologías"
+  columns={4}
+  items={[
+    { icon: "lucide:code", title: "Astro" },
+    { icon: "lucide:palette", title: "Tailwind" },
+    { icon: "lucide:database", title: "Datos" },
+    { icon: "lucide:server", title: "Backend" }
+  ]}
+/>`}
+  />
+
+  <DocCodeBlock
+    title="5. Tarjetas sin iconos"
+    icon="lucide:layout-grid"
+    language="astro"
+    code={`<DocGrid
+  title="Objetivos"
+  items={[
+    {
+      title: "Simplicidad",
+      description: "Reducir la complejidad."
+    },
+    {
+      title: "Consistencia",
+      description: "Mantener una interfaz uniforme."
+    }
+  ]}
+/>`}
+  />
+
+  <DocAlert type="info" title="El número de columnas">
+    La propiedad columns acepta los valores 1, 2, 3 o 4. Si no se especifica,
+    la cuadrícula utiliza dos columnas. El diseño visual final también depende
+    de los estilos definidos en el componente.
+  </DocAlert>
+
+  <DocArticleSection
+    icon="lucide:package"
+    title="Importación"
+    paragraphs={[
+      "Importa DocGrid desde el paquete público de Lity UI para utilizarlo en tus páginas Astro."
+    ]}
+  />
+
+  <DocCodeBlock
+    title="Importar DocGrid"
+    icon="lucide:package"
+    language="astro"
+    code={`import { DocGrid } from "lity-ui";`}
+  />
+
+  <DocNextStep
+    icon="lucide:bell"
+    title="¿Qué sigue?"
+    description="Descubre cómo destacar información importante mediante avisos informativos, confirmaciones, advertencias y errores."
+    buttonText="Ver DocAlert"
+    buttonHref="/components/doc-alert"
+  />
+</Layout>
+

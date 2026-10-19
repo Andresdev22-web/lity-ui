@@ -1,0 +1,157 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  badge?: string;
+  badgeIcon?: string;
+  title?: string;
+  highlight?: string;
+  description?: string;
+}
+
+const {
+  badge,
+  badgeIcon = "lucide:book-open",
+  title,
+  highlight,
+  description,
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <!-- Etiqueta superior -->
+  {badge && (
+    <div
+      class="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm text-[var(--text-secondary)]"
+    >
+      {badgeIcon && (
+        <Icon
+          name={badgeIcon}
+          class="h-4 w-4 text-[var(--accent)]"
+        />
+      )}
+
+      {badge}
+    </div>
+  )}
+
+  <!-- Título -->
+  {(title || highlight) && (
+    <h1
+      class="mb-5 text-4xl font-bold tracking-tight text-[var(--text-primary)] md:text-5xl"
+    >
+      {title && <span>{title}</span>}
+      {highlight && (
+        <span class="text-[var(--accent)]">
+          {title ? ` ${highlight}` : highlight}
+        </span>
+      )}
+    </h1>
+  )}
+
+  <!-- Descripción -->
+  {description && (
+    <p class="max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
+      {description}
+    </p>
+  )}
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocIntroduction
+
+Descripción:
+  Componente reutilizable para introducir páginas de documentación.
+  Permite mostrar una etiqueta con icono, un título con texto destacado
+  y una descripción.
+
+  Todas las propiedades son opcionales. Si no proporcionas una propiedad,
+  el elemento correspondiente no se muestra.
+
+Props:
+  badge (string, opcional):
+    Texto de la etiqueta superior.
+    Si se omite o se deja vacío, no se muestra la etiqueta.
+
+  badgeIcon (string, opcional):
+    Icono de Astro Icon que aparece junto a la etiqueta.
+    Predeterminado: "lucide:book-open".
+    Solo se muestra si badge tiene contenido.
+    Usa "" para ocultar el icono.
+
+  title (string, opcional):
+    Texto principal del título.
+    Puede utilizarse sin highlight.
+
+  highlight (string, opcional):
+    Texto destacado en el color de acento.
+    Aparece después de title si ambos están definidos.
+    También puede utilizarse por sí solo.
+
+  description (string, opcional):
+    Texto descriptivo que aparece debajo del título.
+    Si se omite o se deja vacío, no se muestra.
+
+Ejemplos de uso:
+
+1. Introducción completa:
+
+<DocIntroduction
+  badge="Guía de componentes"
+  badgeIcon="lucide:layers"
+  title="Bienvenido a"
+  highlight="Lity UI"
+  description="Una librería de componentes reutilizables para Astro y Tailwind CSS v4."
+/>
+
+2. Solo título y descripción:
+
+<DocIntroduction
+  title="Instalación"
+  description="Aprende a instalar y configurar Lity UI en tu proyecto."
+/>
+
+3. Título con texto destacado:
+
+<DocIntroduction
+  title="Explora"
+  highlight="los componentes"
+/>
+
+4. Solo texto destacado:
+
+<DocIntroduction highlight="Lity UI" />
+
+5. Etiqueta y título:
+
+<DocIntroduction
+  badge="Documentación oficial"
+  title="Primeros pasos"
+/>
+
+6. Etiqueta sin icono:
+
+<DocIntroduction
+  badge="Guía rápida"
+  badgeIcon=""
+  title="Configuración"
+/>
+
+7. Solo descripción:
+
+<DocIntroduction
+  description="Información y guías para utilizar la librería."
+/>
+
+8. Sin propiedades:
+
+<DocIntroduction />
+
+Importación:
+  Ajusta la ruta según la ubicación del componente en tu proyecto.
+
+Nota:
+  badgeIcon solo se muestra cuando badge tiene contenido.
+  Si title y highlight están vacíos u omitidos, el título no se muestra.
+  Si description está vacío u omitido, la descripción no se muestra.
+-->

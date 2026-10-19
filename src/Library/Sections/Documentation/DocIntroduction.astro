@@ -1,0 +1,81 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  badge?: string;
+  badgeIcon?: string;
+  title: string;
+  highlight?: string;
+  description: string;
+}
+
+const {
+  badge = "Documentación oficial",
+  badgeIcon = "lucide:book-open",
+  title,
+  highlight,
+  description,
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <!-- Etiqueta superior -->
+  <div
+    class="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--border-color)] bg-[var(--bg-secondary)] px-3 py-1.5 text-sm text-[var(--text-secondary)]"
+  >
+    <Icon name={badgeIcon} class="h-4 w-4 text-[var(--accent)]" />
+    {badge}
+  </div>
+
+  <!-- Título -->
+  <h1
+    class="mb-5 text-4xl font-bold tracking-tight text-[var(--text-primary)] md:text-5xl"
+  >
+    {title}
+    {highlight && (
+      <span class="text-[var(--accent)]"> {highlight}</span>
+    )}
+  </h1>
+
+  <!-- Descripción -->
+  <p class="max-w-3xl text-lg leading-8 text-[var(--text-secondary)]">
+    {description}
+  </p>
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocIntroduction
+
+Descripción:
+  Introducción reutilizable para las páginas de documentación.
+  Incluye una etiqueta superior, un título con texto destacado opcional
+  y una descripción.
+
+Props:
+  badge       (string, opcional): Texto de la etiqueta superior.
+              Predeterminado: "Documentación oficial".
+
+  badgeIcon   (string, opcional): Nombre del icono de Astro Icon.
+              Predeterminado: "lucide:book-open".
+
+  title       (string, obligatorio): Texto principal del título.
+
+  highlight   (string, opcional): Texto destacado en el color de acento.
+              Aparece después del título.
+
+  description (string, obligatorio): Texto descriptivo debajo del título.
+
+Ejemplo de uso:
+
+---
+import DocIntroduction from "../components/DocIntroduction.astro";
+---
+
+<DocIntroduction
+  badge="Guía de componentes"
+  badgeIcon="lucide:layers"
+  title="Bienvenido a"
+  highlight="Lity UI"
+  description="Una librería de componentes reutilizables para Astro y Tailwind CSS v4."
+/>
+-->

@@ -1,0 +1,156 @@
+
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  title?: string;
+  icon?: string;
+  paragraphs?: string[];
+  language?: string;
+  code: string;
+}
+
+const {
+  title,
+  icon,
+  paragraphs = [],
+  language = "text",
+  code,
+} = Astro.props as Props;
+---
+
+<section class="mb-8">
+  {(title || paragraphs.length > 0) && (
+    <div class="mb-5">
+      {(icon || title) && (
+        <div class="mb-4 flex items-center gap-3">
+          {icon && (
+            <Icon
+              name={icon}
+              class="h-6 w-6 shrink-0 text-[var(--accent)]"
+            />
+          )}
+
+          {title && (
+            <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+              {title}
+            </h2>
+          )}
+        </div>
+      )}
+
+      {paragraphs.length > 0 && (
+        <div class="space-y-4 leading-7 text-[var(--text-secondary)]">
+          {paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  )}
+
+  <div
+    data-code-block
+    class="overflow-hidden rounded-xl border border-[var(--border-color)] bg-[#0D0D0D]"
+  >
+    <div class="flex items-center justify-between gap-3 border-b border-[var(--border-color)] bg-[var(--bg-secondary)] px-4 py-3">
+      <div class="flex min-w-0 items-center gap-2">
+        <Icon
+          name="lucide:code-2"
+          class="h-4 w-4 shrink-0 text-[var(--accent)]"
+        />
+
+        <span class="truncate text-sm font-medium text-[var(--text-secondary)]">
+          {language}
+        </span>
+      </div>
+
+      <button
+        type="button"
+        data-copy-code
+        class="flex shrink-0 items-center gap-2 rounded-lg border border-[var(--border-color)] px-3 py-1.5 text-sm text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--text-primary)]"
+        aria-label="Copiar código"
+      >
+        <Icon name="lucide:copy" class="h-4 w-4" />
+        <span data-copy-label>Copiar</span>
+      </button>
+    </div>
+
+    <pre class="overflow-x-auto p-5 text-sm leading-7 text-[#E5E5E5]"><code>{code}</code></pre>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-code]").forEach((button) => {
+    if (button.dataset.initialized === "true") return;
+    button.dataset.initialized = "true";
+
+    button.addEventListener("click", async () => {
+      const container = button.closest("[data-code-block]");
+      const codeElement = container?.querySelector("code");
+      const label = button.querySelector("[data-copy-label]");
+
+      if (!codeElement || !label) return;
+
+      try {
+        await navigator.clipboard.writeText(codeElement.textContent ?? "");
+
+        label.textContent = "¡Copiado!";
+
+        window.setTimeout(() => {
+          label.textContent = "Copiar";
+        }, 2000);
+      } catch {
+        label.textContent = "Error al copiar";
+
+        window.setTimeout(() => {
+          label.textContent = "Copiar";
+        }, 2000);
+      }
+    });
+  });
+</script>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocCodeBlock
+
+Descripción:
+  Muestra un bloque de código con su lenguaje y un botón para copiar
+  el contenido al portapapeles.
+
+Props:
+  title     (string, opcional): Título de la sección.
+  icon      (string, opcional): Icono junto al título.
+  paragraphs (string[], opcional): Párrafos explicativos.
+  language  (string, opcional): Lenguaje del código.
+             Predeterminado: "text".
+  code      (string, obligatorio): Código que se mostrará.
+
+Ejemplo de uso:
+
+<DocCodeBlock
+  title="Instalar dependencias"
+  icon="lucide:terminal"
+  paragraphs={[
+    "Ejecuta este comando en la terminal de tu proyecto.",
+  ]}
+  language="bash"
+  code="npm install"
+/>
+
+Ejemplo con varias líneas:
+
+<DocCodeBlock
+  language="javascript"
+  code={`const greeting = "Hola mundo";
+console.log(greeting);`}
+/>
+
+Notas:
+  - El título, el icono y los párrafos son opcionales.
+  - El código se muestra como texto, sin ejecutarse.
+  - El botón copia el contenido exacto del bloque.
+  - El resaltado de sintaxis no está incluido.
+  - La API del portapapeles requiere HTTPS o localhost en los
+    navegadores habituales.
+-->

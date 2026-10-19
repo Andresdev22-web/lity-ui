@@ -1,0 +1,115 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Resource {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+  external?: boolean;
+}
+
+interface Props {
+  title?: string;
+  icon?: string;
+  resources: Resource[];
+}
+
+const {
+  title = "Recursos",
+  icon = "lucide:external-link",
+  resources,
+} = Astro.props;
+---
+
+<section class="mb-16">
+  <div class="mb-4 flex items-center gap-3">
+    {icon && (
+      <Icon
+        name={icon}
+        class="h-6 w-6 text-[var(--accent)]"
+      />
+    )}
+
+    <h2 class="text-2xl font-bold text-[var(--text-primary)]">
+      {title}
+    </h2>
+  </div>
+
+  <div class="space-y-4">
+    {resources.map((resource) => (
+      <a
+        href={resource.href}
+        target={resource.external ? "_blank" : undefined}
+        rel={resource.external ? "noopener noreferrer" : undefined}
+        class="flex items-center justify-between gap-4 rounded-xl border border-[var(--border-color)] bg-[var(--bg-secondary)] p-4 transition-colors hover:border-[var(--accent)]"
+      >
+        <div class="min-w-0">
+          <h3 class="font-semibold text-[var(--text-primary)]">
+            {resource.title}
+          </h3>
+
+          <p class:list={[
+            "mt-1 text-sm text-[var(--text-secondary)]",
+            resource.external ? "break-all" : "",
+          ]}>
+            {resource.description}
+          </p>
+        </div>
+
+        <Icon
+          name={resource.icon ?? (resource.external
+            ? "lucide:arrow-up-right"
+            : "lucide:arrow-right")}
+          class="h-5 w-5 shrink-0 text-[var(--accent)]"
+        />
+      </a>
+    ))}
+  </div>
+</section>
+
+<!--
+DOCUMENTACIÓN DEL COMPONENTE: DocResourceList
+
+Descripción:
+  Muestra una lista de recursos enlazados mediante tarjetas.
+  Permite incluir enlaces internos y externos.
+
+Props:
+  title     (string, opcional): Título de la sección.
+            Predeterminado: "Recursos".
+
+  icon      (string, opcional): Icono junto al título.
+            Predeterminado: "lucide:external-link".
+            Usa "" para ocultarlo.
+
+  resources (Resource[], obligatorio): Lista de recursos.
+
+Cada elemento de resources admite:
+  title       (string, obligatorio): Título del recurso.
+  description (string, obligatorio): Descripción o URL visible.
+  href        (string, obligatorio): Destino del enlace.
+  icon        (string, opcional): Icono de la tarjeta.
+  external    (boolean, opcional): Abre el enlace en otra pestaña.
+              Predeterminado: false.
+
+Ejemplo de uso:
+
+<DocResourceList
+  title="Recursos"
+  icon="lucide:external-link"
+  resources={[
+    {
+      title: "Repositorio de GitHub",
+      description: "github.com/Andresdev22-web/lity-ui",
+      href: "https://github.com/Andresdev22-web/lity-ui",
+      external: true,
+    },
+    {
+      title: "Documentación oficial",
+      description: "Consulta las guías y aprende a utilizar Lity UI.",
+      href: "/documentation",
+    },
+  ]}
+/>
+-->
