@@ -1,31 +1,31 @@
 ---
-// importar los estilos globales del proyecto
 import "../../styles/global.css"
 
-// estructurar los props que resivira el componente
 interface Props {
-	titlePage?: string
+  titlePage?: string
 }
-// resivir los porps y asignarle un resultado por defecto en caso de q no se envie nada al componente
+
 const {
-	titlePage = "Sin titulo"
+  titlePage = "Sin título"
 } = Astro.props
-
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{titlePage}</title>
-</head>
-<body>
-  
-    <slot name="header"></slot>
 
-    <!-- FILA 2: Layout Principal -->
-    <div class="flex-1 flex w-full">
-		<slot></slot>
-	</div>
-</body>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080808" />
+    <title>{titlePage}</title>
+  </head>
+
+  <body class="m-0 min-h-screen w-full">
+    <div class="flex min-h-screen w-full min-w-0 flex-col">
+      <slot name="header" />
+
+      <main class="w-full min-w-0 flex-1">
+        <slot />
+      </main>
+    </div>
+  </body>
 </html>
